@@ -35,7 +35,7 @@ namespace StorybrewScripts
 
             var bg = GetLayer("").CreateSprite(BackgroundPath, OsbOrigin.Centre);
             bg.Scale(0, 0, 0, 7.5, 4.5, 7.5, 4.5);
-            bg.Fade(StartTime - 500, StartTime, 0, Opacity);
+            bg.Fade(StartTime, StartTime + 500, 0, Opacity);
             bg.Fade(EndTime, EndTime + 500, Opacity, 0);
         }
     }
