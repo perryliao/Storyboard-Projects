@@ -9,7 +9,7 @@
     <AppDesignerFolder>\</AppDesignerFolder>
     <RootNamespace>storyboard</RootNamespace>
     <AssemblyName>storyboard</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -19,7 +19,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>\</OutputPath>
-    <IntermediateOutputPath>\</IntermediateOutputPath>
+    <IntermediateOutputPath>..\..\cache\obj</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,10 +52,8 @@
   </Target>
   -->
   <ItemGroup>
-    <Compile Include="Bg.cs" />
-    <Compile Include="Particles.cs" />
-    <Compile Include="Spectrum.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="Background.cs" />
+    <Compile Include="Intro.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>
