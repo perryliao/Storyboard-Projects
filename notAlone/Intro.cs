@@ -27,6 +27,8 @@ namespace StorybrewScripts
             for (int i = 0; i < nowLoading.Length; i++) {
                 if (i >= 10) {
                     nowLoading[i] = layer.CreateSprite("sb/fonts/helvetica/10.png", OsbOrigin.Centre);
+                } else if (i == 4) { 
+                    nowLoading[i] = layer.CreateSprite("sb/fonts/helvetica/1.png", OsbOrigin.Centre);
                 } else {
                     nowLoading[i] = layer.CreateSprite("sb/fonts/helvetica/" + i + ".png", OsbOrigin.Centre);
                 }
@@ -60,14 +62,14 @@ namespace StorybrewScripts
                 text.StartLoopGroup(0, 16);
             }
 
-            //fading in , total 1000ms
+            //fading in , TODO work on the math
             int count = 0;
             foreach (OsbSprite text in nowLoading) {
                 text.Fade(OsbEasing.In, 0 + count*25, 500 + count*20, 0, 1);
                 count++;
             }
 
-            //fading out, total 1000ms
+            //fading out, TODO math
             int count2 = 0;
             foreach (OsbSprite text in nowLoading) {
                 text.Fade(OsbEasing.In, 760 + count2*30, 1500 + count2*30, 1, 0);
