@@ -91,17 +91,17 @@ namespace StorybrewScripts
                 var text = nowLoading[i];
 
                 text.StartLoopGroup(0,16);
-                text.Fade(OsbEasing.In, 0 + i*25, 500 + i*20, 0, 1);
-                text.Fade(OsbEasing.In, 600 + i*30, 1500 + i*30, 1, 0);
+                text.Fade(OsbEasing.InExpo, 0 + i*25, 500 + i*20, 0, 1);
+                text.Fade(OsbEasing.InExpo, 600 + i*30, 1500 + i*30, 1, 0);
                 text.EndGroup();
             }
 
             screen.Scale(0, 1000);
-            screen.Fade(OsbEasing.In, 24824, 27381, 0, 0.7);
-            screen.Fade(OsbEasing.In, 27381, 27551, 0.7, 0);
+            screen.Fade(OsbEasing.In, 24824, 27381, 0, 0.6);
+            screen.Fade(OsbEasing.In, 27381, 27551, 0.6, 0);
 
-            circle.Scale(27381, 27466, 0, 1.75);
-            circle.Scale(27466, 27551, 1.75, 1.5);
+            circle.Scale(OsbEasing.OutElastic, 27466, 27551, 0, 1.5);
+            //circle.Scale(27466, 27551, 1.75, 1.5);
             circle.Fade(OsbEasing.In, 27381, 27551, 0, 1);
             circle.Fade(49369, 1);
 
@@ -112,19 +112,19 @@ namespace StorybrewScripts
             // loop pulse effect
             circleBeat.StartLoopGroup(beatDuration, 15);
             circleBeat.Scale(27551, 27551 + beatDuration, 1.5, 1.75);
-            circleBeat.Fade(OsbEasing.In, 27551,27551 + beatDuration, 0.1, 0);
+            circleBeat.Fade(OsbEasing.Out, 27551,27551 + beatDuration, 0.3, 0);
             circleBeat.Scale(27551 + beatDuration, 27551 + 2*beatDuration, 1.75, 1.5);
             circleBeat.EndGroup();
 
             // shrink circle for drum roll effect
-            circle.Scale(37438- ((38290-37438)/32), 37438, 1.5, 1.75);
-            circle.Scale(37438, 38290, 1.75, 0);
-            circle.Scale(38290, 38460, 0, 1.5);
+            //circle.Scale(37438- ((38290-37438)/32), 37438, 1.5, 1.75);
+            circle.Scale(OsbEasing.OutBack, 37438, 38290, 1.75, 0);
+            circle.Scale(OsbEasing.OutElasticHalf, 38290, 38460, 0, 1.5);
 
             // repeat pulsing
             circleBeat.StartLoopGroup(beatDuration, 13);
             circleBeat.Scale(38460, 38460 + beatDuration, 1.5, 1.75);
-            circleBeat.Fade(OsbEasing.In, 38460,38460 + beatDuration, 0.15, 0);
+            circleBeat.Fade(OsbEasing.Out, 38460,38460 + beatDuration, 0.3, 0);
             circleBeat.Scale(38460 + beatDuration, 38460 + 2*beatDuration, 1.75, 1.5);
             circleBeat.EndGroup();
 
