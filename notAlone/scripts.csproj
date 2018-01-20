@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="Intro.cs" />
+    <Compile Include="Particles.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>
