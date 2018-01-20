@@ -22,7 +22,7 @@ namespace StorybrewScripts
         public double particleAmount = 20;
 
         [Configurable]
-        public double particleDuration = 4000;
+        public double particleDuration = 3000;
 
         [Configurable]
         public double fadeInDuration = 500;
@@ -58,6 +58,10 @@ namespace StorybrewScripts
                     var sprite = pool.Get(startTime, endTime);
                     var x = Random(0, 700);
                     var y = Random(0, 600);
+                    while (x > 250 && x < 400 && y > 200 && y < 400) {
+                        x = Random(0, 700);
+                        y = Random(0, 600);
+                    }
                     var fadeTime = Math.Max(startTime, startTime + fadeInDuration);
 
                     sprite.Move(startTime, x, y);
