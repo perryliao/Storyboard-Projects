@@ -12,14 +12,10 @@ using System.Linq;
 
 namespace StorybrewScripts
 {
-    public class Particles : StoryboardObjectGenerator
+    public class Arrows : StoryboardObjectGenerator
     {
         [Configurable]
-        public string Path = "sb/sprites/circleGlow.png";
-
-
-        [Configurable]
-        public double particleAmount = 20;
+        public double particleAmount = 15;
 
         [Configurable]
         public double particleDuration = 3000;
@@ -30,12 +26,14 @@ namespace StorybrewScripts
         [Configurable]
         public double fadeOutDuration = 500;
 
+        
+
 
         public override void Generate() {
 
             var layer = GetLayer("");
 
-            using (var pool = new OsbSpritePool(layer, Path, OsbOrigin.Centre, (sprite, startTime, endTime) => {
+            using (var pool = new OsbSpritePool(layer, "sb/sprites/toDown.png", OsbOrigin.Centre, (sprite, startTime, endTime) => {
                 // This action runs for every sprite created from the pool, after all of them are created (AFTER the for loop below).
 
                 // It is intended to set states common to every sprite:
@@ -45,6 +43,7 @@ namespace StorybrewScripts
 
                 // Initial setup.
                 sprite.Scale(27551, 0);
+                
 
             }))
 
@@ -61,26 +60,36 @@ namespace StorybrewScripts
                     while (x > 200 && x < 400 && y > 100 && y < 340) {
                         x = Random(0, 640);
                         y = Random(0, 480);
-                    } 
-                    var fadeTime = Math.Max(startTime, startTime + fadeInDuration);
+                    }
 
-                    sprite.Move(startTime, x, y);
+                    var arrowCount = Random(3, 6);
 
-                    sprite.Fade(OsbEasing.In, startTime, fadeTime, 0, 1);
-                    sprite.Scale(OsbEasing.OutElasticHalf, startTime, fadeTime, 0, 1);
-                    sprite.Fade(OsbEasing.In, fadeTime, fadeTime + fadeOutDuration, 1, 0);
-                    sprite.Scale(OsbEasing.InExpo, fadeTime, fadeTime + fadeOutDuration, 1, 0);
-                
+                    List<OsbSprite> arrowList = new List<OsbSprite>();
+
+                    while (arrowCount >= 0) {
+                        arrowList.Add(layer.CreateSprite("sb/sprites/toDown.png", OsbOrigin.Centre));
+                        arrowCount--;
+                    }
+                        
+                    var loopAmount = Random(2, 5);
+                    
+                    for (int i = 0; i < arrowList.Count; i++) {
+                        OsbSprite arrow = arrowList[i]; 
+
+                        
+                        arrow.Scale(startTime, 0.2);
+
+                        arrow.StartLoopGroup(0, loopAmount);
+                        
+                        arrow.Fade(OsbEasing.InOutExpo, startTime, startTime + 300 + 2*i, 0, 1);
+                        arrow.Move(OsbEasing.InOutExpo, startTime, startTime + 300 + 2*i, x, y, x, y + 10 + i*15);
+
+                        arrow.Fade(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, 1, 0);
+                        arrow.Move(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, x, y + 10 + i*15, x, y + 20 + i*20);
+                        arrow.EndGroup();
+                    }
                 }
             }
-
-        }
-
-        private int getRandomBetween(int a, int b) {
-            Random rnd = new Random();
-            int ret = rnd.Next(a, b); 
-
-            return ret;
         }
     }
 }
