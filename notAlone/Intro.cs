@@ -90,13 +90,13 @@ namespace StorybrewScripts
             for (int i = 0; i < nowLoading.Length; i++) {
                 var text = nowLoading[i];
 
-                text.StartLoopGroup(0,16);
-                text.Fade(OsbEasing.InExpo, 0 + i*25, 500 + i*20, 0, 1);
-                text.Fade(OsbEasing.InExpo, 600 + i*30, 1500 + i*30, 1, 0);
+                text.StartLoopGroup(0,11);
+                text.Fade(OsbEasing.InExpo, 0 + i*20, 800 + i*20, 0, 1);
+                text.Fade(OsbEasing.InExpo, 800 + i*20, 2200 + i*25, 1, 0);
                 text.EndGroup();
             }
 
-            screen.Scale(0, 1000);
+            screen.ScaleVec(24824, 440, 240);
             screen.Fade(OsbEasing.In, 24824, 27381, 0, 0.6);
             screen.Fade(OsbEasing.In, 27381, 27551, 0.6, 0);
 

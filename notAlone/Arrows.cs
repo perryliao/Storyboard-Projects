@@ -57,7 +57,7 @@ namespace StorybrewScripts
                     var sprite = pool.Get(startTime, endTime);
                     var x = Random(0, 640);
                     var y = Random(0, 480);
-                    while (x > 200 && x < 400 && y > 100 && y < 340) {
+                    while (x > 140 && x < 500 && y > 60 && y < 420) {
                         x = Random(0, 640);
                         y = Random(0, 480);
                     }
@@ -85,7 +85,7 @@ namespace StorybrewScripts
                         arrow.Move(OsbEasing.InOutExpo, startTime, startTime + 300 + 2*i, x, y, x, y + 10 + i*15);
 
                         arrow.Fade(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, 1, 0);
-                        arrow.Move(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, x, y + 10 + i*15, x, y + 20 + i*20);
+                        arrow.Move(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, x, y + 10 + i*15, x, y + 20 + i*24);
                         arrow.EndGroup();
                     }
                 }

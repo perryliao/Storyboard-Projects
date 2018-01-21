@@ -58,7 +58,7 @@ namespace StorybrewScripts
                     var sprite = pool.Get(startTime, endTime);
                     var x = Random(0, 640);
                     var y = Random(0, 480);
-                    while (x > 200 && x < 400 && y > 100 && y < 340) {
+                    while (x > 140 && x < 500 && y > 60 && y < 420) { // real values: (132, 508, 52, 427)
                         x = Random(0, 640);
                         y = Random(0, 480);
                     } 

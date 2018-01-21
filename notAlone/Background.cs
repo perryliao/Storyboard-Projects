@@ -16,15 +16,28 @@ namespace StorybrewScripts
     {
         public override void Generate()
         {
-		    var layer = GetLayer("Main");
+		    var layer = GetLayer("MainBG");
+            var bg = layer.CreateSprite("notAlone.jpg", OsbOrigin.Centre);
             var screen = layer.CreateSprite("sb/sprites/dot.jpg", OsbOrigin.Centre);
-
-            screen.Scale(0,1000);
-            screen.ColorHsb(0, 225, 0.6, 0.3);
+            var bw = layer.CreateSprite("sb/bgs/bw.jpg", OsbOrigin.Centre);
+            screen.ScaleVec(27381, 440, 240);
+            screen.ColorHsb(27381, 225, 0.6, 0.3); //dark blue
             screen.Fade(27381, 27551, 0, 1);
-            screen.Fade(91642, 1); //stay until first chorus
             
-            
-        }
+            screen.ColorHsb(OsbEasing.InCirc, 48858, 49369, 225, 0.6, 0.3, 225, 0, 0.13); // dark grey
+
+            screen.Fade(OsbEasing.OutExpo, 60108, 60364, 1, 0);
+
+            bw.Fade(60108, 1);
+            bw.Scale(60108, 0.45);
+            bw.Fade(OsbEasing.OutExpo, 60108, 60364, 0, 1);
+
+            bw.Fade(OsbEasing.InExpo, 70847, 71188, 1, 0);
+
+            bg.Scale(70847, 0.45);
+            bg.Fade(OsbEasing.InExpo, 70847, 71188, 0, 1);
+
+            bg.Fade(93006, 0);
+        } 
     }
 }

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Arrows.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Bars.cs" />
     <Compile Include="Intro.cs" />
     <Compile Include="Particles.cs" />
   </ItemGroup>
