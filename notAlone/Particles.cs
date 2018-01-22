@@ -73,14 +73,6 @@ namespace StorybrewScripts
                 
                 }
             }
-
-        }
-
-        private int getRandomBetween(int a, int b) {
-            Random rnd = new Random();
-            int ret = rnd.Next(a, b); 
-
-            return ret;
         }
     }
 }

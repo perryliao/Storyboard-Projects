@@ -85,7 +85,7 @@ namespace StorybrewScripts
                         arrow.Move(OsbEasing.InOutExpo, startTime, startTime + 300 + 2*i, x, y, x, y + 10 + i*15);
 
                         arrow.Fade(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, 1, 0);
-                        arrow.Move(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, x, y + 10 + i*15, x, y + 20 + i*24);
+                        arrow.Move(OsbEasing.InExpo, startTime + 300 + 2*i, startTime + 600 + 2*i, x, y + 10 + i*15, x, y + 20 + i*26);
                         arrow.EndGroup();
                     }
                 }

@@ -23,6 +23,9 @@ namespace StorybrewScripts
             screen.ScaleVec(27381, 440, 240);
             screen.ColorHsb(27381, 225, 0.6, 0.3); //dark blue
             screen.Fade(27381, 27551, 0, 1);
+
+            screen.ColorHsb(OsbEasing.OutExpo, 37438, 38290, 225, 0.6, 0.3, 0, 0.7, 0.35); //drum roll, change to red
+            screen.ColorHsb(OsbEasing.OutCirc, 38290, 38460, 0, 0.7, 0.35, 225, 0.6, 0.3); //back to blue
             
             screen.ColorHsb(OsbEasing.InCirc, 48858, 49369, 225, 0.6, 0.3, 225, 0, 0.13); // dark grey
 
