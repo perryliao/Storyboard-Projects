@@ -25,18 +25,16 @@ namespace StorybrewScripts
             OsbSprite[] allParts = new OsbSprite[] { bodyMain, bodyDarken, bodyHighlight, bodyPixelate };
             foreach (OsbSprite elem in allParts) {
                 elem.Scale(0, 0.45);
-                elem.Move(0, 50, 240);
+                elem.Move(0, 140, 240);
+                elem.Fade(OsbEasing.In, 5623, 5801, 0, 1);
+                elem.Fade(OsbEasing.In, 100771, 100949, 1, 0);
             }
+            
+            bodyDarken.Fade(OsbEasing.In, 16984, 17162, 1, 0); 
+            bodyHighlight.Fade(OsbEasing.In, 16984, 17162, 1, 0);
 
-            bodyMain.Fade(OsbEasing.In, 5623, 5801, 0, 1);
             bodyDarken.Fade(OsbEasing.In, 62428, 62606, 0, 1);
             bodyHighlight.Fade(OsbEasing.In, 62428, 62606, 0, 1);
-            bodyPixelate.Fade(OsbEasing.In, 5623, 5801, 0, 1);
-
-            bodyMain.Fade(OsbEasing.In, 100771, 100949, 0, 1);
-            bodyDarken.Fade(OsbEasing.In, 100771, 100949, 0, 1);
-            bodyHighlight.Fade(OsbEasing.In, 100771, 100949, 0, 1);
-            bodyPixelate.Fade(OsbEasing.In, 100771, 100949, 0, 1);
         }
     }
 }
