@@ -51,6 +51,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Body.cs" />
+  </ItemGroup>
   <ItemGroup />
 </Project>
