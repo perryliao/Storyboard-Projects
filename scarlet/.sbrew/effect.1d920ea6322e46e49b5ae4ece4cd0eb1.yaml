@@ -1,0 +1,14 @@
+﻿FormatVersion: 6
+Name: "Body 1"
+Script: "Body"
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  9c8db9ee7d1c44cea86821720dd07da1:
+    Name: "body"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes

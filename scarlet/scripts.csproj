@@ -54,6 +54,8 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="Body.cs" />
+    <Compile Include="Clock.cs" />
+    <Compile Include="Gears.cs" />
     <Compile Include="Light.cs" />
   </ItemGroup>
   <ItemGroup />

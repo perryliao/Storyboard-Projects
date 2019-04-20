@@ -1,0 +1,50 @@
+﻿FormatVersion: 6
+Name: "Gears 8"
+Script: "Gears"
+Config:
+  gearNumber:
+    Type: "System.String"
+    Value: "4"
+  startTime:
+    Type: "System.Double"
+    Value: "2961"
+  endTime:
+    Type: "System.Double"
+    Value: "4913"
+  scale:
+    Type: "System.Double"
+    Value: "0.45"
+  xPos:
+    Type: "System.Double"
+    Value: "440"
+  yPos:
+    Type: "System.Double"
+    Value: "370"
+  initialRotation:
+    Type: "System.Double"
+    Value: "0"
+  rotationAmount:
+    Type: "System.Double"
+    Value: "0.051"
+  clockwise:
+    Type: "System.Boolean"
+    Value: "True"
+  fall:
+    Type: "System.Boolean"
+    Value: "True"
+  fallTime:
+    Type: "System.Double"
+    Value: "4203"
+  collapseTime:
+    Type: "System.Double"
+    Value: "4736"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  c12f3bf4ac2f4f4ebdf625cf5b3aa6bc:
+    Name: "gears"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
