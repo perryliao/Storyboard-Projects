@@ -18,10 +18,12 @@ namespace StorybrewScripts
         public double startTime = 5801;
         [Configurable]
         public double endTime = 17162;
+        [Configurable]
+        public bool continueLight = false;
 
         public double beatLength = 356;
 
-        public double fadeTo = 0.4;
+        public double fadeTo = 0.65;
         public override void Generate()
         {
 		    var layer = GetLayer("light");
@@ -35,12 +37,13 @@ namespace StorybrewScripts
             light.Fade(startTime - beatLength/2, startTime, 0, fadeTo); 
             light.Fade(endTime - beatLength/2, endTime, fadeTo, 0);
             
-            light.Rotate(startTime - beatLength/2, endTime, Math.PI/2, Math.PI*3/4);
+            light.Rotate(startTime - beatLength/2, endTime, Math.PI*8/16, Math.PI*10/16);
 
             var secondStartTime = (endTime - startTime) / 2 + startTime; 
+            var endTime2 = continueLight ? endTime + (endTime - startTime) / 2 : endTime;
             light2.Fade(secondStartTime - 4*beatLength, secondStartTime, 0, fadeTo);
-            light2.Fade(endTime - beatLength/2, endTime, fadeTo, 0);
-            light2.Rotate(secondStartTime - 4*beatLength, endTime, Math.PI*7/16, Math.PI*9/16);
+            light2.Fade(endTime - beatLength/2, endTime2, fadeTo, 0);
+            light2.Rotate(secondStartTime - 4*beatLength, endTime2, Math.PI*8/16, continueLight ? Math.PI*10/16 : Math.PI*9/16);
         }
     }
 }
