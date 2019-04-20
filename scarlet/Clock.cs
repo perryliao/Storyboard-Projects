@@ -28,7 +28,7 @@ namespace StorybrewScripts
 
             foreach(OsbSprite elem in allParts) {
                 elem.Fade(0, 121, 0, 1);
-                elem.Fade(1186, 1186, 1, 0);
+                elem.Fade(OsbEasing.InExpo, 1008, 1186, 1, 0);
             }
 
             hourHand.Rotate(653, 831, 0, Math.PI/6);
