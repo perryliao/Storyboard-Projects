@@ -17,15 +17,15 @@ namespace StorybrewScripts
         [Configurable]
         public string gearNumber = "0";
         [Configurable]
-        public double startTime = 1363;
+        public double startTime = 2961;
         [Configurable]
-        public double endTime = 2073;
+        public double endTime = 4913;
         [Configurable]
         public double scale = 1.0;
         [Configurable]
-        public double xValue = 0.0;
+        public double xPos = 0.0;
         [Configurable]
-        public double yValue = 0.0;
+        public double yPos = 0.0;
         [Configurable]
         public double initialRotation = 0;
         [Configurable]
@@ -34,6 +34,10 @@ namespace StorybrewScripts
         public bool clockwise = true; // will fall to the right if fall is set to true
         [Configurable]
         public bool fall = true;
+        [Configurable]
+        public double fallTime = 4203; // Only used if fall == true
+        [Configurable]
+        public double collapseTime = 4736; // Only used if fall == true
         
         public double beatLength = 356;
         public override void Generate()
@@ -42,11 +46,28 @@ namespace StorybrewScripts
             OsbSprite gear = layer.CreateSprite("sb/gears/gear" + gearNumber + ".png", OsbOrigin.Centre);
 
             gear.Scale(0, scale);
-            gear.Move(startTime - beatLength/2, xValue, yValue);
+            gear.Move(startTime - beatLength/2, xPos, yPos);
             gear.Rotate(0, Math.PI*initialRotation);
             gear.Fade(OsbEasing.InExpo, startTime - beatLength/2, startTime, 0, 1);
-            gear.Fade(OsbEasing.InExpo, endTime - beatLength/2, endTime, 1, 0);
             gear.Rotate(startTime - beatLength/2, endTime, initialRotation, initialRotation + Math.PI*rotationAmount * (clockwise ? -1 : 1));
+        
+            if (fall) {
+                Random rnd = new Random();
+                double newX =  xPos + (clockwise ? 1 : -1) * (10 + rnd.Next(20)); 
+                double newY = 420 + rnd.Next(60);
+                gear.Move(OsbEasing.OutCirc,fallTime, collapseTime, gear.PositionAt(fallTime), newX, newY);
+                gear.Move(
+                        OsbEasing.OutCirc,
+                        collapseTime,
+                        endTime,
+                        gear.PositionAt(collapseTime),
+                        newX + (clockwise ? 1 : -1) * (60 + rnd.Next(60)),
+                        newY + 20 + rnd.Next(20)
+                    );
+            }
+            
+            gear.Fade(OsbEasing.InExpo, endTime - beatLength/2, endTime, 1, 0);
+            
         }
     }
 }
