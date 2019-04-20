@@ -27,11 +27,19 @@ namespace StorybrewScripts
             hourHand.ScaleVec(0, 0.8, 0.7);
 
             foreach(OsbSprite elem in allParts) {
-                elem.Fade(0, 121, 0, 1);
+                elem.Fade(OsbEasing.InExpo, 0, 121, 0, 1);
                 elem.Fade(OsbEasing.InExpo, 1008, 1186, 1, 0);
             }
 
             hourHand.Rotate(653, 831, 0, Math.PI/6);
+
+            foreach(OsbSprite elem in allParts) {
+                elem.Fade(OsbEasing.InExpo, 2073, 2251, 0, 1);
+                elem.Fade(OsbEasing.InExpo, 2783, 2961, 1, 0);
+            }
+
+            minHand.Rotate(2073, 2961, 0, Math.PI*2*5);
+            hourHand.Rotate(2073, 2961, Math.PI*5/6, Math.PI*10/6);
         }
     }
 }

@@ -21,16 +21,19 @@ namespace StorybrewScripts
         [Configurable]
         public double endTime = 2073;
         [Configurable]
-        public bool clockwise = true;
-        [Configurable]
         public double scale = 1.0;
         [Configurable]
         public double xValue = 0.0;
         [Configurable]
         public double yValue = 0.0;
-
+        [Configurable]
+        public double initialRotation = 0;
         [Configurable]
         public double rotationAmount = 1/8;
+        [Configurable]
+        public bool clockwise = true; // will fall to the right if fall is set to true
+        [Configurable]
+        public bool fall = true;
         
         public double beatLength = 356;
         public override void Generate()
@@ -40,9 +43,10 @@ namespace StorybrewScripts
 
             gear.Scale(0, scale);
             gear.Move(startTime - beatLength/2, xValue, yValue);
+            gear.Rotate(0, Math.PI*initialRotation);
             gear.Fade(OsbEasing.InExpo, startTime - beatLength/2, startTime, 0, 1);
-            gear.Fade(OsbEasing.OutExpo, endTime - beatLength/2, endTime, 1, 0);
-            gear.Rotate(startTime - beatLength/2, endTime, 0, Math.PI*rotationAmount * (clockwise ? -1 : 1));
+            gear.Fade(OsbEasing.InExpo, endTime - beatLength/2, endTime, 1, 0);
+            gear.Rotate(startTime - beatLength/2, endTime, initialRotation, initialRotation + Math.PI*rotationAmount * (clockwise ? -1 : 1));
         }
     }
 }
