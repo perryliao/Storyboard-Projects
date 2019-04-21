@@ -25,7 +25,7 @@ Config:
     Value: "-0.3"
   rotationAmount:
     Type: "System.Double"
-    Value: "0.2"
+    Value: "0.187"
   clockwise:
     Type: "System.Boolean"
     Value: "False"
