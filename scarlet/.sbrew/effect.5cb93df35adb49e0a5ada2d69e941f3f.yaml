@@ -1,0 +1,20 @@
+﻿FormatVersion: 6
+Name: "Paint 2"
+Script: "Paint"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "62606"
+  numIterations:
+    Type: "System.Int32"
+    Value: "8"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  8d1146730fc84b0ab13f996157c8b122:
+    Name: "paint"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
