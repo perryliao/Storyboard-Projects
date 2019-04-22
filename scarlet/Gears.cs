@@ -53,8 +53,8 @@ namespace StorybrewScripts
         
             if (fall) {
                 Random rnd = new Random();
-                double newX =  xPos + (clockwise ? 1 : -1) * (10 + rnd.Next(20)); 
-                double newY = 420 + rnd.Next(60);
+                double newX =  xPos + (clockwise ? 1 : -1) * (rnd.Next(20)); 
+                double newY = yPos + rnd.Next(30, 60);
                 gear.Move(OsbEasing.OutCirc,fallTime, collapseTime, gear.PositionAt(fallTime), newX, newY);
                 gear.Move(
                         OsbEasing.OutCirc,
@@ -66,7 +66,7 @@ namespace StorybrewScripts
                     );
             }
             
-            gear.Fade(OsbEasing.InExpo, endTime - beatLength/2, endTime, 1, 0);
+            gear.Fade(OsbEasing.OutExpo, endTime - beatLength/2, endTime, 1, 0);
             
         }
     }

@@ -35,11 +35,12 @@ namespace StorybrewScripts
 
             foreach(OsbSprite elem in allParts) {
                 elem.Fade(OsbEasing.InExpo, 2073, 2251, 0, 1);
+                elem.Color(2072, 2073, elem.ColorAt(2072), 1, 0, 0); // TODO fix this hack
                 elem.Fade(OsbEasing.InExpo, 2783, 2961, 1, 0);
             }
 
-            minHand.Rotate(2073, 2961, 0, Math.PI*2*5);
-            hourHand.Rotate(2073, 2961, Math.PI*5/6, Math.PI*10/6);
+            minHand.Rotate(2073, 2961, 0, -Math.PI*2*5);
+            hourHand.Rotate(2073, 2961, Math.PI*5/6, -Math.PI*2/6);
         }
     }
 }
