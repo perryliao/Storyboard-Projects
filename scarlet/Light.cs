@@ -29,10 +29,8 @@ namespace StorybrewScripts
 		    var layer = GetLayer("light");
             var light = layer.CreateSprite("sb/light.png", OsbOrigin.CentreLeft);
             var light2 = layer.CreateSprite("sb/light.png", OsbOrigin.CentreLeft);
-            light.ScaleVec(0, 0.9, 2.0);
-            light.Move(0, 280, -100);
-            light2.ScaleVec(0, 0.9, 2.0);
-            light2.Move(0, 280, -100);
+            light.ScaleVec(startTime - beatLength/2, 0.9, 2.0);
+            light.Move(startTime - beatLength/2, 280, -100);
             
             light.Fade(startTime - beatLength/2, startTime, 0, fadeTo); 
             light.Fade(endTime - beatLength/2, endTime, fadeTo, 0);
@@ -40,6 +38,9 @@ namespace StorybrewScripts
             light.Rotate(startTime - beatLength/2, endTime, Math.PI*8/16, Math.PI*10/16);
 
             var secondStartTime = (endTime - startTime) / 2 + startTime; 
+            light2.ScaleVec(secondStartTime, 0.9, 2.0);
+            light2.Move(secondStartTime, 280, -100);
+
             var endTime2 = continueLight ? endTime + (endTime - startTime) / 2 : endTime;
             light2.Fade(secondStartTime - 4*beatLength, secondStartTime, 0, fadeTo);
             light2.Fade(endTime - beatLength/2, endTime2, fadeTo, 0);
