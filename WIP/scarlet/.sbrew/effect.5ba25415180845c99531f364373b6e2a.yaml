@@ -1,0 +1,23 @@
+﻿FormatVersion: 6
+Name: "Light 2"
+Script: "Light"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "62606"
+  endTime:
+    Type: "System.Double"
+    Value: "73967"
+  continueLight:
+    Type: "System.Boolean"
+    Value: "True"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  5a95189c368a49ee977ec716cd0a9e5a:
+    Name: "light"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes
