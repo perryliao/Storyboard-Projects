@@ -17,6 +17,22 @@ namespace StorybrewScripts
         private int width = 854;
         private int height = 480;
         private int scale = 8; // 4 or lower is too slow
+
+        /*
+         *  @param OsbSprite[][] field  - The field of tiles
+         *  @param int coord            - x (if vert == true) or y (if vert == false) coordinate of the new line to split to 
+         *  @param double startTime     - Time of when the movement starts 
+         *  @param double endTIme       - Time of when the movement ends
+         *  @param OsbEasing easing     - Fade Easing type to use: https://github.com/Damnae/storybrew/blob/master/common/Storyboarding/OsbSprite.cs#L319
+         *  @param bool vert            - True if the splitting line is vertical
+         */
+        private void moveBoundary(OsbSprite[][] field, int coord, double startTime, double endTime, OsbEasing easing, bool vert = true) {
+            if (vert) {
+                
+            } else {
+                // horizontal coordinate
+            }
+        }
         public override void Generate()
         {
 		    var layer = GetLayer("tiles");            
