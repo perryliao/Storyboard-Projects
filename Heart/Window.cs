@@ -30,7 +30,7 @@ namespace StorybrewScripts
          */
         private void MoveWindow(OsbSprite window, WindowDirection dir, double coord, double startTime, double endTime) {
             if (dir == WindowDirection.LEFT) {
-                window.ScaleVec(startTime, endTime, window.ScaleAt(startTime), coord, window.ScaleAt(startTime).Y);
+                window.ScaleVec(startTime, endTime, window.ScaleAt(startTime), coord + 100, window.ScaleAt(startTime).Y);
             }
         }
         public override void Generate()
@@ -43,23 +43,23 @@ namespace StorybrewScripts
             // MoveWindow(leftWindow, WindowDirection.LEFT, 300, 116409, 117115); 
 
             foreach( var hitobject in Beatmap.HitObjects) {
-                if (hitobject.StartTime > 116409 && hitobject.EndTime < 150292) {
+                if (hitobject.StartTime >= 116409 && hitobject.EndTime <= 150292) {
                     if (hitobject is OsuSlider) {        
-                        var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 4;
-                        var sliderStartTime = hitobject.StartTime;
+                        double timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 8;
+                        double sliderStartTime = hitobject.StartTime;
                         while (true) {
-                            var sliderEndTime = sliderStartTime + timestep;
-                            var complete = hitobject.EndTime - sliderEndTime < 5;
+                            double sliderEndTime = sliderStartTime + timestep;
+                            bool complete = hitobject.EndTime - sliderEndTime < 5;
                             if (complete) sliderEndTime = hitobject.EndTime;
                             
-                            MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PlayfieldPosition.X, sliderStartTime, sliderEndTime); 
+                            MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PositionAtTime(sliderStartTime).X, sliderStartTime, sliderEndTime); 
 
                             if (complete) break;
                             sliderStartTime += timestep;
                         }
                     } else {
                         // circle
-                        MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PlayfieldPosition.X,hitobject.StartTime, hitobject.EndTime); 
+                        MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PositionAtTime(hitobject.StartTime).X, hitobject.StartTime, hitobject.EndTime); 
                     }
                 }
             }
