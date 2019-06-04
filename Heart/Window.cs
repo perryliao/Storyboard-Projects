@@ -25,12 +25,15 @@ namespace StorybrewScripts
          * @param OsbSprite window:     The window sprite to move
          * @param WindowDirection dir:  Direction the window is expanding. 
          * @param double coord:         The coordinate to move the window to, depending on the direction; LEFT/RIGHT == x, TOP/BOT == y 
-         * @param startTime:            Time when the action starts
-         * @param endTime:              Time when the action ends
+         * @param double startTime:     Time when the action starts
+         * @param double endTime:       Time when the action ends
+         * @param OsbEasing easing:     Easing to use to move the window, default = InOutSine
          */
-        private void MoveWindow(OsbSprite window, WindowDirection dir, double coord, double startTime, double endTime) {
+        private void MoveWindow(OsbSprite window, WindowDirection dir, double coord, double startTime, double endTime, OsbEasing easing = OsbEasing.InOutSine) {
+            double timeOffset = 89;
+            double displacement = 100;
             if (dir == WindowDirection.LEFT) {
-                window.ScaleVec(startTime, endTime, window.ScaleAt(startTime), coord + 100, window.ScaleAt(startTime).Y);
+                window.ScaleVec(easing, startTime - timeOffset, endTime - timeOffset, window.ScaleAt(startTime), coord + displacement, window.ScaleAt(startTime).Y);
             }
         }
         public override void Generate()
@@ -41,8 +44,8 @@ namespace StorybrewScripts
             leftWindow.ScaleVec(0, 0, 480);
             // leftWindow.ScaleVec(0, 10000, leftWindow.ScaleAt(0), 200, leftWindow.ScaleAt(0).Y);
             // MoveWindow(leftWindow, WindowDirection.LEFT, 300, 116409, 117115); 
-
-            foreach( var hitobject in Beatmap.HitObjects) {
+            OsuHitObject prevObject = null; 
+            foreach( OsuHitObject hitobject in Beatmap.HitObjects) {
                 if (hitobject.StartTime >= 116409 && hitobject.EndTime <= 150292) {
                     if (hitobject is OsuSlider) {        
                         double timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 8;
@@ -57,9 +60,17 @@ namespace StorybrewScripts
                             if (complete) break;
                             sliderStartTime += timestep;
                         }
+
+                        prevObject = hitobject;
                     } else {
                         // circle
-                        MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PositionAtTime(hitobject.StartTime).X, hitobject.StartTime, hitobject.EndTime); 
+                        if (prevObject != null) {
+                            MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PositionAtTime(prevObject.EndTime).X, prevObject.EndTime, hitobject.EndTime);
+                        } else {
+                            MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PositionAtTime(hitobject.EndTime).X, hitobject.EndTime, hitobject.EndTime);
+                        }
+                      
+                        prevObject = hitobject;
                     }
                 }
             }
