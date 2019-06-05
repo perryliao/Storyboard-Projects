@@ -32,10 +32,21 @@ namespace StorybrewScripts
         private void MoveWindow(OsbSprite window, WindowDirection dir, double coord, double startTime, double endTime, OsbEasing easing = OsbEasing.InOutSine) {
             double timeOffset = 89;
             double displacement = 100;
-            if (dir == WindowDirection.LEFT) {
-                window.ScaleVec(easing, startTime - timeOffset, endTime - timeOffset, window.ScaleAt(startTime), coord + displacement, window.ScaleAt(startTime).Y);
+            switch (dir) {
+                case WindowDirection.LEFT: 
+                case WindowDirection.RIGHT: 
+                    window.ScaleVec(easing, startTime - timeOffset, endTime - timeOffset, window.ScaleAt(startTime), coord + displacement, window.ScaleAt(startTime).Y);
+                    break;
+                case WindowDirection.TOP: 
+                case WindowDirection.BOTTOM: 
+                    // do something else 
+                    break; 
+                default: 
+                    // no action...
+                    break; 
             }
         }
+
         public override void Generate()
         {
             // Initialize
@@ -53,9 +64,13 @@ namespace StorybrewScripts
                         while (true) {
                             double sliderEndTime = sliderStartTime + timestep;
                             bool complete = hitobject.EndTime - sliderEndTime < 5;
-                            if (complete) sliderEndTime = hitobject.EndTime;
-                            
-                            MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PositionAtTime(sliderStartTime).X, sliderStartTime, sliderEndTime); 
+                            OsbEasing ease = OsbEasing.InOutSine;
+                            if (complete) {
+                                sliderEndTime = hitobject.EndTime;
+                            } else {
+                                ease = OsbEasing.None;
+                            }
+                            MoveWindow(leftWindow, WindowDirection.LEFT, hitobject.PositionAtTime(sliderStartTime).X, sliderStartTime, sliderEndTime, ease); 
 
                             if (complete) break;
                             sliderStartTime += timestep;
