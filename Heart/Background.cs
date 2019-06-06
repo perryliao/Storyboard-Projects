@@ -18,16 +18,33 @@ namespace StorybrewScripts
         [Configurable]
         public double Opacity = 0.2;
 
+        
+        private int width = 854;
+        private int height = 480;
+
         public override void Generate()
         {
             // Configuring default bg
             if (BackgroundPath == "") BackgroundPath = Beatmap.BackgroundPath ?? string.Empty;
             if (StartTime == EndTime) EndTime = (int)(Beatmap.HitObjects.LastOrDefault()?.EndTime ?? AudioDuration);
 
+            var layer = GetLayer("Background");
             var bitmap = GetMapsetBitmap(BackgroundPath);
-            var bg = GetLayer("").CreateSprite(BackgroundPath, OsbOrigin.Centre);
+            var bg = layer.CreateSprite(BackgroundPath, OsbOrigin.Centre);
             bg.Scale(StartTime, 480.0f / bitmap.Height);
             bg.Fade(StartTime, 0);
+
+            OsbSprite tileBG = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
+            tileBG.ColorHsb(34527, 0, 0, 0.1);
+            tileBG.ScaleVec(34527, width, height);
+            tileBG.Fade(34527, 0.6);
+            tileBG.Fade(42997, 0);
+
+            OsbSprite letterboxBG = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
+            letterboxBG.ColorHsb(23233, 51, 0.09, 0.9);
+            letterboxBG.Fade(23233, 1);
+            letterboxBG.ScaleVec(23233, width, height * 0.7);
+            letterboxBG.Fade(34527, 0);
         }
     }
 }
