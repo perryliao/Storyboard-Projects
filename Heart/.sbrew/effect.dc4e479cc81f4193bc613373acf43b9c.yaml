@@ -1,0 +1,14 @@
+﻿FormatVersion: 6
+Name: "Tiles 1"
+Script: "Tiles"
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  6724498a80a14ee29a8436bf32d0bc69:
+    Name: "tiles"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
