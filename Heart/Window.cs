@@ -53,6 +53,8 @@ namespace StorybrewScripts
 		    var layer = GetLayer("Window");
             OsbSprite leftWindow = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-100 , 480/2));
             leftWindow.ScaleVec(0, 0, 480);
+            leftWindow.Color(0, 247, 230, 213);
+
             // leftWindow.ScaleVec(0, 10000, leftWindow.ScaleAt(0), 200, leftWindow.ScaleAt(0).Y);
             // MoveWindow(leftWindow, WindowDirection.LEFT, 300, 116409, 117115); 
             OsuHitObject prevObject = null; 
