@@ -37,7 +37,7 @@ namespace StorybrewScripts
 
             blackBar.Color(45468, 0,0,0);
             blackBar.ScaleVec(endTime, width / 2, barHeight);
-            blackBar.Fade(OsbEasing.InExpo, 45115, endTime, blackBar.OpacityAt(45115), 0);
+            blackBar.Fade(OsbEasing.InExpo, 45468, endTime, blackBar.OpacityAt(45115), 0);
 
             smallWhiteBar.Color(45468, 247, 230, 213);
             smallWhiteBar.ScaleVec(OsbEasing.OutExpo, 45468, 45644, 0, barHeight, width * 0.1, barHeight);
