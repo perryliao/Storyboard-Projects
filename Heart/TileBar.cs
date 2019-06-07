@@ -45,17 +45,19 @@ namespace StorybrewScripts
             smallWhiteBar.Fade(OsbEasing.InExpo, 45115, endTime, smallWhiteBar.OpacityAt(45115), 0);
 
             int i;
-            int numSquares = 15;
+            int numSquares = 25;
             double squareStartTime = 45468;
             OsbSprite square;
             Random rnd = new Random(); 
+            
             for (i = 0; i < numSquares; i++) {
-                double squareHeight = barHeight * ((float) rnd.Next(10,40) / 100);
+                double squareHeight = barHeight * ((float) rnd.Next(5,30) / 100);
                 square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.TopLeft, new Vector2(width * 0.6f - 100, (float) (height/2 - barHeight / 2 + (barHeight - squareHeight) * rnd.Next(0, 100) / 100 )));
                 square.Color(squareStartTime, 247, 230, 213);
                 square.ScaleVec(squareStartTime, endTime, 0, squareHeight, rnd.Next(5, 15), squareHeight);
-                square.MoveX(OsbEasing.OutCirc, squareStartTime, endTime, square.PositionAt(squareStartTime).X, square.PositionAt(squareStartTime).X + rnd.Next(3, 70));
-                // square.Fade(OsbEasing.InExpo, 45468, endTime, square.OpacityAt(45115), 0);
+
+                square.MoveX(OsbEasing.OutCirc, squareStartTime, endTime, square.PositionAt(squareStartTime).X, square.PositionAt(squareStartTime).X + rnd.Next(0, 130) );
+                square.Fade(OsbEasing.InExpo, 45468, endTime, square.OpacityAt(45115), 0);
             }
         }
     }
