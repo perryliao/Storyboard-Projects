@@ -42,7 +42,7 @@ namespace StorybrewScripts
             smallWhiteBar.Color(45468, 247, 230, 213);
             smallWhiteBar.ScaleVec(OsbEasing.OutExpo, 45468, 45644, 0, barHeight, width * 0.1, barHeight);
             smallWhiteBar.MoveX(OsbEasing.InOutExpo, 45468, 45644, smallWhiteBar.PositionAt(45468).X, smallWhiteBar.PositionAt(45468).X + width * 0.1);
-            smallWhiteBar.Fade(OsbEasing.InExpo, 45115, endTime, smallWhiteBar.OpacityAt(45115), 0);
+            smallWhiteBar.Fade(OsbEasing.InExpo, 45115, 45644, smallWhiteBar.OpacityAt(45115), 0);
 
             int i;
             int numSquares = 25;
