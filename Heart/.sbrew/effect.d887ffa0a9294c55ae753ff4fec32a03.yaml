@@ -1,0 +1,14 @@
+﻿FormatVersion: 6
+Name: "TileBar 1"
+Script: "TileBar"
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  c3e18b14ca364b30a5aefd88a0952b07:
+    Name: "tileBar"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

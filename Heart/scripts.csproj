@@ -53,6 +53,9 @@
   -->
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="TileBar.cs" />
+    <Compile Include="Tiles.cs" />
+    <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>

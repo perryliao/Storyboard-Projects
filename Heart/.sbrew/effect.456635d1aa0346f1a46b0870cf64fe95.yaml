@@ -1,0 +1,14 @@
+﻿FormatVersion: 6
+Name: "Window 1"
+Script: "Window"
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  b23f4e47e93a4783946b06e8caa549f8:
+    Name: "Window"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
