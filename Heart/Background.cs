@@ -45,6 +45,10 @@ namespace StorybrewScripts
             letterboxBG.Fade(23233, 1);
             letterboxBG.ScaleVec(23233, width, height * 0.7);
             letterboxBG.Fade(34527, 0);
+
+            
+            letterboxBG.Fade(209586, 1);
+            letterboxBG.Fade(232174, 0);
         }
     }
 }

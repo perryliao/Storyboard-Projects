@@ -47,19 +47,23 @@ namespace StorybrewScripts
             }
         }
 
+        private double windowStartTime = 116409;
+        private double windowEndTime = 150292;
+
         public override void Generate()
         {
             // Initialize
 		    var layer = GetLayer("Window");
             OsbSprite leftWindow = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-100 , 480/2));
-            leftWindow.ScaleVec(0, 0, 480);
-            leftWindow.Color(0, 247, 230, 213);
+            leftWindow.Fade(windowStartTime, 1);
+            leftWindow.ScaleVec(windowStartTime - 100, 0, 480);
+            leftWindow.Color(windowStartTime, 247, 230, 213);
 
             // leftWindow.ScaleVec(0, 10000, leftWindow.ScaleAt(0), 200, leftWindow.ScaleAt(0).Y);
-            // MoveWindow(leftWindow, WindowDirection.LEFT, 300, 116409, 117115); 
+            // MoveWindow(leftWindow, WindowDirection.LEFT, 300, windowStartTime, 117115); 
             OsuHitObject prevObject = null; 
             foreach( OsuHitObject hitobject in Beatmap.HitObjects) {
-                if (hitobject.StartTime >= 116409 && hitobject.EndTime <= 150292) {
+                if (hitobject.StartTime >= windowStartTime && hitobject.EndTime <= windowEndTime) {
                     if (hitobject is OsuSlider) {        
                         double timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 8;
                         double sliderStartTime = hitobject.StartTime;
@@ -93,7 +97,7 @@ namespace StorybrewScripts
             }
 
 
-            leftWindow.Fade(237821, 1);
+            leftWindow.Fade(windowEndTime, 0);
         }
     }
 }
