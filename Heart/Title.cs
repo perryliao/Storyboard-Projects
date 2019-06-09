@@ -16,6 +16,7 @@ namespace StorybrewScripts
     {
         private double startTime = 23233;
         private double endTime = 34527;
+        
         public override void Generate()
         {
 		    var layer = GetLayer("Title");

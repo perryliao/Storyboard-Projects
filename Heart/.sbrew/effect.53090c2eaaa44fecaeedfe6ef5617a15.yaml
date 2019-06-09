@@ -1,0 +1,17 @@
+﻿FormatVersion: 6
+Name: "Letterbox 1"
+Script: "Letterbox"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "23233"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  800b3ca541f545af9eeb72efd6127853:
+    Name: "Letterbox"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
