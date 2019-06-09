@@ -59,6 +59,40 @@ namespace StorybrewScripts
                 square.MoveX(OsbEasing.OutCirc, squareStartTime, endTime, square.PositionAt(squareStartTime).X, square.PositionAt(squareStartTime).X + rnd.Next(0, 130) );
                 square.Fade(OsbEasing.InExpo, 45468, endTime, square.OpacityAt(45115), 0);
             }
+
+            // hard coded squares 
+            // square 1
+            double fixedHeight = barHeight * 0.45;
+            square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.TopLeft, new Vector2(width * 0.6f - 100, (float) (height/2 - barHeight / 2 + (barHeight - fixedHeight))));
+            square.Color(squareStartTime, 247, 230, 213);
+            square.ScaleVec(squareStartTime, endTime, 0, fixedHeight, rnd.Next(10, 15), fixedHeight);
+            square.MoveX(OsbEasing.OutCirc, squareStartTime, endTime, square.PositionAt(squareStartTime).X, square.PositionAt(squareStartTime).X + rnd.Next(0, 4) );
+            square.Fade(OsbEasing.InExpo, 45468, endTime, square.OpacityAt(45115), 0);
+
+            // square 2
+            fixedHeight = barHeight * 0.33;
+            square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.TopLeft, new Vector2(width * 0.6f - 100, (float) (height/2 - barHeight / 2 + rnd.Next(0, 4))));
+            square.Color(squareStartTime, 247, 230, 213);
+            square.ScaleVec(squareStartTime, endTime, 0, fixedHeight, rnd.Next(13, 18), fixedHeight);
+            square.MoveX(OsbEasing.OutCirc, squareStartTime, endTime, square.PositionAt(squareStartTime).X, square.PositionAt(squareStartTime).X + rnd.Next(3, 6) );
+            square.Fade(OsbEasing.InExpo, 45468, endTime, square.OpacityAt(45115), 0);
+
         }
+
+        /// <summary>Sets up the square sprites for the trailing bar effect</summary>
+        /// <param name="startTime">Time when the square will appear</param>
+        /// <param name="endTime">Time when the square will fade out</param>
+        /// <param name="movementOverride">If true, set your own movement after calling this method</param>
+        /// <param name="squareHeight">Height of the new square,</param>
+        /// <returns>The created square sprite.</returns>
+        // private OsuSprite squareSetUp(double startTime, double endTime, bool movementOverride, double squareHeight) {
+        //     Random rnd = new Random();
+        //     if (squareHeight == -1) { squareHeight = barHeight * ((float) rnd.Next(5,30) / 100); }
+        //     OsuSprite square = GetLayer("TileBar").CreateSprite("sb/1x1.jpg", OsbOrigin.TopLeft, new Vector2(width * 0.6f - 100, (float) (height/2 - barHeight / 2 + (barHeight - squareHeight) * rnd.Next(0, 100) / 100 )));
+        //     square.Color(startTime, 247, 230, 213);
+        //     square.ScaleVec(startTime, endTime, 0, squareHeight, rnd.Next(5, 15), squareHeight);
+        //     square.Fade(OsbEasing.InExpo, 45468, endTime, square.OpacityAt(45115), 0);
+        //     return square;
+        // }
     }
 }
