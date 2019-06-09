@@ -52,8 +52,13 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="Antique.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Letterbox.cs" />
+    <Compile Include="Particles.cs" />
+    <Compile Include="TileBar.cs" />
     <Compile Include="Tiles.cs" />
+    <Compile Include="Title.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup />

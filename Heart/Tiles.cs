@@ -24,12 +24,7 @@ namespace StorybrewScripts
         public override void Generate()
         {
 		    var layer = GetLayer("tiles");
-            OsbSprite bg = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
-            bg.ColorHsb(blockStartTime, 0, 0, 0.1);
-            bg.ScaleVec(blockStartTime, width, height);
-            bg.Fade(blockStartTime, 0.6);
-            bg.Fade(startTime, 0);
-
+            
             OsbSprite[][] field = new OsbSprite[height/scale][];  // field[y][x]
             for (int i = 0; i < height/scale; i++) {
                 field[i] = new OsbSprite[width/scale];
@@ -55,23 +50,6 @@ namespace StorybrewScripts
                     sprite.Fade(OsbEasing.InExpo, 45115, endTime, sprite.OpacityAt(45115), 0);
                 }
             }
-
-            OsbSprite blackBar = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft);
-            OsbSprite whiteBar = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-100 , 240));
-            double barHeight = 20;
-            whiteBar.Color(startTime, 247, 230, 213);
-            whiteBar.ScaleVec(startTime, 44939, 0, barHeight, width * 0.2, barHeight);
-            whiteBar.ScaleVec(OsbEasing.OutExpo, 44939, 45468, whiteBar.ScaleAt(44939), width * 0.9, barHeight);
-            whiteBar.ScaleVec(OsbEasing.OutExpo, 45468, endTime, whiteBar.ScaleAt(45468), width * 0.6, barHeight);
-            
-            blackBar.Color(45468, 0,0,0);
-            blackBar.ScaleVec(endTime, width / 2, barHeight);
-
-            OsbSprite smallWhiteBar = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(width * 0.9f - 100 , 240));
-            smallWhiteBar.Color(45468, 247, 230, 213);
-            smallWhiteBar.ScaleVec(OsbEasing.OutExpo, 45468, 45644, 0, barHeight, width * 0.1, barHeight);
-            smallWhiteBar.MoveX(OsbEasing.InOutExpo, 45468, 45644, smallWhiteBar.PositionAt(45468).X, smallWhiteBar.PositionAt(45468).X + width * 0.1);
-
         }
     }
 }
