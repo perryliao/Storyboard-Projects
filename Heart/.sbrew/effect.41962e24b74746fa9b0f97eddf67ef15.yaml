@@ -1,0 +1,20 @@
+﻿FormatVersion: 6
+Name: "Antique 1"
+Script: "Antique"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "23233"
+  endTime:
+    Type: "System.Double"
+    Value: "34527"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  1390a2f0285b4ac2b79cc85e2fa00f6c:
+    Name: "Antique"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
