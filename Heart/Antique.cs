@@ -46,11 +46,14 @@ namespace StorybrewScripts
         /// <param name="lineEndTime">Time when the line will fade out</param>
         /// 
         private OsbSprite configureLineEffect(double lineStartTime, double lineEndTime) {
-            OsbSprite line = GetLayer("Antique").CreateSprite("sb/Pool 1/rain.png", OsbOrigin.Centre);
-            line.Fade(lineStartTime, 0.4);
-            line.ScaleVec(lineStartTime, 1, 15);
-            line.ColorHsb(lineStartTime, 0, 0, 0.05);
-            line.Fade(lineEndTime, 0);
+            Random rnd = new Random();
+            OsbSprite line = GetLayer("Antique").CreateSprite("sb/Pool 1/rain.png", OsbOrigin.Centre, new Vector2(rnd.Next(-107, 747), 240));
+            double actualStart = lineStartTime - beatLength/4 < startTime ? startTime : lineStartTime - beatLength/4;
+            line.Fade(OsbEasing.OutCirc, actualStart, lineStartTime, 0, 0.4);
+            line.ScaleVec(actualStart, rnd.Next(0, 200)/200 + 1, 14);
+            line.ColorHsb(actualStart, 0, 0, 0.05);
+            line.MoveX(actualStart, lineEndTime, line.PositionAt(actualStart).X, line.PositionAt(actualStart).X + rnd.Next(-20, 20));
+            line.Fade(OsbEasing.OutCirc, lineEndTime - beatLength / 4, lineEndTime, 0.4, 0);
             return line;
         }
     }
