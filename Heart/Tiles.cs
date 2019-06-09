@@ -24,12 +24,7 @@ namespace StorybrewScripts
         public override void Generate()
         {
 		    var layer = GetLayer("tiles");
-            OsbSprite bg = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
-            bg.ColorHsb(blockStartTime, 0, 0, 0.1);
-            bg.ScaleVec(blockStartTime, width, height);
-            bg.Fade(blockStartTime, 0.6);
-            bg.Fade(startTime, 0);
-
+            
             OsbSprite[][] field = new OsbSprite[height/scale][];  // field[y][x]
             for (int i = 0; i < height/scale; i++) {
                 field[i] = new OsbSprite[width/scale];
