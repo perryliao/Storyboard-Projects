@@ -37,14 +37,14 @@ namespace StorybrewScripts
             OsbSprite tileBG = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
             tileBG.ColorHsb(34527, 0, 0, 0.1);
             tileBG.ScaleVec(34527, width, height);
-            tileBG.Fade(34527, 0.6);
+            tileBG.Fade(OsbEasing.OutExpo, 33821, 34527, 0, 0.6);
             tileBG.Fade(42997, 0);
 
             OsbSprite letterboxBG = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
             letterboxBG.ColorHsb(23233, 51, 0.09, 0.9);
             letterboxBG.Fade(23233, 1);
             letterboxBG.ScaleVec(23233, width, height * 0.7);
-            letterboxBG.Fade(34527, 0);
+            letterboxBG.Fade(OsbEasing.InCirc, 33821, 34527, 1, 0);
 
             
             letterboxBG.Fade(209586, 1);

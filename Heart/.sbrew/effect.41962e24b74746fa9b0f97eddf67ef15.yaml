@@ -8,6 +8,9 @@ Config:
   endTime:
     Type: "System.Double"
     Value: "34527"
+  staticTime:
+    Type: "System.Double"
+    Value: "33821"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"

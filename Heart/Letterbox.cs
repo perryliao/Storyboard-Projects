@@ -17,7 +17,7 @@ namespace StorybrewScripts
         [Configurable]
         public double startTime = 23233;
         [Configurable]
-        private double endTime = 34527;
+        public double endTime = 34527;
 
         /// <summary>Creates 2 black bar sprites, on the top and bottom.</summary>
         public override void Generate()

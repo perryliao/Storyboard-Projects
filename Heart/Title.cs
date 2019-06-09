@@ -28,7 +28,7 @@ namespace StorybrewScripts
             foreach (OsbSprite word in words) {
                 word.Fade(startTime, 1);
                 word.Scale(startTime, 0.5);
-                word.Fade(endTime, 0);
+                word.Fade(OsbEasing.InExpo, 33821, endTime, 1, 0);
             }
         }
     }
