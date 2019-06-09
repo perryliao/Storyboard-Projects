@@ -20,6 +20,7 @@ namespace StorybrewScripts
         public double endTime = 34527;
 
         private double beatLength = 23939 - 23233;
+        private Random rnd = new Random();
 
         // private int width = 854;
         // private int height = 480;
@@ -37,8 +38,13 @@ namespace StorybrewScripts
             mask.Fade(endTime, 0);
 
             // vertical line effect
-            Random rnd = new Random();
-            OsbSprite line = configureLineEffect(startTime, endTime);
+            double i;
+            for (i = startTime; i < endTime; i += beatLength / 2) {
+                // each half a beat has a 10% chance to generate a new line 
+                if (rnd.Next(0, 100) < 100) {
+                    configureLineEffect(i, i + (beatLength * (rnd.Next(0, 300) / 100)));
+                }
+            }
         }
 
         /// <summary>This is where line effect sprites are created, It is intended to set states common to every sprite.</summary>
@@ -46,11 +52,10 @@ namespace StorybrewScripts
         /// <param name="lineEndTime">Time when the line will fade out</param>
         /// 
         private OsbSprite configureLineEffect(double lineStartTime, double lineEndTime) {
-            Random rnd = new Random();
             OsbSprite line = GetLayer("Antique").CreateSprite("sb/Pool 1/rain.png", OsbOrigin.Centre, new Vector2(rnd.Next(-107, 747), 240));
             double actualStart = lineStartTime - beatLength/4 < startTime ? startTime : lineStartTime - beatLength/4;
             line.Fade(OsbEasing.OutCirc, actualStart, lineStartTime, 0, 0.4);
-            line.ScaleVec(actualStart, rnd.Next(0, 200)/200 + 1, 14);
+            line.ScaleVec(actualStart, rnd.Next(0, 200)/150 + 1, 14);
             line.ColorHsb(actualStart, 0, 0, 0.05);
             line.MoveX(actualStart, lineEndTime, line.PositionAt(actualStart).X, line.PositionAt(actualStart).X + rnd.Next(-20, 20));
             line.Fade(OsbEasing.OutCirc, lineEndTime - beatLength / 4, lineEndTime, 0.4, 0);

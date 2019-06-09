@@ -1,17 +1,20 @@
 ﻿FormatVersion: 6
-Name: "Letterbox 1"
-Script: "Letterbox"
+Name: "Antique 2"
+Script: "Antique"
 Config:
   startTime:
     Type: "System.Double"
-    Value: "23233"
+    Value: "209586"
+  endTime:
+    Type: "System.Double"
+    Value: "232174"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  800b3ca541f545af9eeb72efd6127853:
-    Name: "Letterbox"
+  612fac42690341a886508f3b4b59cf73:
+    Name: "Antique"
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes
