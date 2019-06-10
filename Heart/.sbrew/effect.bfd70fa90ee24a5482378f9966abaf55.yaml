@@ -1,0 +1,26 @@
+﻿FormatVersion: 6
+Name: "Rain 1"
+Script: "Rain"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "34527"
+  endTime:
+    Type: "System.Double"
+    Value: "42997"
+  particleDuration:
+    Type: "System.Double"
+    Value: "1000"
+  particleAmount:
+    Type: "System.Double"
+    Value: "100"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  5cde3c14831648769d514ccbf91613dc:
+    Name: "Rain"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
