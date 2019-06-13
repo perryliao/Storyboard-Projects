@@ -21,7 +21,7 @@ namespace StorybrewScripts
         public double endTime = 20409;
 
         [Configurable]
-        public double slowFadeTime = 11939;
+        public double slowFadeTime = 12997;
 
         private double beatLength = 706;
 
@@ -38,6 +38,14 @@ namespace StorybrewScripts
 
             for (i = startTime; i < slowFadeTime; i += timestep) {
                 heartThumpingAnimations(kokoro, i, 0.6, 1);
+            }
+
+            double fadeOut = 0.9;
+            double scaleRate = 0.1;
+            for (i = slowFadeTime; i < endTime; i += timestep) {
+                heartThumpingAnimations(kokoro, i, Math.Max(fadeOut - 0.4, 0), fadeOut);
+                
+                if (fadeOut > scaleRate) fadeOut -= scaleRate;
             }
         }
 

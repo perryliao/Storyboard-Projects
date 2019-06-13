@@ -5,6 +5,12 @@ Config:
   startTime:
     Type: "System.Double"
     Value: "292"
+  endTime:
+    Type: "System.Double"
+    Value: "20409"
+  slowFadeTime:
+    Type: "System.Double"
+    Value: "12997"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
