@@ -37,15 +37,20 @@ namespace StorybrewScripts
             if (slowFadeTime >= endTime) slowFadeTime = endTime;
 
             for (i = startTime; i < slowFadeTime; i += timestep) {
-                kokoro.Fade(OsbEasing.OutBounce, i, i + beatLength / 4, 0, 0.6);
-                kokoro.Fade(OsbEasing.OutCirc, i + (beatLength / 4), i + (3 * beatLength / 8), 0.6, 1);
-                kokoro.Fade(OsbEasing.InCirc, i + (3 * beatLength / 8), i + (beatLength / 2) , 1, 0);
+                heartThumpingAnimations(kokoro, i, 0.6, 1);
             }
+        }
 
-            // kokoro.StartLoopGroup(startTime, 1);
-            // kokoro.Fade(OsbEasing.OutBounce, startTime, 468, 0, 1);
-            // // kokoro.Fade(OsbEasing.InExpo, 468, 644, 1, 0);
-            // kokoro.EndGroup();
+        /// <summary>Sets the thumping animations for the given sprite. This will automatically fade out half a beat after the given start time.</summary>
+        /// <param name="kkr">The sprite to animate</param>
+        /// <param name="start">The start time</param>
+        /// <param name="midwayFade">The opacity for the first (minor) heart beat</param>
+        /// <param name="finalFade">The opacity for the second (major) heart beat</param>
+        ///
+        private void heartThumpingAnimations( OsbSprite kkr, double start, double midwayFade, double finalFade) {
+            kkr.Fade(OsbEasing.OutBounce, start, start + beatLength / 4, kkr.OpacityAt(start), midwayFade);
+            kkr.Fade(OsbEasing.OutCirc, start + (beatLength / 4), start + (3 * beatLength / 8), midwayFade, finalFade);
+            kkr.Fade(OsbEasing.InCirc, start + (3 * beatLength / 8), start + (beatLength / 2) , finalFade, 0);
         }
     }
 }
