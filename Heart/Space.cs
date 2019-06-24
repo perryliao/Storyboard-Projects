@@ -25,12 +25,15 @@ namespace StorybrewScripts
         {
 		    var layer = GetLayer("Space");
 
-            int numStars = 300;
+            int numStars = 400;
             int i;
 
             for (i = 0; i < numStars; i++) {
                 OsbSprite circ = createStar(startTime, endTime);
-                circ.Move(startTime, endTime*Math.Pow(2, 2), circ.PositionAt(startTime), new Vector2(320, 240));
+                circ.Move(startTime, endTime*3, circ.PositionAt(startTime), new Vector2(320, 240));
+                var tmp = circ.PositionAt(endTime);
+
+                circ.Move(startTime, endTime, circ.PositionAt(startTime), tmp);
                 // circ.Move(startTime, startTime + beatLength, circ.PositionAt(startTime), new Vector2(Mathf.PerlinNoise(0, startTime), *2 - 1, 0));
             }
         }
@@ -40,7 +43,7 @@ namespace StorybrewScripts
         /// <param name="eTime">Ending time of the object</param>
         ///
         private OsbSprite createStar(double sTime, double eTime) {
-            OsbSprite dot = GetLayer("Space").CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, new Vector2(Random(-207, 847), Random(-100, 580)));
+            OsbSprite dot = GetLayer("Space").CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, new Vector2(Random(-307, 947), Random(-100, 580)));
             dot.Scale(sTime, (double) Random(0,100)/800);
             dot.Fade(OsbEasing.InQuad, sTime, sTime + beatLength/2, 0, 1 );
             dot.Fade(OsbEasing.InQuad, eTime - beatLength/2, eTime, 1, 0 );
