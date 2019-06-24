@@ -21,7 +21,7 @@ namespace StorybrewScripts
         [Configurable]
         public double staticTime = 0;
 
-        private double beatLength = 23939 - 23233;
+        private double beatLength = 706;
         private Random rnd = new Random();
 
         // private int width = 854;
