@@ -22,6 +22,8 @@ namespace StorybrewScripts
         public double staticTime = 0;
 
         private double beatLength = 706;
+        private int width = 854;
+        private int height = 480;
         private Random rnd = new Random();
 
         // private int width = 854;
@@ -54,6 +56,24 @@ namespace StorybrewScripts
                 for (i = 0; i < 854; i += 1) {
                     configureLineEffect(rnd.Next((int)staticTime, (int)endTime - 1), endTime, i - 107);
                 }
+            }
+
+            // Configure film scratch/dust effect
+            // Number of film textures: 2
+            int numTextures = 2;
+            int j;
+            OsbSprite[] filmTextures = new OsbSprite[numTextures];
+            for (j = 0; j < numTextures; j++) {
+                filmTextures[j] = layer.CreateSprite("sb/film/" + j.ToString() + ".png", OsbOrigin.Centre);
+                filmTextures[j].ScaleVec(startTime, width, height * 0.7);
+            }
+
+            OsbSprite currentFilm;
+            double timeStep = beatLength/4;
+            for (i = startTime; i < endTime; i += timeStep) {
+                currentFilm = filmTextures[Random(0, numTextures - 1)];
+                currentFilm.Fade(i, 1);
+                currentFilm.Fade(i + timeStep, 0);
             }
         }
 
