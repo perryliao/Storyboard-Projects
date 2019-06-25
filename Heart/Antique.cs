@@ -26,9 +26,6 @@ namespace StorybrewScripts
         private int height = 480;
         private Random rnd = new Random();
 
-        // private int width = 854;
-        // private int height = 480;
-
         public override void Generate()
         {
 		    var layer = GetLayer("Antique");
@@ -59,8 +56,7 @@ namespace StorybrewScripts
             }
 
             // Configure film scratch/dust effect
-            // Number of film textures: 2
-            int numTextures = 2;
+            int numTextures = 8;
             int j;
             OsbSprite[] filmTextures = new OsbSprite[numTextures];
             for (j = 0; j < numTextures; j++) {
@@ -69,11 +65,19 @@ namespace StorybrewScripts
             }
 
             OsbSprite currentFilm;
+            int prevFilmNum = -1;
+            int currentFilmNum = -1;
             double timeStep = beatLength/4;
             for (i = startTime; i < endTime; i += timeStep) {
-                currentFilm = filmTextures[Random(0, numTextures - 1)];
+                while (currentFilmNum == prevFilmNum) {
+                    currentFilmNum = rnd.Next(numTextures);
+                }
+
+                currentFilm = filmTextures[currentFilmNum];
+                // Log(rnd.Next(numTextures).ToString());
                 currentFilm.Fade(i, 1);
                 currentFilm.Fade(i + timeStep, 0);
+                prevFilmNum = currentFilmNum;
             }
         }
 
