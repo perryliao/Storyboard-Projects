@@ -32,7 +32,7 @@ namespace StorybrewScripts
 
             for (i = 0; i < numStars; i++) {
                 OsbSprite circ = createStar(startTime, endTime);
-                circ.Move(startTime, endTime*3, circ.PositionAt(startTime), calculateEndPoint(circ.PositionAt(startTime).X, circ.PositionAt(startTime).Y));
+                circ.Move(startTime, endTime, circ.PositionAt(startTime), calculateEndPoint(circ.PositionAt(startTime).X, circ.PositionAt(startTime).Y));
                 var tmp = circ.PositionAt(endTime);
 
                 circ.Move(startTime, endTime, circ.PositionAt(startTime), tmp);
@@ -85,11 +85,9 @@ namespace StorybrewScripts
         /// <param name="spriteY">y coordinate of the object</param>
         ///
         private Vector2 calculateEndPoint(float spriteX, float spriteY) {
-            // TODO: calculate end point of sprite based on given coordinates
             Vector2 origin = new Vector2(320, 240);
             int radius = 25;
             
-            Log("sX: "+ spriteX.ToString() + " xY: " + spriteY.ToString());
             // Formula of circle: (x-h)^2 + (y-k)^2 = r^2
             float h = origin.X;
             float k = origin.Y;
@@ -97,8 +95,6 @@ namespace StorybrewScripts
             float m = (k - spriteY)/(h - spriteX);
             float b = k - m*h;
 
-            Log("h: "+ h.ToString() + " k: " + k.ToString());
-            Log("m: "+ m.ToString() + " b: " + b.ToString());
             // Formula for end point: intersect of the 2 equations...
             // (x-h)^2 + (y-k)^2 = r^2 ; where y = m*x + b
             // (x-h)^2 + ( m*x + b - k)^2 = r^2
@@ -110,16 +106,19 @@ namespace StorybrewScripts
             double quadA = Math.Pow(m, 2) + 1;
             double quadB = 2*m*(b-k) - 2*h;
             double quadC = Math.Pow(h, 2) + Math.Pow((b-k), 2) - Math.Pow(radius, 2);
-            Log("a: "+ quadA.ToString() + " b: " + quadB.ToString() + " c: " + quadC.ToString());
+            float x1 = (float) ((-1*quadB + Math.Sqrt(Math.Pow(quadB, 2) - 4 * quadA * quadC))/(2*quadA));
+            float x2 = (float) ((-1*quadB - Math.Sqrt(Math.Pow(quadB, 2) - 4 * quadA * quadC))/(2*quadA));
 
-            double x1 = (-1*quadB + Math.Sqrt(Math.Pow(quadB, 2) - 4 * quadA * quadC))/(2*quadA);
-            double x2 = (-1*quadB - Math.Sqrt(Math.Pow(quadB, 2) - 4 * quadA * quadC))/(2*quadA);
+            // Plug x coordinates back to origin line equation
+            float y1 = (float) m*x1 + b;
+            float y2 = (float) m*x2 + b;
 
-            Log("x1: "+ x1.ToString() + " x2: " + x2.ToString());
-            Log("");
+            Vector2 o = new Vector2(spriteX, spriteY);
+            Vector2 p1 = new Vector2(x1, y1);
+            Vector2 p2 = new Vector2(x2, y2);
 
-            Vector2 ret = new Vector2(320, 240);
-            return ret;
+            // Pick the point closest to the sprite
+            return (o-p1).Length < (o-p2).Length ? p1 : p2;
         }
     }
 }
