@@ -32,7 +32,7 @@ namespace StorybrewScripts
 
             for (i = 0; i < numStars; i++) {
                 OsbSprite circ = createStar(startTime, endTime);
-                circ.Move(startTime, endTime*3, circ.PositionAt(startTime), new Vector2(320, 240));
+                circ.Move(startTime, endTime*3, circ.PositionAt(startTime), calculateEndPoint(circ.PositionAt(startTime).X, circ.PositionAt(startTime).Y));
                 var tmp = circ.PositionAt(endTime);
 
                 circ.Move(startTime, endTime, circ.PositionAt(startTime), tmp);
@@ -56,7 +56,7 @@ namespace StorybrewScripts
 
                     int startX = Random(-107, 747);
                     int startY = Random(0, 480);
-                    sprite.Move(OsbEasing.InCirc, start, finish, new Vector2(startX, startY), new Vector2(320, 240));
+                    sprite.Move(OsbEasing.InCirc, start, finish, new Vector2(startX, startY), calculateEndPoint(startX, startY));
 
                     double fadeInTime = start + (particleDuration * 0.1);
                     sprite.Fade(OsbEasing.OutCirc, start, fadeInTime, 0, 0.9);
@@ -78,6 +78,16 @@ namespace StorybrewScripts
             dot.Fade(OsbEasing.InQuad, sTime, sTime + beatLength/2, 0, 1 );
             dot.Fade(OsbEasing.InQuad, eTime - beatLength/2, eTime, 1, 0 );
             return dot;
+        }
+
+        /// <summary>Calculates the endpoint of the current sprite, given its start position</summary>
+        /// <param name="x">x coordinate of the object</param>
+        /// <param name="y">y coordinate of the object</param>
+        ///
+        private Vector2 calculateEndPoint(double x, double y) {
+            // TODO: calculate end point of sprite based on given coordinates
+            Vector2 ret = new Vector2(320, 240);
+            return ret;
         }
     }
 }
