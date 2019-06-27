@@ -60,22 +60,23 @@ namespace StorybrewScripts
             int j;
             OsbSprite[] filmTextures = new OsbSprite[numTextures];
             for (j = 0; j < numTextures; j++) {
-                filmTextures[j] = layer.CreateSprite("sb/film/" + j.ToString() + ".png", OsbOrigin.Centre);
-                filmTextures[j].ScaleVec(startTime, width, height * 0.7);
+                filmTextures[j] = layer.CreateSprite("sb/film/" + j.ToString() +".png", OsbOrigin.Centre);
+                filmTextures[j].ScaleVec(startTime, 1.7, 1.35);
+                filmTextures[j].Fade(startTime, 0);
             }
 
             OsbSprite currentFilm;
             int prevFilmNum = -1;
             int currentFilmNum = -1;
-            double timeStep = beatLength/4;
-            for (i = startTime; i < endTime; i += timeStep) {
+            double timeStep = beatLength/16;
+            for (i = startTime + timeStep; i < endTime; i += timeStep) {
                 while (currentFilmNum == prevFilmNum) {
                     currentFilmNum = rnd.Next(numTextures);
                 }
 
                 currentFilm = filmTextures[currentFilmNum];
                 // Log(rnd.Next(numTextures).ToString());
-                currentFilm.Fade(i, 1);
+                currentFilm.Fade(i, 0.6);
                 currentFilm.Fade(i + timeStep, 0);
                 prevFilmNum = currentFilmNum;
             }
