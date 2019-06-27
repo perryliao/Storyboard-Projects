@@ -21,6 +21,8 @@ namespace StorybrewScripts
         public double endTime = 23233;
 
         private double beatLength = 706;
+        private double particleDuration = 1000;
+        private double particleAmount = 100;
         public override void Generate()
         {
 		    var layer = GetLayer("Space");
@@ -35,6 +37,34 @@ namespace StorybrewScripts
 
                 circ.Move(startTime, endTime, circ.PositionAt(startTime), tmp);
                 // circ.Move(startTime, startTime + beatLength, circ.PositionAt(startTime), new Vector2(Mathf.PerlinNoise(0, startTime), *2 - 1, 0));
+            }
+
+            using (OsbSpritePool pool = new OsbSpritePool(layer, "sb/Pool 2/cir2.png", OsbOrigin.Centre, (sprite, startTime, endTime) =>
+            {
+                // This action runs for every sprite created from the pool, after all of them are created (AFTER the for loop below).
+                // It is intended to set states common to every sprite:
+                
+            }))
+            {
+                double timeStep = particleDuration / particleAmount;
+                double start;
+                for (start = startTime; start <= endTime - particleDuration; start += timeStep) {
+                    // This is where sprites are created from the pool.
+                    // Commands here are specific to each sprite.
+                    double finish = start + particleDuration;
+                    OsbSprite sprite = pool.Get(startTime, endTime);
+
+                    int startX = Random(-107, 747);
+                    int startY = Random(0, 480);
+                    sprite.Move(OsbEasing.InCirc, start, finish, new Vector2(startX, startY), new Vector2(320, 240));
+
+                    double fadeInTime = start + (particleDuration * 0.1);
+                    sprite.Fade(OsbEasing.OutCirc, start, fadeInTime, 0, 0.9);
+                    sprite.Fade(OsbEasing.InOutCirc, fadeInTime, finish, 0.9, 0);
+                    
+                    double scale = (double) Random(1, 30)/1000;
+                    sprite.Scale(start, finish, scale, scale/10);
+                }
             }
         }
 
