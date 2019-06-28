@@ -30,7 +30,7 @@ namespace StorybrewScripts
             int numStars = 400;
             double i, j;
 
-            for (i = 0; i < 640; i++) {
+            for (i = 50; i < 640; i++) {
                 for (j = 0; j < 3; j++) {
                     Vector2 pos = findStartingPosition( i );
                     OsbSprite circ = layer.CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, pos);
@@ -91,8 +91,12 @@ namespace StorybrewScripts
         /// <summary>Calculates the starting point of a star, given the radius away from the center it should be at the end</summary>
         /// <param name="radius">Radius of the circle that the end point will be on</param>
         private Vector2 findStartingPosition(double radius) {
-            
-            return new Vector2(Random(-307, 947), Random(-100, 580));
+            Vector2 o = new Vector2(320, 240);
+            Vector2 ret = new Vector2(Random(-307, 947), Random(-100, 580));
+            while ((o-ret).Length < radius) {
+                ret = new Vector2(Random(-307, 947), Random(-100, 580));
+            }
+            return ret;
         } 
 
         private Vector2 calculateEndPoint(float spriteX, float spriteY, double radius) {
