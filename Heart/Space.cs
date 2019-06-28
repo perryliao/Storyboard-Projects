@@ -26,12 +26,14 @@ namespace StorybrewScripts
         public override void Generate()
         {
 		    var layer = GetLayer("Space");
-
-            int numStars = 400;
             double i, j;
 
             for (i = 50; i < 640; i++) {
-                for (j = 0; j < 3; j++) {
+                double iterations = 1;
+                if (i > 200) iterations = 3;
+                else if (i > 100) iterations = 2;
+                
+                for (j = 0; j < iterations; j++) {
                     Vector2 pos = findStartingPosition( i );
                     OsbSprite circ = layer.CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, pos);
                     circ.Scale(startTime, (double) Random(0,100)/800);
