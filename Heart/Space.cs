@@ -84,12 +84,6 @@ namespace StorybrewScripts
         //     return dot;
         // }
 
-        /// <summary>Calculates the endpoint of the current sprite, given its start position</summary>
-        /// <param name="spriteX">x coordinate of the object</param>
-        /// <param name="spriteY">y coordinate of the object</param>
-        /// <param name="radius">Radius of the circle that the end point will be on</param>
-        ///
-
         /// <summary>Calculates the starting point of a star, given the radius away from the center it should be at the end</summary>
         /// <param name="radius">Radius of the circle that the end point will be on</param>
         private Vector2 findStartingPosition(double radius) {
@@ -101,6 +95,11 @@ namespace StorybrewScripts
             return ret;
         } 
 
+        /// <summary>Calculates the endpoint of the current sprite, given its start position</summary>
+        /// <param name="spriteX">x coordinate of the object</param>
+        /// <param name="spriteY">y coordinate of the object</param>
+        /// <param name="radius">Radius of the circle that the end point will be on</param>
+        ///
         private Vector2 calculateEndPoint(float spriteX, float spriteY, double radius) {
             Vector2 origin = new Vector2(320, 240);
             
