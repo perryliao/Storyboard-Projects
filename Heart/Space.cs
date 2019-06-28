@@ -32,11 +32,7 @@ namespace StorybrewScripts
 
             for (i = 0; i < numStars; i++) {
                 OsbSprite circ = createStar(startTime, endTime);
-                circ.Move(startTime, endTime, circ.PositionAt(startTime), calculateEndPoint(circ.PositionAt(startTime).X, circ.PositionAt(startTime).Y));
-                var tmp = circ.PositionAt(endTime);
-
-                circ.Move(startTime, endTime, circ.PositionAt(startTime), tmp);
-                // circ.Move(startTime, startTime + beatLength, circ.PositionAt(startTime), new Vector2(Mathf.PerlinNoise(0, startTime), *2 - 1, 0));
+                circ.Move(startTime, endTime, circ.PositionAt(startTime), calculateEndPoint(circ.PositionAt(startTime).X, circ.PositionAt(startTime).Y, 25));
             }
 
             using (OsbSpritePool pool = new OsbSpritePool(layer, "sb/Pool 2/cir2.png", OsbOrigin.Centre, (sprite, startTime, endTime) =>
@@ -56,10 +52,10 @@ namespace StorybrewScripts
 
                     int startX = Random(-107, 747);
                     int startY = Random(0, 480);
-                    sprite.Move(OsbEasing.InCirc, start, finish, new Vector2(startX, startY), calculateEndPoint(startX, startY));
+                    sprite.Move(OsbEasing.InCirc, start, finish, new Vector2(startX, startY), calculateEndPoint(startX, startY, 25));
 
-                    double fadeInTime = start + (particleDuration * 0.1);
-                    sprite.Fade(OsbEasing.OutCirc, start, fadeInTime, 0, 0.9);
+                    double fadeInTime = start + (particleDuration * 0.2);
+                    sprite.Fade(OsbEasing.InSine, start, fadeInTime, 0, 0.9);
                     sprite.Fade(OsbEasing.InOutCirc, fadeInTime, finish, 0.9, 0);
                     
                     double scale = (double) Random(1, 30)/1000;
@@ -83,10 +79,10 @@ namespace StorybrewScripts
         /// <summary>Calculates the endpoint of the current sprite, given its start position</summary>
         /// <param name="spriteX">x coordinate of the object</param>
         /// <param name="spriteY">y coordinate of the object</param>
+        /// <param name="radius">Radius of the circle that the end point will be on</param>
         ///
-        private Vector2 calculateEndPoint(float spriteX, float spriteY) {
+        private Vector2 calculateEndPoint(float spriteX, float spriteY, int radius) {
             Vector2 origin = new Vector2(320, 240);
-            int radius = 25;
             
             // Formula of circle: (x-h)^2 + (y-k)^2 = r^2
             float h = origin.X;
@@ -97,10 +93,8 @@ namespace StorybrewScripts
 
             // Formula for end point: intersect of the 2 equations...
             // (x-h)^2 + (y-k)^2 = r^2 ; where y = m*x + b
-            // (x-h)^2 + ( m*x + b - k)^2 = r^2
-            // (x^2 - 2*x*h + h^2) + (m^2*x^2 + 2*m*x*(b-k) + (b - k)^2) = r^2
             // ...
-            // x^2*(m^2 + 1) + x*(2*h + 2*m*b - 2*m*k) + (b-k)^2 = r^2
+            // x^2*(m^2 + 1) + x*(2*m*(b - k) - 2*h) + (h^2 + (b-k)^2 - r^2) = 0
             // use quadratic equation here...
 
             double quadA = Math.Pow(m, 2) + 1;
