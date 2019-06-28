@@ -28,11 +28,17 @@ namespace StorybrewScripts
 		    var layer = GetLayer("Space");
 
             int numStars = 400;
-            int i;
+            double i, j;
 
-            for (i = 0; i < numStars; i++) {
-                OsbSprite circ = createStar(startTime, endTime);
-                circ.Move(startTime, endTime, circ.PositionAt(startTime), calculateEndPoint(circ.PositionAt(startTime).X, circ.PositionAt(startTime).Y, 25));
+            for (i = 0; i < 640; i++) {
+                for (j = 0; j < 3; j++) {
+                    Vector2 pos = findStartingPosition( i );
+                    OsbSprite circ = layer.CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, pos);
+                    circ.Scale(startTime, (double) Random(0,100)/800);
+                    circ.Fade(OsbEasing.InQuad, startTime, startTime + beatLength/2, 0, 1 );
+                    circ.Fade(OsbEasing.InQuad, endTime - beatLength/2, endTime, 1, 0 );
+                    circ.Move(startTime, endTime, circ.PositionAt(startTime), calculateEndPoint(pos.X, pos.Y, i));
+                }
             }
 
             using (OsbSpritePool pool = new OsbSpritePool(layer, "sb/Pool 2/cir2.png", OsbOrigin.Centre, (sprite, startTime, endTime) =>
@@ -68,20 +74,28 @@ namespace StorybrewScripts
         /// <param name="sTime">Starting time of the object</param>
         /// <param name="eTime">Ending time of the object</param>
         ///
-        private OsbSprite createStar(double sTime, double eTime) {
-            OsbSprite dot = GetLayer("Space").CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, new Vector2(Random(-307, 947), Random(-100, 580)));
-            dot.Scale(sTime, (double) Random(0,100)/800);
-            dot.Fade(OsbEasing.InQuad, sTime, sTime + beatLength/2, 0, 1 );
-            dot.Fade(OsbEasing.InQuad, eTime - beatLength/2, eTime, 1, 0 );
-            return dot;
-        }
+        // private OsbSprite createStar(double sTime, double eTime) {
+        //     OsbSprite dot = GetLayer("Space").CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, new Vector2(Random(-307, 947), Random(-100, 580)));
+        //     dot.Scale(sTime, (double) Random(0,100)/800);
+        //     dot.Fade(OsbEasing.InQuad, sTime, sTime + beatLength/2, 0, 1 );
+        //     dot.Fade(OsbEasing.InQuad, eTime - beatLength/2, eTime, 1, 0 );
+        //     return dot;
+        // }
 
         /// <summary>Calculates the endpoint of the current sprite, given its start position</summary>
         /// <param name="spriteX">x coordinate of the object</param>
         /// <param name="spriteY">y coordinate of the object</param>
         /// <param name="radius">Radius of the circle that the end point will be on</param>
         ///
-        private Vector2 calculateEndPoint(float spriteX, float spriteY, int radius) {
+
+        /// <summary>Calculates the starting point of a star, given the radius away from the center it should be at the end</summary>
+        /// <param name="radius">Radius of the circle that the end point will be on</param>
+        private Vector2 findStartingPosition(double radius) {
+            
+            return new Vector2(Random(-307, 947), Random(-100, 580));
+        } 
+
+        private Vector2 calculateEndPoint(float spriteX, float spriteY, double radius) {
             Vector2 origin = new Vector2(320, 240);
             
             // Formula of circle: (x-h)^2 + (y-k)^2 = r^2
