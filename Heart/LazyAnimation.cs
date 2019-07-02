@@ -16,6 +16,7 @@ namespace StorybrewScripts
     public class LazyAnimation : StoryboardObjectGenerator
     {
         private double beatLength = 706;
+        private double glitchStartTime = 38056;
         public override void Generate()
         {
 		    var layer = GetLayer("Lazy");
@@ -32,29 +33,63 @@ namespace StorybrewScripts
             circle.Fade(OsbEasing.InOutElastic, 36644, 37350, 1, 0);
             circle.Color(36821, 1, 0, 0);
 
-            double boxEndTime = 38056;
             OsbSprite boxOut = layer.CreateSprite("sb/boxcircle.png", OsbOrigin.Centre);
             boxOut.Fade(OsbEasing.In, 37350 - beatLength/4, 37350, 0, 1);
             boxOut.Scale(37350 - beatLength/4, 0.2);
             boxOut.Rotate(37350 - beatLength/4, Math.PI/16);
-            boxOut.Scale(OsbEasing.In, 37350, boxEndTime, boxOut.ScaleAt(37350).X, 3);
-            boxOut.Rotate(37350, boxEndTime, boxOut.RotationAt(37350), boxOut.RotationAt(37350) + Math.PI * 5 / 8);
-            boxOut.Fade(boxEndTime, 0);
+            boxOut.Scale(OsbEasing.In, 37350, glitchStartTime, boxOut.ScaleAt(37350).X, 3);
+            boxOut.Rotate(37350, glitchStartTime, boxOut.RotationAt(37350), boxOut.RotationAt(37350) + Math.PI * 5 / 8);
+            boxOut.Fade(glitchStartTime, 0);
             OsbSprite boxMid = layer.CreateSprite("sb/boxcircle.png", OsbOrigin.Centre);
             boxMid.Fade(OsbEasing.In, 37350 - beatLength/4, 37350, 0, 1);
             boxMid.Scale(37350 - beatLength/4, 0.15);
             boxMid.Rotate(37350 - beatLength/4, Math.PI/8);
-            boxMid.Scale(OsbEasing.InCubic, 37350, boxEndTime, boxMid.ScaleAt(37350).X, 2);
-            boxMid.Rotate(37350, boxEndTime, boxMid.RotationAt(37350), boxMid.RotationAt(37350) + Math.PI * 5 / 8);
-            boxMid.Fade(boxEndTime, 0);
+            boxMid.Scale(OsbEasing.InCubic, 37350, glitchStartTime, boxMid.ScaleAt(37350).X, 2);
+            boxMid.Rotate(37350, glitchStartTime, boxMid.RotationAt(37350), boxMid.RotationAt(37350) + Math.PI * 5 / 8);
+            boxMid.Fade(glitchStartTime, 0);
             OsbSprite boxIn = layer.CreateSprite("sb/boxcircle.png", OsbOrigin.Centre);
             boxIn.Fade(OsbEasing.In, 37350 - beatLength/4, 37350, 0, 1);
             boxIn.Scale(37350 - beatLength/4, 0.1);
             boxIn.Rotate(37350 - beatLength/4, Math.PI*3/8);
             boxIn.Fade(40174, 0);
-            boxIn.Scale(OsbEasing.InExpo, 37350, boxEndTime, boxIn.ScaleAt(37350).X, 0.4);
-            boxIn.Rotate(37350, boxEndTime, boxIn.RotationAt(37350), boxIn.RotationAt(37350) + Math.PI * 5 / 8);
+            boxIn.Scale(OsbEasing.InExpo, 37350, glitchStartTime, boxIn.ScaleAt(37350).X, 0.4);
+            boxIn.Rotate(37350, glitchStartTime, boxIn.RotationAt(37350), boxIn.RotationAt(37350) + Math.PI * 5 / 8);
 
+            OsbSprite boxInBox = glitchFadeIn(0.365, 0.7, "sb/boxy.png");
+            OsbSprite[] rotations = new OsbSprite[4];
+            OsbSprite circInBox;
+            int i;
+            for (i = 0; i < rotations.Length; i++) {
+                rotations[i] = glitchFadeIn(0.065, 0.9, "sb/Pool 1/cir.png");
+                if (i == 3) circInBox = glitchFadeIn(0.09, 1, "sb/Pool 1/cir.png");
+                rotations[i].ColorHsb(glitchStartTime, 32, 0.18, 0.85);
+            }
+
+            rotations[0].Move(glitchStartTime, 250, 290);
+            rotations[0].Scale(glitchStartTime, 0.05);
+            
+            rotations[1].Move(glitchStartTime, 390, 270);
+
+            rotations[2].Move(glitchStartTime, 365, 215);
+            rotations[2].Scale(glitchStartTime, 0.025);
+
+            rotations[3].Move(glitchStartTime, 280, 235);
+            rotations[3].Scale(glitchStartTime, 0.01);
+
+            for (i = 0; i < rotations.Length; i++) {
+                rotations[i].StartLoopGroup(glitchStartTime, 10);
+                rotations[i].Move(OsbEasing.InSine, 0, beatLength, rotations[i].PositionAt(glitchStartTime), rotations[(i+1)%4].PositionAt(glitchStartTime));
+                rotations[i].Scale(OsbEasing.InSine, 0, beatLength, rotations[i].ScaleAt(glitchStartTime).X, rotations[(i+1)%4].ScaleAt(glitchStartTime).X);
+                rotations[i].EndGroup();
+            }
+        }
+
+        private OsbSprite glitchFadeIn(double scale, double fade, string path) {
+            OsbSprite sprite = GetLayer("Lazy").CreateSprite(path, OsbOrigin.Centre);
+            sprite.Scale(glitchStartTime, scale);
+            sprite.Fade(OsbEasing.InElastic, glitchStartTime, 38321, 0, fade);
+            sprite.Fade(40174, 0);
+            return sprite;
         }
     }
 }
