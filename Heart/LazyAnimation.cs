@@ -86,6 +86,16 @@ namespace StorybrewScripts
                 rotations[i].Scale(OsbEasing.InSine, 0, beatLength, rotations[i].ScaleAt(glitchStartTime).X, rotations[(i+1)%4].ScaleAt(glitchStartTime).X);
                 rotations[i].EndGroup();
             }
+
+            OsbSprite line = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107, 240));
+            OsbSprite lineEnd = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.CentreRight, new Vector2(-39, 240));
+            line.ScaleVec(40174, 30, 100);
+            line.Fade(40174, 1);
+            line.Fade(42997, 0);
+            lineEnd.ScaleVec(40174, 0.1, 0.16666);
+            lineEnd.Fade(40174, 1);
+            lineEnd.Fade(42997, 0);
+        
         }
 
         private OsbSprite glitchFadeIn(double scale, double fade, string path) {
