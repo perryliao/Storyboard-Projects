@@ -60,24 +60,26 @@ namespace StorybrewScripts
             OsbSprite circInBox;
             int i;
             for (i = 0; i < rotations.Length; i++) {
-                rotations[i] = glitchFadeIn(0.065, 0.9, "sb/Pool 1/cir.png");
-                if (i == 3) circInBox = glitchFadeIn(0.09, 1, "sb/Pool 1/cir.png");
+                rotations[i] = glitchFadeIn(0.065, 1, "sb/Pool 1/cir.png");
+                if (i == 1) circInBox = glitchFadeIn(0.09, 1, "sb/Pool 1/cir.png");
                 rotations[i].ColorHsb(glitchStartTime, 32, 0.18, 0.85);
             }
 
-            rotations[0].Move(glitchStartTime, 250, 290);
-            rotations[0].Scale(glitchStartTime, 0.05);
+            rotations[0].Move(glitchStartTime, 365, 215);
+            rotations[0].Scale(glitchStartTime, 0.025);
+
+            rotations[1].Move(glitchStartTime, 280, 235);
+            rotations[1].Scale(glitchStartTime, 0.01);
+
+            rotations[2].Move(glitchStartTime, 250, 290);
+            rotations[2].Scale(glitchStartTime, 0.05);
             
-            rotations[1].Move(glitchStartTime, 390, 270);
+            rotations[3].Move(glitchStartTime, 390, 270);
 
-            rotations[2].Move(glitchStartTime, 365, 215);
-            rotations[2].Scale(glitchStartTime, 0.025);
 
-            rotations[3].Move(glitchStartTime, 280, 235);
-            rotations[3].Scale(glitchStartTime, 0.01);
 
             for (i = 0; i < rotations.Length; i++) {
-                rotations[i].StartLoopGroup(glitchStartTime, 10);
+                rotations[i].StartLoopGroup(glitchStartTime, 3);
                 rotations[i].Move(OsbEasing.InSine, 0, beatLength, rotations[i].PositionAt(glitchStartTime), rotations[(i+1)%4].PositionAt(glitchStartTime));
                 rotations[i].Scale(OsbEasing.InSine, 0, beatLength, rotations[i].ScaleAt(glitchStartTime).X, rotations[(i+1)%4].ScaleAt(glitchStartTime).X);
                 rotations[i].EndGroup();
