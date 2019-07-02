@@ -54,8 +54,10 @@ namespace StorybrewScripts
             boxIn.Fade(40174, 0);
             boxIn.Scale(OsbEasing.InExpo, 37350, glitchStartTime, boxIn.ScaleAt(37350).X, 0.4);
             boxIn.Rotate(37350, glitchStartTime, boxIn.RotationAt(37350), boxIn.RotationAt(37350) + Math.PI * 5 / 8);
+            boxIn.Rotate(glitchStartTime, 40174, boxIn.RotationAt(glitchStartTime), boxIn.RotationAt(glitchStartTime) - Math.PI / 16);
 
-            OsbSprite boxInBox = glitchFadeIn(0.365, 0.7, "sb/boxy.png");
+            OsbSprite boxInBox = glitchFadeIn(0.365, 0.4, "sb/boxy.png");
+            boxInBox.Rotate(glitchStartTime, 40174, boxInBox.RotationAt(glitchStartTime), boxInBox.RotationAt(glitchStartTime) - Math.PI / 16);
             OsbSprite[] rotations = new OsbSprite[4];
             OsbSprite circInBox;
             int i;
@@ -65,16 +67,16 @@ namespace StorybrewScripts
                 rotations[i].ColorHsb(glitchStartTime, 32, 0.18, 0.85);
             }
 
-            rotations[0].Move(glitchStartTime, 365, 215);
+            rotations[0].Move(glitchStartTime, 375, 215);
             rotations[0].Scale(glitchStartTime, 0.025);
 
-            rotations[1].Move(glitchStartTime, 280, 235);
+            rotations[1].Move(glitchStartTime, 280, 225);
             rotations[1].Scale(glitchStartTime, 0.01);
 
-            rotations[2].Move(glitchStartTime, 250, 290);
-            rotations[2].Scale(glitchStartTime, 0.05);
+            rotations[2].Move(glitchStartTime, 250, 280);
+            rotations[2].Scale(glitchStartTime, 0.045);
             
-            rotations[3].Move(glitchStartTime, 390, 270);
+            rotations[3].Move(glitchStartTime, 390, 260);
 
 
 
