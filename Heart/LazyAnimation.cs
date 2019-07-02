@@ -87,14 +87,21 @@ namespace StorybrewScripts
                 rotations[i].EndGroup();
             }
 
+            double progressStartTime = 40174;
             OsbSprite line = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107, 240));
-            OsbSprite lineEnd = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.CentreRight, new Vector2(-39, 240));
-            line.ScaleVec(40174, 30, 100);
-            line.Fade(40174, 1);
+            OsbSprite lineEnd = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.CentreLeft, new Vector2(-39 - 70, 240));
+            line.ScaleVec(progressStartTime - beatLength/4, 30, 100);
+            line.Fade(progressStartTime - beatLength/4, 0);
+            line.Fade(progressStartTime, 1);
             line.Fade(42997, 0);
-            lineEnd.ScaleVec(40174, 0.1, 0.16666);
-            lineEnd.Fade(40174, 1);
+            lineEnd.ScaleVec(progressStartTime - beatLength/4, 0.1, 0.16666);
+            lineEnd.Fade(progressStartTime - beatLength/4, 0);
+            lineEnd.Fade(progressStartTime, 1);
             lineEnd.Fade(42997, 0);
+
+            line.ScaleVec(OsbEasing.InQuint, progressStartTime, progressStartTime + beatLength, line.ScaleAt(progressStartTime), line.ScaleAt(progressStartTime).X + 150, line.ScaleAt(progressStartTime).Y + 210);
+            lineEnd.ScaleVec(OsbEasing.InQuint, progressStartTime, progressStartTime + beatLength, lineEnd.ScaleAt(progressStartTime), lineEnd.ScaleAt(progressStartTime).X + 0.351, lineEnd.ScaleAt(progressStartTime).Y + 0.351 );
+            lineEnd.MoveX(OsbEasing.InQuint, progressStartTime, progressStartTime + beatLength, lineEnd.PositionAt(progressStartTime).X, lineEnd.PositionAt(progressStartTime).X + 31 );
         
         }
 
