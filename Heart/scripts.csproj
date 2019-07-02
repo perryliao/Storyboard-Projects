@@ -55,6 +55,7 @@
     <Compile Include="Antique.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Kokoro.cs" />
+    <Compile Include="LazyAnimation.cs" />
     <Compile Include="Letterbox.cs" />
     <Compile Include="RainAnimations.cs" />
     <Compile Include="Space.cs" />
