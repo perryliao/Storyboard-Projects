@@ -32,25 +32,29 @@ namespace StorybrewScripts
             circle.Fade(OsbEasing.InOutElastic, 36644, 37350, 1, 0);
             circle.Color(36821, 1, 0, 0);
 
-            double boxEndTime = 38233;
-            OsbSprite boxOut = setUpBox(37350, 40174);
-            boxOut.Scale(OsbEasing.Out, 37350, boxEndTime, boxOut.ScaleAt(37350).X, 1.5);
-            boxOut.Rotate(37350, boxEndTime, 0, 5*Math.PI/4);
-            OsbSprite boxMid = setUpBox(37350, 40174);
-            boxMid.Scale(OsbEasing.Out, 37527, boxEndTime, boxMid.ScaleAt(37527).X, 1);
-            boxMid.Rotate(37527, boxEndTime, 0, Math.PI);
-            OsbSprite boxIn = setUpBox(37350, 40174);
-            boxIn.Scale(OsbEasing.Out, 37703, boxEndTime, boxIn.ScaleAt(37703).X, 0.5);
-            boxIn.Rotate(37703, boxEndTime, 0, 3*Math.PI/4);
+            double boxEndTime = 38056;
+            OsbSprite boxOut = layer.CreateSprite("sb/boxcircle.png", OsbOrigin.Centre);
+            boxOut.Fade(OsbEasing.In, 37350 - beatLength/4, 37350, 0, 1);
+            boxOut.Scale(37350 - beatLength/4, 0.2);
+            boxOut.Rotate(37350 - beatLength/4, Math.PI/16);
+            boxOut.Scale(OsbEasing.In, 37350, boxEndTime, boxOut.ScaleAt(37350).X, 3);
+            boxOut.Rotate(37350, boxEndTime, boxOut.RotationAt(37350), boxOut.RotationAt(37350) + Math.PI * 5 / 8);
+            boxOut.Fade(boxEndTime, 0);
+            OsbSprite boxMid = layer.CreateSprite("sb/boxcircle.png", OsbOrigin.Centre);
+            boxMid.Fade(OsbEasing.In, 37350 - beatLength/4, 37350, 0, 1);
+            boxMid.Scale(37350 - beatLength/4, 0.15);
+            boxMid.Rotate(37350 - beatLength/4, Math.PI/8);
+            boxMid.Scale(OsbEasing.InCubic, 37350, boxEndTime, boxMid.ScaleAt(37350).X, 2);
+            boxMid.Rotate(37350, boxEndTime, boxMid.RotationAt(37350), boxMid.RotationAt(37350) + Math.PI * 5 / 8);
+            boxMid.Fade(boxEndTime, 0);
+            OsbSprite boxIn = layer.CreateSprite("sb/boxcircle.png", OsbOrigin.Centre);
+            boxIn.Fade(OsbEasing.In, 37350 - beatLength/4, 37350, 0, 1);
+            boxIn.Scale(37350 - beatLength/4, 0.1);
+            boxIn.Rotate(37350 - beatLength/4, Math.PI*3/8);
+            boxIn.Fade(40174, 0);
+            boxIn.Scale(OsbEasing.InExpo, 37350, boxEndTime, boxIn.ScaleAt(37350).X, 0.4);
+            boxIn.Rotate(37350, boxEndTime, boxIn.RotationAt(37350), boxIn.RotationAt(37350) + Math.PI * 5 / 8);
 
-        }
-
-        private OsbSprite setUpBox( double start, double end) {
-            OsbSprite box = GetLayer("boxy").CreateSprite("sb/boxy.png", OsbOrigin.Centre);
-            box.Fade(OsbEasing.In, start - beatLength/4, start, 0, 1);
-            box.Scale(start - beatLength/4, 0);
-            box.Fade(end, 0);
-            return box;
         }
     }
 }
