@@ -58,51 +58,61 @@ namespace StorybrewScripts
 
             OsbSprite boxInBox = glitchFadeIn(0.365, 0.4, "sb/boxy.png");
             boxInBox.Rotate(glitchStartTime, 40174, boxInBox.RotationAt(glitchStartTime), boxInBox.RotationAt(glitchStartTime) - Math.PI / 16);
-            OsbSprite[] rotations = new OsbSprite[4];
+            OsbSprite[] rotations = new OsbSprite[5];
             OsbSprite circInBox;
             int i;
             for (i = 0; i < rotations.Length; i++) {
-                rotations[i] = glitchFadeIn(0.065, 1, "sb/Pool 1/cir.png");
+                rotations[i] = glitchFadeIn(0.060, 1, "sb/Pool 1/cir.png");
                 if (i == 1) circInBox = glitchFadeIn(0.09, 1, "sb/Pool 1/cir.png");
                 rotations[i].ColorHsb(glitchStartTime, 32, 0.18, 0.85);
             }
 
-            rotations[0].Move(glitchStartTime, 375, 215);
+            rotations[0].Move(glitchStartTime, 365, 207);
             rotations[0].Scale(glitchStartTime, 0.025);
 
-            rotations[1].Move(glitchStartTime, 280, 225);
+            rotations[1].Move(glitchStartTime, 280, 215);
             rotations[1].Scale(glitchStartTime, 0.01);
 
-            rotations[2].Move(glitchStartTime, 250, 280);
+            rotations[2].Move(glitchStartTime, 245, 260);
             rotations[2].Scale(glitchStartTime, 0.045);
             
-            rotations[3].Move(glitchStartTime, 390, 260);
+            rotations[3].Move(glitchStartTime, 310, 270);
+            rotations[3].Scale(glitchStartTime, 0.075 );
 
-
+            rotations[4].Move(glitchStartTime, 395, 240 );
 
             for (i = 0; i < rotations.Length; i++) {
                 rotations[i].StartLoopGroup(glitchStartTime, 3);
-                rotations[i].Move(OsbEasing.InSine, 0, beatLength, rotations[i].PositionAt(glitchStartTime), rotations[(i+1)%4].PositionAt(glitchStartTime));
-                rotations[i].Scale(OsbEasing.InSine, 0, beatLength, rotations[i].ScaleAt(glitchStartTime).X, rotations[(i+1)%4].ScaleAt(glitchStartTime).X);
+                rotations[i].Move(OsbEasing.InSine, 0, beatLength, rotations[i].PositionAt(glitchStartTime), rotations[(i+1) % rotations.Length].PositionAt(glitchStartTime));
+                rotations[i].Scale(OsbEasing.InSine, 0, beatLength, rotations[i].ScaleAt(glitchStartTime).X, rotations[(i+1) % rotations.Length].ScaleAt(glitchStartTime).X);
                 rotations[i].EndGroup();
             }
 
-            double progressStartTime = 40174;
-            OsbSprite line = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107, 240));
-            OsbSprite lineEnd = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.CentreLeft, new Vector2(-39 - 70, 240));
-            line.ScaleVec(progressStartTime - beatLength/4, 30, 100);
-            line.Fade(progressStartTime - beatLength/4, 0);
-            line.Fade(progressStartTime, 1);
-            line.Fade(42997, 0);
-            lineEnd.ScaleVec(progressStartTime - beatLength/4, 0.1, 0.16666);
-            lineEnd.Fade(progressStartTime - beatLength/4, 0);
-            lineEnd.Fade(progressStartTime, 1);
-            lineEnd.Fade(42997, 0);
+            OsbSprite cir1 = createBeatCircles(320 - 200, 240, 40174, false);
+            OsbSprite cir2 = createBeatCircles(320, 240, 40703, false);
+            OsbSprite cir3 = createBeatCircles(320 + 200, 240, 41233, false);
 
-            line.ScaleVec(OsbEasing.InQuint, progressStartTime, progressStartTime + beatLength, line.ScaleAt(progressStartTime), line.ScaleAt(progressStartTime).X + 150, line.ScaleAt(progressStartTime).Y + 210);
-            lineEnd.ScaleVec(OsbEasing.InQuint, progressStartTime, progressStartTime + beatLength, lineEnd.ScaleAt(progressStartTime), lineEnd.ScaleAt(progressStartTime).X + 0.351, lineEnd.ScaleAt(progressStartTime).Y + 0.351 );
-            lineEnd.MoveX(OsbEasing.InQuint, progressStartTime, progressStartTime + beatLength, lineEnd.PositionAt(progressStartTime).X, lineEnd.PositionAt(progressStartTime).X + 31 );
-        
+            // double progressStartTime = 40174;
+            // OsbSprite line = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107, 240));
+            // OsbSprite lineEnd = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.CentreLeft, new Vector2(-39 - 70, 240));
+            // line.ScaleVec(progressStartTime - beatLength/4, 30, 100);
+            // line.Fade(progressStartTime - beatLength/4, 0);
+            // line.Fade(progressStartTime, 1);
+            // line.Fade(42997, 0);
+            // lineEnd.ScaleVec(progressStartTime - beatLength/4, 0.1, 0.16666);
+            // lineEnd.Fade(progressStartTime - beatLength/4, 0);
+            // lineEnd.Fade(progressStartTime, 1);
+            // lineEnd.Fade(42997, 0);
+
+            // double relativeTime = progressStartTime;
+            // line.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, line.ScaleAt(relativeTime), line.ScaleAt(relativeTime).X + 150, line.ScaleAt(relativeTime).Y + 210);
+            // lineEnd.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, lineEnd.ScaleAt(relativeTime), lineEnd.ScaleAt(relativeTime).X + 0.351, lineEnd.ScaleAt(relativeTime).Y + 0.351 );
+            // lineEnd.MoveX(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, lineEnd.PositionAt(relativeTime).X, lineEnd.PositionAt(relativeTime).X + 31 );
+            
+            // relativeTime += beatLength;
+            // line.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, line.ScaleAt(relativeTime), line.ScaleAt(relativeTime).X + 350, line.ScaleAt(relativeTime).Y - 110);
+            // lineEnd.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, lineEnd.ScaleAt(relativeTime), lineEnd.ScaleAt(relativeTime).X - 0.184, lineEnd.ScaleAt(relativeTime).Y - 0.184 );
+            // lineEnd.MoveX(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, lineEnd.PositionAt(relativeTime).X, lineEnd.PositionAt(relativeTime).X + 410 );
         }
 
         private OsbSprite glitchFadeIn(double scale, double fade, string path) {
@@ -111,6 +121,19 @@ namespace StorybrewScripts
             sprite.Fade(OsbEasing.InElastic, glitchStartTime, 38321, 0, fade);
             sprite.Fade(40174, 0);
             return sprite;
+        }
+
+        private OsbSprite createBeatCircles(float x, float y, double cirStartTime, bool skipAnimation = true) {
+            OsbSprite cir = GetLayer("BeatCircles").CreateSprite("sb/Pool 1/cir.png", OsbOrigin.Centre, new Vector2(x, y));
+
+            cir.Fade(cirStartTime, 1);       
+            cir.Scale(cirStartTime, 0.07);
+            if (!skipAnimation) {
+                cir.ScaleVec(OsbEasing.OutBack, cirStartTime, cirStartTime + beatLength/4, cir.ScaleAt(cirStartTime), cir.ScaleAt(cirStartTime).X, cir.ScaleAt(cirStartTime).Y + 0.03);
+                cir.ScaleVec(OsbEasing.OutBack, cirStartTime + beatLength/4, cirStartTime + beatLength/2, cir.ScaleAt(cirStartTime + beatLength/4), cir.ScaleAt(cirStartTime + beatLength/4).X, cir.ScaleAt(cirStartTime).Y);
+            }
+            cir.Fade(42997, 0);
+            return cir;
         }
     }
 }
