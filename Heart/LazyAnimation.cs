@@ -89,8 +89,44 @@ namespace StorybrewScripts
             }
 
             OsbSprite cir1 = createBeatCircles(320 - 200, 240, 40174, false);
+            cir1.Color(40174, 1, 1, 1);
+            OsbSprite cir1R = createBeatCircles(320 - 200 - 20, 240 + 4, 42644, true);
+            OsbSprite cir1B = createBeatCircles(320 - 200 + 20, 240 - 4, 42644, true);
+
+            cir1R.Color(OsbEasing.OutExpo, 42644, 42997, 1, 0, 0, 1,1,1);
+            cir1R.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
+            cir1R.Move(OsbEasing.OutElastic, 42644, 42997, cir1R.PositionAt(42644), cir1.PositionAt(42644));
+            
+            cir1.Fade(42644, 0);
+            cir1B.Color(OsbEasing.OutExpo, 42644, 42997, 0, 0.8, 0.9, 1,1,1);
+            cir1B.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
+            cir1B.Move(OsbEasing.OutElastic, 42644, 42997, cir1B.PositionAt(42644), cir1.PositionAt(42644));
+            
             OsbSprite cir2 = createBeatCircles(320, 240, 40703, false);
+            cir2.Color(40703, 1, 1, 1);
+            OsbSprite cir2R = createBeatCircles(320 - 20, 240 + 4, 42644, true);
+            OsbSprite cir2B = createBeatCircles(320 + 20, 240 - 4, 42644, true);
+            
+            cir2R.Color(OsbEasing.OutExpo, 42644, 42997, 1, 0, 0, 1,1,1);
+            cir2R.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
+            cir2R.Move(OsbEasing.OutElastic, 42644, 42997, cir2R.PositionAt(42644), cir2.PositionAt(42644));
+            cir2.Fade(42644, 0);
+            cir2B.Color(OsbEasing.OutExpo, 42644, 42997, 0, 0.8, 0.9, 1,1,1);
+            cir2B.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
+            cir2B.Move(OsbEasing.OutElastic, 42644, 42997, cir2B.PositionAt(42644), cir2.PositionAt(42644));
+
             OsbSprite cir3 = createBeatCircles(320 + 200, 240, 41233, false);
+            cir3.Color(41233, 1, 1, 1);
+            OsbSprite cir3R = createBeatCircles(320 + 200 - 20, 240 + 4, 42644, true);
+            OsbSprite cir3B = createBeatCircles(320 + 200 + 20, 240 - 4, 42644, true);
+
+            cir3R.Color(OsbEasing.OutExpo, 42644, 42997, 1, 0, 0, 1,1,1);
+            cir3R.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
+            cir3R.Move(OsbEasing.OutElastic, 42644, 42997, cir3R.PositionAt(42644), cir3.PositionAt(42644));
+            cir3.Fade(42644, 0);
+            cir3B.Color(OsbEasing.OutExpo, 42644, 42997, 0, 0.8, 0.9, 1,1,1);
+            cir3B.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
+            cir3B.Move(OsbEasing.OutElastic, 42644, 42997, cir3B.PositionAt(42644), cir3.PositionAt(42644));
 
             // double progressStartTime = 40174;
             // OsbSprite line = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107, 240));
@@ -130,6 +166,8 @@ namespace StorybrewScripts
             if (!skipAnimation) {
                 cir.ScaleVec(OsbEasing.OutBack, cirStartTime, cirStartTime + beatLength/4, 0.07, 0.07, 0.07, 0.1);
                 cir.ScaleVec(OsbEasing.OutBack, cirStartTime + beatLength/4, cirStartTime + beatLength/2, cir.ScaleAt(cirStartTime + beatLength/4), cir.ScaleAt(cirStartTime + beatLength/4).X, cir.ScaleAt(cirStartTime).Y);
+            } else {
+                cir.Scale(cirStartTime, 0.07);
             }
             cir.Fade(42997, 0);
             return cir;
