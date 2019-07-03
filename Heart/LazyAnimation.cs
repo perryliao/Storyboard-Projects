@@ -124,12 +124,11 @@ namespace StorybrewScripts
         }
 
         private OsbSprite createBeatCircles(float x, float y, double cirStartTime, bool skipAnimation = true) {
-            OsbSprite cir = GetLayer("BeatCircles").CreateSprite("sb/Pool 1/cir.png", OsbOrigin.Centre, new Vector2(x, y));
+            OsbSprite cir = GetLayer("Lazy").CreateSprite("sb/Pool 1/cir.png", OsbOrigin.Centre, new Vector2(x, y));
 
             cir.Fade(cirStartTime, 1);       
-            cir.Scale(cirStartTime, 0.07);
             if (!skipAnimation) {
-                cir.ScaleVec(OsbEasing.OutBack, cirStartTime, cirStartTime + beatLength/4, cir.ScaleAt(cirStartTime), cir.ScaleAt(cirStartTime).X, cir.ScaleAt(cirStartTime).Y + 0.03);
+                cir.ScaleVec(OsbEasing.OutBack, cirStartTime, cirStartTime + beatLength/4, 0.07, 0.07, 0.07, 0.1);
                 cir.ScaleVec(OsbEasing.OutBack, cirStartTime + beatLength/4, cirStartTime + beatLength/2, cir.ScaleAt(cirStartTime + beatLength/4), cir.ScaleAt(cirStartTime + beatLength/4).X, cir.ScaleAt(cirStartTime).Y);
             }
             cir.Fade(42997, 0);
