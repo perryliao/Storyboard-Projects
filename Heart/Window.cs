@@ -31,7 +31,7 @@ namespace StorybrewScripts
          */
         private void MoveWindow(OsbSprite window, WindowDirection dir, double coord, double startTime, double endTime, OsbEasing easing = OsbEasing.InOutSine) {
             double timeOffset = 89;
-            double displacement = 100;
+            double displacement = 107;
             switch (dir) {
                 case WindowDirection.LEFT: 
                 case WindowDirection.RIGHT: 
@@ -54,7 +54,7 @@ namespace StorybrewScripts
         {
             // Initialize
 		    var layer = GetLayer("Window");
-            OsbSprite leftWindow = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-100 , 480/2));
+            OsbSprite leftWindow = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107 , 480/2));
             leftWindow.Fade(windowStartTime, 1);
             leftWindow.ScaleVec(windowStartTime - 100, 0, 480);
             leftWindow.Color(windowStartTime, 247, 230, 213);
