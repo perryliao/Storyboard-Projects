@@ -152,15 +152,19 @@ namespace StorybrewScripts
         }
 
         private void circleRGBChannelEffect(OsbSprite original, OsbSprite red, OsbSprite blue) {
+            double splitPoint = 42733;
+
             original.Fade(42644, 0);
 
-            red.Color(OsbEasing.OutExpo, 42644, 42997, 1, 0, 0, 1,1,1);
-            red.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
-            red.Move(OsbEasing.OutElastic, 42644, 42997, red.PositionAt(42644), original.PositionAt(42644));
+            red.Color(OsbEasing.InQuad, 42644, 42997, 1, 0, 0, 1,1,1);
+            red.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 0.6);
+            red.Move(OsbEasing.InExpo, 42644, splitPoint, original.PositionAt(42644), red.PositionAt(42644));
+            red.Move(OsbEasing.OutElastic, splitPoint, 42997, red.PositionAt(splitPoint), original.PositionAt(42644));
             
-            blue.Color(OsbEasing.OutExpo, 42644, 42997, 0, 0.8, 0.9, 1,1,1);
-            blue.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 1);
-            blue.Move(OsbEasing.OutElastic, 42644, 42997, blue.PositionAt(42644), original.PositionAt(42644));
+            blue.Color(OsbEasing.InQuad, 42644, 42997, 0, 0.8, 0.9, 1,1,1);
+            blue.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 0.6);
+            blue.Move(OsbEasing.InExpo, 42644, splitPoint, original.PositionAt(42644), blue.PositionAt(42644));
+            blue.Move(OsbEasing.OutElastic, splitPoint, 42997, blue.PositionAt(splitPoint), original.PositionAt(42644));
         }
     }
 }
