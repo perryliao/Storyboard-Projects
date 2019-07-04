@@ -19,7 +19,7 @@ namespace StorybrewScripts
         [Configurable]
         public double endTime = 42997;
         [Configurable]
-        public double particleDuration = 1000;
+        public double particleDuration = 1500;
         [Configurable]
         public double particleAmount = 100;
 
@@ -32,21 +32,21 @@ namespace StorybrewScripts
             double i;
             for (i = 0; i < particleAmount; i++) {
                 OsbSprite spec = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
-                double angle = Random(-5, 5);
+                double startX = Random(-107, 747), startY = -150;
+                double angle = degToRad(Random(-10, 10));
                 double length = Random(50, 200);
+                float depth = 660;
+                Vector2 endPos = new Vector2( (float) (depth * Math.Tan(angle) + startX), depth);
 
-                spec.StartLoopGroup(startTime + Random(0, beatLength*4), (int) ((endTime - startTime) / particleDuration - 2));
+                Assert(angle > 0 ? endPos.X > startX : endPos.X <= startX, startX.ToString() + " " + endPos.X.ToString());
+
+                spec.StartLoopGroup(startTime + Random(0, beatLength*4), (int) ((endTime - startTime) / particleDuration - 1));
                 
-                spec.Rotate(0, degToRad(angle));
+                // Actions done per loop
+                spec.Rotate(0, -angle);
                 spec.ScaleVec(0, 1, length);
-                double startX = Random(-107, 747), startY = -100;
-                if (angle < 0) {
-                    // points to the right, move right
-                    spec.Move(OsbEasing.InOutExpo, 0, particleDuration, startX, startY, startX + Random(0, 5), 600);
-                } else {
-                    // points to the left, move left
-                    spec.Move(OsbEasing.InOutExpo, 0, particleDuration, startX, startY, startX - Random(0, 5), 600);
-                }
+                spec.Move(OsbEasing.InOutExpo, 0, particleDuration, startX, startY, endPos.X, endPos.Y);
+                
                 
                 spec.EndGroup();
             }
