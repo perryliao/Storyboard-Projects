@@ -19,6 +19,8 @@ namespace StorybrewScripts
         [Configurable]
         public double endTime = 34527;
 
+        private double beatLength = 34527 - 33821;
+
         /// <summary>Creates 2 black bar sprites, on the top and bottom.</summary>
         public override void Generate()
         {
@@ -32,7 +34,7 @@ namespace StorybrewScripts
                 bar.Fade(startTime, 1);
                 bar.Color(startTime, 0, 0, 0);
                 bar.ScaleVec(startTime, 854, 480 * 0.15);
-                bar.Fade(endTime, 0);
+                bar.Fade(OsbEasing.InExpo, endTime - beatLength / 2, endTime, 1, 0);
             }
         }
     }

@@ -4,7 +4,7 @@ BeatmapId: 0
 BeatmapName: "zzz"
 Assemblies:
 Layers:
-  - "34709755f12b4627a6608d754a5f1112"
+  - "b4ae456138b5408d832ac6e9ec52bab9"
   - "b23f4e47e93a4783946b06e8caa549f8"
   - "6724498a80a14ee29a8436bf32d0bc69"
   - "c3e18b14ca364b30a5aefd88a0952b07"
@@ -14,3 +14,5 @@ Layers:
   - "0a07ff7e277e49469c99dea4fce6c8e9"
   - "86b76b0901dd4a78a38f9e3564c7f1d5"
   - "cda6882e64984ad29d655dbb4382e3e8"
+  - "5cde3c14831648769d514ccbf91613dc"
+  - "1ed2ee55d75f489b9f644aacf71a1ce7"

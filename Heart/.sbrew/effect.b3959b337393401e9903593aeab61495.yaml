@@ -1,0 +1,14 @@
+﻿FormatVersion: 6
+Name: "LazyAnimation 1"
+Script: "LazyAnimation"
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  1ed2ee55d75f489b9f644aacf71a1ce7:
+    Name: "Lazy"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes
