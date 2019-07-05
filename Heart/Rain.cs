@@ -32,20 +32,26 @@ namespace StorybrewScripts
             double i;
             for (i = 0; i < particleAmount; i++) {
                 OsbSprite spec = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
-                double startX = Random(-107, 747), startY = -150;
-                double angle = degToRad(Random(-10, 10));
-                double length = Random(40, 120);
+                double startX;
+                double startY = -150;
+                double angle;
+                double length;
                 float depth = 660;
-                Vector2 endPos = new Vector2( (float) (depth * Math.Tan(angle) + startX), depth);
+                Vector2 endPos;
+
+                spec.StartLoopGroup(startTime + Random(0, beatLength), (int) ((endTime - startTime) / particleDuration -1));
+                
+                startX =  Random(-107, 747);
+                angle = degToRad(Random(-10, 10));
+                length = Random(40, 120);
+                endPos = new Vector2( (float) (depth * Math.Tan(angle) + startX), depth);
                 
                 Assert(angle > 0 ? endPos.X > startX : endPos.X <= startX, startX.ToString() + " " + endPos.X.ToString());
 
-                spec.StartLoopGroup(startTime + Random(0, beatLength*4), (int) ((endTime - startTime) / particleDuration - 1));
-                
                 // Actions done per loop
                 spec.Rotate(0, -angle);
                 spec.ScaleVec(0, 1, length);
-                spec.Move(OsbEasing.InOutExpo, 0, particleDuration, startX, startY, endPos.X, endPos.Y);
+                spec.Move(OsbEasing.Out, 0, particleDuration, startX, startY, endPos.X, endPos.Y);
                 
                 spec.EndGroup();
             }

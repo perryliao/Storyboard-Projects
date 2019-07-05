@@ -10,10 +10,10 @@ Config:
     Value: "42997"
   particleDuration:
     Type: "System.Double"
-    Value: "1500"
+    Value: "600"
   particleAmount:
     Type: "System.Double"
-    Value: "60"
+    Value: "40"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
