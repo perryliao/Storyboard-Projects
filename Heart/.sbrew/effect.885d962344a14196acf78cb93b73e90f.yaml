@@ -9,6 +9,6 @@ Config:
 Layers:
   7d0baf90eb3046f3a8b238f8d3f520fd:
     Name: "Animations"
-    OsbLayer: Background
+    OsbLayer: Foreground
     DiffSpecific: No
     Visible: Yes
