@@ -67,12 +67,17 @@ namespace StorybrewScripts
             foreach( OsbSprite line in Triangle ) {
                 line.Fade(OsbEasing.InExpo, 48468, 48644, 0, 1);
                 line.ScaleVec(48468, 50762, 250, 2, 174, 2);
+                line.ScaleVec(OsbEasing.InOutExpo, 50762, 51468, line.ScaleAt(50762), 0, 2);
                 line.Fade(51468, 0);
             }
 
             AB.Move(OsbEasing.InOutExpo, 48468, 49350, AB.PositionAt(48468), BottomMid.X, BottomMid.Y);
             AC.Move(OsbEasing.InOutExpo, 48468, 49350, AC.PositionAt(48468), TopRight.X, TopRight.Y);
             BC.Move(OsbEasing.InOutExpo, 48468, 49350, BC.PositionAt(48468), TopLeft.X, TopLeft.Y);
+
+            AB.Move(OsbEasing.InOutExpo, 50762, 51468, AB.PositionAt(50762), BottomMid.X + Math.Cos(Math.PI/3) * ( 480 - BottomMid.Y), 480);
+            AC.Move(OsbEasing.InOutExpo, 50762, 51468, AC.PositionAt(50762), TopRight.X + TopRight.Y/Math.Tan(Math.PI/3), 0);
+            BC.Move(OsbEasing.InOutExpo, 50762, 51468, BC.PositionAt(50762), -107, TopLeft.Y);
         }
     }
 }
