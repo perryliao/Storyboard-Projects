@@ -125,13 +125,13 @@ namespace StorybrewScripts
             boxOut.Scale(OsbEasing.InExpo, 53409, 53762, 1, 0.53);
             boxOut.Rotate(OsbEasing.InExpo, 53409, 53762, Math.PI*3/4, Math.PI/2);
             boxOut.Color(OsbEasing.InExpo, 53409, 53762, white, black);
-            boxOut.Fade(57115, 0);
+            boxOut.Fade(55350, 0);
 
             boxMid.Fade(OsbEasing.InCirc, 52174, 52527, 0, 1);
             boxMid.Scale(OsbEasing.InExpo, 52174, 52527, 0.75, 0.345);
             boxMid.Rotate(OsbEasing.InExpo, 52174, 52527, 0, Math.PI/4);
             boxMid.Color(OsbEasing.InExpo, 53409, 53762, white, black);
-            boxMid.Fade(57115, 0);
+            boxMid.Fade(54821, 0); //54821
 
             boxIn.Fade(OsbEasing.InCirc, 51644, 51997, 0, 1);
             boxIn.Scale(OsbEasing.InExpo, 51644, 51997, 0.5, 0.225);
@@ -152,21 +152,22 @@ namespace StorybrewScripts
             boxyCirc.Color(OsbEasing.InExpo, 54115, 54292, white, red);
             boxyCirc.Fade(57115, 0);
 
-            boxBreak(54292, 54821, 66.4, 3, 0); 
+            boxBreak(54292, 54821, 66.4, 3);
+            boxBreakDiag(54821, 55350, 143.8, 3.8);
+            boxBreak(55350, 57115, 156.5, 5.2); 
         }
 
-        private void boxBreak(double start, double end, double distance, double width, double initialRotation) {
-            boxBreakHelper(start, end, -distance, distance, width, initialRotation, true);
-            boxBreakHelper(start, end, -distance, -distance, width, initialRotation, true);
-            boxBreakHelper(start, end, -distance, -distance, width, initialRotation + Math.PI/2, false);
-            boxBreakHelper(start, end, distance, -distance, width, initialRotation + Math.PI/2, false);
+        private void boxBreak(double start, double end, double distance, double width) {
+            boxBreakHelper(start, end, -distance, distance, width, 0, true);
+            boxBreakHelper(start, end, -distance, -distance, width, 0, true);
+            boxBreakHelper(start, end, -distance, -distance, width, Math.PI/2, false);
+            boxBreakHelper(start, end, distance, -distance, width, Math.PI/2, false);
         }
 
         private void boxBreakHelper(double start, double end, double xDisplacement, double yDisplacement, double width, double angle, bool vert ) {
             StoryboardLayer layer = GetLayer("Animations");
             OsbSprite l;
-            int i;
-            double numSplits = 1, accumulatedLength = 0, currentLength;
+            double moveRange = width*2, accumulatedLength = 0, currentLength;
             bool stopFlag = false;
             while (!stopFlag) {
                 l = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2((float)(320 + xDisplacement + (vert ? accumulatedLength : 0)), (float)(240 + yDisplacement + (!vert ? accumulatedLength : 0))));
@@ -179,8 +180,41 @@ namespace StorybrewScripts
                     stopFlag = true;
                 }
                 l.ScaleVec(start, currentLength, width);
-                l.Rotate(start, end, angle, angle + Random(-Math.PI/8, Math.PI/8));
-                l.Move(start, end, l.PositionAt(start), l.PositionAt(start).X + Random(-5, 5), l.PositionAt(start).Y + Random(-5, 5));
+                l.Rotate(start, end, angle, angle + Random(-Math.PI/6, Math.PI/6));
+                l.Move(start, end, l.PositionAt(start), l.PositionAt(start).X + Random(-moveRange, moveRange), l.PositionAt(start).Y + Random(-moveRange, moveRange));
+                l.Fade(end, 0);
+                accumulatedLength += currentLength;
+            }
+        }
+
+        
+        private void boxBreakDiag(double start, double end, double distance, double width) {
+            boxBreakDiagHelper(start, end, 0, distance, width, -Math.PI/4, true);
+            boxBreakDiagHelper(start, end, -distance, 0, width, -Math.PI/4, true);
+            boxBreakDiagHelper(start, end, 0, -distance, width, Math.PI/4, false);
+            boxBreakDiagHelper(start, end, -distance, 0, width, Math.PI/4, false);
+        }
+
+        private void boxBreakDiagHelper(double start, double end, double xDisplacement, double yDisplacement, double width, double angle, bool vert ) {
+            StoryboardLayer layer = GetLayer("Animations");
+            OsbSprite l;
+            double moveRange = width*2, accumulatedLength = 0, currentLength;
+            bool stopFlag = false;
+
+            double length = Math.Max(Math.Abs(xDisplacement), Math.Abs(yDisplacement)) * Math.Cos(angle);
+            while (!stopFlag) {
+                l = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2((float)(320 + xDisplacement + (vert ? accumulatedLength * Math.Cos(angle) : accumulatedLength * Math.Sin(angle))), (float)(240 + yDisplacement + (!vert ? accumulatedLength * Math.Cos(angle) : accumulatedLength * Math.Sin(angle)))));
+                l.Fade(start, 1);
+                l.Color(start, black);
+
+                currentLength = Random(8, 25);
+                if (currentLength + accumulatedLength > length * 2 + 2) {
+                    currentLength = length*2 - accumulatedLength + 2;
+                    stopFlag = true;
+                }
+                l.ScaleVec(start, currentLength, width);
+                l.Rotate(start, end, angle, angle + Random(-Math.PI/6, Math.PI/6));
+                l.Move(start, end, l.PositionAt(start), l.PositionAt(start).X + Random(-moveRange, moveRange), l.PositionAt(start).Y + Random(-moveRange, moveRange));
                 l.Fade(end, 0);
                 accumulatedLength += currentLength;
             }
