@@ -14,6 +14,10 @@ namespace StorybrewScripts
 {
     public class Animations : StoryboardObjectGenerator
     {
+        public Color4 white = new Color4(1, 1, 1, 1f);
+        public Color4 black = new Color4((float)26/255, (float)26/255, (float)26/255, 1f);
+        public Color4 red = new Color4((float)225/255, (float)9/255, (float)11/255, 1f);
+
         public override void Generate()
         {
 		    var layer = GetLayer("Animations");
@@ -111,30 +115,42 @@ namespace StorybrewScripts
             ///////////////////////////////////////////////
             // square in square part 2
             ///////////////////////////////////////////////
+            OsbSprite boxyCirc = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.Centre);
             OsbSprite boxOut = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
             OsbSprite boxMid = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
             OsbSprite boxIn = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
             OsbSprite boxInIn = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
 
             boxOut.Fade(OsbEasing.InCirc, 53409, 53762, 0, 1);
-            boxOut.Scale(OsbEasing.InExpo, 53409, 53762, 1, 0.55);
+            boxOut.Scale(OsbEasing.InExpo, 53409, 53762, 1, 0.53);
             boxOut.Rotate(OsbEasing.InExpo, 53409, 53762, Math.PI*3/4, Math.PI/2);
-            boxOut.Fade(54292, 0);
+            boxOut.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxOut.Fade(57115, 0);
 
             boxMid.Fade(OsbEasing.InCirc, 52174, 52527, 0, 1);
             boxMid.Scale(OsbEasing.InExpo, 52174, 52527, 0.75, 0.345);
             boxMid.Rotate(OsbEasing.InExpo, 52174, 52527, 0, Math.PI/4);
-            boxMid.Fade(54292, 0);
+            boxMid.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxMid.Fade(57115, 0);
 
             boxIn.Fade(OsbEasing.InCirc, 51644, 51997, 0, 1);
             boxIn.Scale(OsbEasing.InExpo, 51644, 51997, 0.5, 0.225);
             boxIn.Rotate(OsbEasing.InExpo, 51644, 51997, Math.PI*3/4, Math.PI/2);
-            boxIn.Fade(54292, 0);
+            boxIn.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxIn.Fade(57115, 0);
 
             boxInIn.Fade(OsbEasing.InCirc, 51115, 51468, 0, 1);
             boxInIn.Scale(OsbEasing.InExpo, 51115, 51468, 0.25, 0.149);
             boxInIn.Rotate(OsbEasing.InExpo, 51115, 51468, 0, Math.PI/4);
-            boxInIn.Fade(54292, 0);
+            boxInIn.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxInIn.Fade(57115, 0);
+            boxInIn.Fade(OsbEasing.InExpo, 53409, 53674, 1, 0);
+
+            boxyCirc.Fade(53409, 1);
+            boxyCirc.Color(53409, white);
+            boxyCirc.Scale(OsbEasing.InExpo, 53409, 53762, 0, 0.8);
+            boxyCirc.Color(OsbEasing.InExpo, 54115, 54292, white, red);
+            boxyCirc.Fade(57115, 0);
         }
     }
 }
