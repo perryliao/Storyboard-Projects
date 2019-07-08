@@ -61,7 +61,7 @@ namespace StorybrewScripts
                     circle = layer.CreateSprite("sb/Pool 1/hollow cir.png", OsbOrigin.Centre);
                     circle.Fade(OsbEasing.OutExpo, 48997, 49350, 0, 1);
                     circle.Color(48997, 1,1,1);
-                    circle.Scale(OsbEasing.OutBack, 48997, 49350, 0.2, 0.05 + 0.017 * Math.Pow(i, 4)/1050 );
+                    circle.Scale(OsbEasing.OutQuart, 48997, 49350, 0.2, 0.05 + 0.017 * Math.Pow(i, 4)/1050 );
                     circle.Scale(OsbEasing.In, 49350, 50409, circle.ScaleAt(49350).X, circle.ScaleAt(49350).X - 0.02 );
                     circle.Scale(OsbEasing.InExpo, 50409, 50762, circle.ScaleAt(50409).X, 4 );
                     circle.Fade(OsbEasing.InOutExpo, 50409, 50762, 1, 0);
@@ -71,7 +71,7 @@ namespace StorybrewScripts
             circle = layer.CreateSprite("sb/Pool 3/Animation_1/Ellipse21.png", OsbOrigin.Centre);
             circle.Fade(OsbEasing.OutExpo, 48997, 49350, 0, 1);
             circle.Color(48997, 1,1,1);
-            circle.Scale(OsbEasing.OutBack, 48997, 49350, 0.2, 1.2 );
+            circle.Scale(OsbEasing.InOutQuart, 48997, 49350, 0.2, 1.2 );
             circle.Scale(OsbEasing.In, 49350, 50409, circle.ScaleAt(49350).X, circle.ScaleAt(49350).X - 0.02 );
             circle.Scale(OsbEasing.InExpo, 50409, 50762, circle.ScaleAt(50409).X, 4 );
             circle.Fade(OsbEasing.InOutExpo, 50409, 50762, 1, 0);
@@ -108,6 +108,33 @@ namespace StorybrewScripts
             AC.Move(OsbEasing.InOutExpo, 50762, 51468, AC.PositionAt(50762), TopRight.X + TopRight.Y/Math.Tan(Math.PI/3), 0);
             BC.Move(OsbEasing.InOutExpo, 50762, 51468, BC.PositionAt(50762), -107, TopLeft.Y);
             
+            ///////////////////////////////////////////////
+            // square in square part 2
+            ///////////////////////////////////////////////
+            OsbSprite boxOut = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
+            OsbSprite boxMid = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
+            OsbSprite boxIn = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
+            OsbSprite boxInIn = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre);
+
+            boxOut.Fade(OsbEasing.InCirc, 53409, 53762, 0, 1);
+            boxOut.Scale(OsbEasing.InExpo, 53409, 53762, 1, 0.55);
+            boxOut.Rotate(OsbEasing.InExpo, 53409, 53762, Math.PI*3/4, Math.PI/2);
+            boxOut.Fade(54292, 0);
+
+            boxMid.Fade(OsbEasing.InCirc, 52174, 52527, 0, 1);
+            boxMid.Scale(OsbEasing.InExpo, 52174, 52527, 0.75, 0.345);
+            boxMid.Rotate(OsbEasing.InExpo, 52174, 52527, 0, Math.PI/4);
+            boxMid.Fade(54292, 0);
+
+            boxIn.Fade(OsbEasing.InCirc, 51644, 51997, 0, 1);
+            boxIn.Scale(OsbEasing.InExpo, 51644, 51997, 0.5, 0.225);
+            boxIn.Rotate(OsbEasing.InExpo, 51644, 51997, Math.PI*3/4, Math.PI/2);
+            boxIn.Fade(54292, 0);
+
+            boxInIn.Fade(OsbEasing.InCirc, 51115, 51468, 0, 1);
+            boxInIn.Scale(OsbEasing.InExpo, 51115, 51468, 0.25, 0.149);
+            boxInIn.Rotate(OsbEasing.InExpo, 51115, 51468, 0, Math.PI/4);
+            boxInIn.Fade(54292, 0);
         }
     }
 }
