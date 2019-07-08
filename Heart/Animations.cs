@@ -155,6 +155,34 @@ namespace StorybrewScripts
             boxBreak(54292, 54821, 66.4, 3);
             boxBreakDiag(54821, 55350, 143.8, 3.8);
             boxBreak(55350, 57115, 156.5, 5.2); 
+
+            ///////////////////////////////////////////////
+            // 3x3 squares
+            ///////////////////////////////////////////////
+            
+            float spacing = 150;
+            double timeBetween = 200, squareScale = 100;
+            Vector2 squareStartPos = new Vector2(320 - spacing, 240 - spacing);
+            int x, y;
+            OsbSprite[][] field = new OsbSprite[3][], fieldRings = new OsbSprite[3][];  // field[y][x]
+            for (i = 0; i < 3; i++) {
+                field[i] = new OsbSprite[3];
+                fieldRings[i] = new OsbSprite[3];
+            }
+
+            for (y = 0; y < 3; y++) {
+                for (x = 0; x < 3; x++) {
+                    field[y][x] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
+                    field[y][x].Fade(57115, 1);
+                    field[y][x].Scale(OsbEasing.In, 57115 + (x + y) * timeBetween, 57115 + (x + y + 1) * timeBetween, 0, squareScale);
+                    field[y][x].Fade(59939, 0);
+                    
+                    fieldRings[y][x] = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
+                    fieldRings[y][x].Fade(57115, 1);
+                    fieldRings[y][x].Scale(OsbEasing.In, 57115 + (x + y) * timeBetween, 57115 + (x + y + 1) * timeBetween, 0, 0.18);
+                    fieldRings[y][x].Fade(59939, 0);
+                }
+            }
         }
 
         private void boxBreak(double start, double end, double distance, double width) {
