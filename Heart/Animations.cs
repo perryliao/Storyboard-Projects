@@ -158,35 +158,11 @@ namespace StorybrewScripts
         }
 
         private void boxBreak(double start, double end, double distance, double width) {
-            boxBreakHelper(start, end, -distance, distance, width, 0, true);
-            boxBreakHelper(start, end, -distance, -distance, width, 0, true);
-            boxBreakHelper(start, end, -distance, -distance, width, Math.PI/2, false);
-            boxBreakHelper(start, end, distance, -distance, width, Math.PI/2, false);
+            boxBreakDiagHelper(start, end, -distance, distance, width, 0, true);
+            boxBreakDiagHelper(start, end, -distance, -distance, width, 0, true);
+            boxBreakDiagHelper(start, end, -distance, -distance, width, Math.PI/2, false);
+            boxBreakDiagHelper(start, end, distance, -distance, width, Math.PI/2, false);
         }
-
-        private void boxBreakHelper(double start, double end, double xDisplacement, double yDisplacement, double width, double angle, bool vert ) {
-            StoryboardLayer layer = GetLayer("Animations");
-            OsbSprite l;
-            double moveRange = width*2, accumulatedLength = 0, currentLength;
-            bool stopFlag = false;
-            while (!stopFlag) {
-                l = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2((float)(320 + xDisplacement + (vert ? accumulatedLength : 0)), (float)(240 + yDisplacement + (!vert ? accumulatedLength : 0))));
-                l.Fade(start, 1);
-                l.Color(start, black);
-
-                currentLength = Random(8, 25);
-                if (currentLength + accumulatedLength > Math.Abs(xDisplacement) * 2 + 1.5) {
-                    currentLength = Math.Abs(xDisplacement)*2 - accumulatedLength + 1.5;
-                    stopFlag = true;
-                }
-                l.ScaleVec(start, currentLength, width);
-                l.Rotate(start, end, angle, angle + Random(-Math.PI/6, Math.PI/6));
-                l.Move(start, end, l.PositionAt(start), l.PositionAt(start).X + Random(-moveRange, moveRange), l.PositionAt(start).Y + Random(-moveRange, moveRange));
-                l.Fade(end, 0);
-                accumulatedLength += currentLength;
-            }
-        }
-
         
         private void boxBreakDiag(double start, double end, double distance, double width) {
             boxBreakDiagHelper(start, end, 0, distance, width, -Math.PI/4, true);
@@ -201,9 +177,11 @@ namespace StorybrewScripts
             double moveRange = width*2, accumulatedLength = 0, currentLength;
             bool stopFlag = false;
 
-            double length = Math.Max(Math.Abs(xDisplacement), Math.Abs(yDisplacement)) * Math.Cos(angle);
+            double angleLength = angle % Math.PI == Math.PI/2 ? Math.Sin(angle) : Math.Cos(angle);
+            double angleLengthInv = angle % Math.PI == Math.PI/2 ? Math.Cos(angle) : Math.Sin(angle);
+            double length = Math.Max(Math.Abs(xDisplacement), Math.Abs(yDisplacement)) * angleLength; 
             while (!stopFlag) {
-                l = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2((float)(320 + xDisplacement + (vert ? accumulatedLength * Math.Cos(angle) : accumulatedLength * Math.Sin(angle))), (float)(240 + yDisplacement + (!vert ? accumulatedLength * Math.Cos(angle) : accumulatedLength * Math.Sin(angle)))));
+                l = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2((float)(320 + xDisplacement + (vert ? accumulatedLength * angleLength : accumulatedLength * angleLengthInv)), (float)(240 + yDisplacement + (!vert ? accumulatedLength * angleLength : accumulatedLength * angleLengthInv))));
                 l.Fade(start, 1);
                 l.Color(start, black);
 
