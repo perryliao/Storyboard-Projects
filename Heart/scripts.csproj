@@ -52,6 +52,7 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="Animations.cs" />
     <Compile Include="Antique.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Kokoro.cs" />

@@ -28,8 +28,8 @@ namespace StorybrewScripts
         public override void Generate()
         {
 		    var layer = GetLayer("");
-            OsbSprite kokoro = layer.CreateSprite("sb/Pool 1/heart.png", OsbOrigin.Centre);
-            kokoro.Scale(startTime, 0.2);
+            OsbSprite kokoro = layer.CreateSprite("sb/kkr.png", OsbOrigin.Centre);
+            kokoro.Scale(startTime, 0.4);
 
             double timestep = beatLength * 2;
             double i;
