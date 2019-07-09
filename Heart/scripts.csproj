@@ -55,6 +55,7 @@
     <Compile Include="Animations.cs" />
     <Compile Include="Antique.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Crossfade.cs" />
     <Compile Include="Kokoro.cs" />
     <Compile Include="LazyAnimation.cs" />
     <Compile Include="Letterbox.cs" />
