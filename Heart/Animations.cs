@@ -259,6 +259,23 @@ namespace StorybrewScripts
             square.Rotate(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, -Math.PI/4, -Math.PI*3/4);
             square.Rotate(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, -Math.PI*3/4, -Math.PI/2);
             square.Fade(squareStart + beatLength*4, 0);
+
+            ///////////////////////////////////////////////
+            // kkr sketch 
+            ///////////////////////////////////////////////
+
+            OsbSprite kkr2 = layer.CreateSprite("sb/sketchKkr.png", OsbOrigin.Centre);
+            kkr2.Fade(62762, 1);
+            kkr2.Scale(62762, 0.8);
+            kkr2.Fade(68409, 0);
+
+            OsbSprite cut = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreRight, new Vector2(320 - 100, 240 + 100));
+            cut.Fade(65233, 1);
+            cut.Rotate(65233, -Math.PI/4);
+            cut.ScaleVec(OsbEasing.InQuart, 65233, 65233 + beatLength/2, 0, 1, 100, 1);
+            cut.ScaleVec(OsbEasing.OutQuart, 65233 + beatLength/2, 65939, 100, 1, 0, 1);
+            cut.Move(OsbEasing.InOutQuart, 65233, 65939, cut.PositionAt(65233), cut.PositionAt(65233).X + 200, cut.PositionAt(65233).Y - 200);
+            cut.Fade(65939, 0);
         }
 
         private void boxBreak(double start, double end, double distance, double width) {
