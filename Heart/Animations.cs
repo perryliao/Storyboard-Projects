@@ -229,16 +229,6 @@ namespace StorybrewScripts
             ///////////////////////////////////////////////
 
             squareStart = 59939;
-            squareEnd = squareStart + beatLength*4;
-
-            square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
-            square.Fade(squareStart, 1);
-            square.Color(squareStart, black);
-            square.Scale(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, 0, 150);
-            square.Scale(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 150, 110);
-            square.Rotate(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, -Math.PI/4, -Math.PI*3/4);
-            square.Rotate(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, -Math.PI*3/4, -Math.PI/2);
-            square.Fade(squareStart + beatLength*4, 0);
             
             double timestep = (beatLength/2)/(squares.Length), fadeInTime;
 
@@ -257,6 +247,18 @@ namespace StorybrewScripts
                 square.Scale(OsbEasing.OutCirc, fadeInTime, squareStart + beatLength/2, 0, 0.4);
                 square.Scale(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 0.4, 0);
             }
+
+            squareRoundedLines(squareStart);
+
+            square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
+            square.Fade(squareStart, 1);
+            square.Color(squareStart, black);
+            square.Color(OsbEasing.InOutExpo, squareStart + beatLength*3, squareStart + beatLength*4, black, grey);
+            square.Scale(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, 0, 150);
+            square.Scale(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 150, 110);
+            square.Rotate(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, -Math.PI/4, -Math.PI*3/4);
+            square.Rotate(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, -Math.PI*3/4, -Math.PI/2);
+            square.Fade(squareStart + beatLength*4, 0);
         }
 
         private void boxBreak(double start, double end, double distance, double width) {
@@ -311,7 +313,7 @@ namespace StorybrewScripts
             showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8.5, 367f, 64);
             showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8.5, 397, 78);
             
-            showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 172, 254);
+            showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 174, 252);
             showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 13, 320 - 200, 240 + 200);
             showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 312, 382);
 
@@ -343,6 +345,46 @@ namespace StorybrewScripts
                 240 + 86 
             );
             t2.Fade(circleStartTime + beatLength*4, 0);
+        }
+
+        private void squareRoundedLines(double squareStartTime) {
+            double lineStart = squareStartTime + beatLength;
+            showRoundLine(lineStart, squareStartTime + 4*beatLength, -Math.PI/6, 2.9, 320 - 54, 240 - 54);
+            showRoundLine(lineStart, squareStartTime + 4*beatLength, Math.PI*5/6, 2.9, 320 + 54, 240 + 54);
+
+            showRoundLine(lineStart + beatLength/2, squareStartTime + 4*beatLength, -Math.PI*5/6, 9, 320  + 240, 240);
+            showRoundLine(lineStart + beatLength/2, squareStartTime + 4*beatLength, Math.PI/6, 9, 320  - 240, 240);
+            
+            showRoundLine(lineStart + beatLength, squareStartTime + 4*beatLength, Math.PI*5/6, 13, 320, 101); 
+            showRoundLine(lineStart + beatLength, squareStartTime + 4*beatLength, -Math.PI/6, 13, 320, 379); 
+            
+            showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, -Math.PI*2.9/9 - Math.PI*3.21/9 + Math.PI, 2.55, 320, 101); 
+            showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, -Math.PI*2.9/9 + Math.PI, 2.55, 320, 101); 
+            showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, -Math.PI*2.9/9 - Math.PI*3.21/9, 2.55, 320, 379); 
+            showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, -Math.PI*2.9/9, 2.55, 320, 379); 
+            showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, 0, 6, 320 - 240, 240); 
+            showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, Math.PI, 6, 320 + 240, 240); 
+
+            // OsbSprite[] tt = new OsbSprite[2] {
+            //     GetLayer("Animations").CreateSprite("sb/t.png", OsbOrigin.BottomRight, new Vector2(320 - 240, 240)),
+            //     GetLayer("Animations").CreateSprite("sb/t.png", OsbOrigin.BottomRight, new Vector2(320 + 240, 240))
+            // }; 
+            // bool flag = false;
+            // foreach(OsbSprite t in tt) {
+            //     t.Fade(squareStartTime + beatLength*7/2, 1);
+            //     t.Rotate(squareStartTime + beatLength*7/2, flag ? -Math.PI/4 : -Math.PI*5/4);
+            //     t.Color(squareStartTime + beatLength*7/2, black);
+            //     t.ScaleVec(
+            //         squareStartTime + beatLength*7/2, 
+            //         squareStartTime + beatLength*7/2 + beatLength/4, 
+            //         0, 
+            //         0, 
+            //         0.8, 
+            //         1
+            //     );
+            //     t.Fade(squareStartTime + beatLength*4, 0);
+            //     flag = true;
+            // }
         }
 
         private void showRoundLine(double startTime, double endTime, double angle, double length, float xPos, float yPos) {
