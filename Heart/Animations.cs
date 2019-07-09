@@ -15,8 +15,11 @@ namespace StorybrewScripts
     public class Animations : StoryboardObjectGenerator
     {
         public Color4 white = new Color4(1, 1, 1, 1f);
+        public Color4 grey = new Color4(0.5f, 0.5f, 0.5f, 1f);
         public Color4 black = new Color4((float)26/255, (float)26/255, (float)26/255, 1f);
         public Color4 red = new Color4((float)225/255, (float)9/255, (float)11/255, 1f);
+
+        private double beatLength = 706;
 
         public override void Generate()
         {
@@ -131,7 +134,7 @@ namespace StorybrewScripts
             boxMid.Scale(OsbEasing.InExpo, 52174, 52527, 0.75, 0.345);
             boxMid.Rotate(OsbEasing.InExpo, 52174, 52527, 0, Math.PI/4);
             boxMid.Color(OsbEasing.InExpo, 53409, 53762, white, black);
-            boxMid.Fade(54821, 0); //54821
+            boxMid.Fade(54821, 0);
 
             boxIn.Fade(OsbEasing.InCirc, 51644, 51997, 0, 1);
             boxIn.Scale(OsbEasing.InExpo, 51644, 51997, 0.5, 0.225);
@@ -160,29 +163,58 @@ namespace StorybrewScripts
             // 3x3 squares
             ///////////////////////////////////////////////
             
-            float spacing = 150;
-            double timeBetween = 200, squareScale = 100;
-            Vector2 squareStartPos = new Vector2(320 - spacing, 240 - spacing);
-            int x, y;
-            OsbSprite[][] field = new OsbSprite[3][], fieldRings = new OsbSprite[3][];  // field[y][x]
-            for (i = 0; i < 3; i++) {
-                field[i] = new OsbSprite[3];
-                fieldRings[i] = new OsbSprite[3];
-            }
+            // float spacing = 150;
+            // double timeBetween = beatLength/4, squareScale = 100;
+            // Vector2 squareStartPos = new Vector2(320 - spacing, 240 - spacing);
+            // int x, y;
+            // OsbSprite[][] field = new OsbSprite[3][], fieldRings = new OsbSprite[field.Length][];
+            // for (i = 0; i < 3; i++) {
+            //     field[i] = new OsbSprite[field.Length];
+            //     fieldRings[i] = new OsbSprite[field[i].Length];
+            // }
 
-            for (y = 0; y < 3; y++) {
-                for (x = 0; x < 3; x++) {
-                    field[y][x] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
-                    field[y][x].Fade(57115, 1);
-                    field[y][x].Scale(OsbEasing.In, 57115 + (x + y) * timeBetween, 57115 + (x + y + 1) * timeBetween, 0, squareScale);
-                    field[y][x].Fade(59939, 0);
+            // for (y = 0; y < field.Length; y++) {
+            //     for (x = 0; x < field[y].Length; x++) {
+            //         squareStart = 57115 + (x + y) * timeBetween;
+            //         field[y][x] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
+            //         field[y][x].Fade(squareStart, 1);
+            //         field[y][x].Color(squareStart, grey);
+            //         field[y][x].Scale(OsbEasing.OutBack, squareStart, squareStart + timeBetween, 0, squareScale);
+            //         field[y][x].Fade(59939, 0);
                     
-                    fieldRings[y][x] = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
-                    fieldRings[y][x].Fade(57115, 1);
-                    fieldRings[y][x].Scale(OsbEasing.In, 57115 + (x + y) * timeBetween, 57115 + (x + y + 1) * timeBetween, 0, 0.18);
-                    fieldRings[y][x].Fade(59939, 0);
-                }
-            }
+            //         fieldRings[y][x] = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
+            //         fieldRings[y][x].Fade(squareStart, 1);
+            //         fieldRings[y][x].Scale(OsbEasing.OutBack, squareStart, squareStart + timeBetween, 0, 0.18);
+            //         fieldRings[y][x].Fade(59939, 0);
+            //     }
+            //   }
+            
+            ///////////////////////////////////////////////
+            // circle matrix effect
+            ///////////////////////////////////////////////
+
+            circle = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.Centre);
+            double circleStartTime = 57115;
+            
+            circle.Fade(OsbEasing.OutExpo, circleStartTime, circleStartTime + beatLength/4, 0, 1);
+            circle.Scale(OsbEasing.OutBack, circleStartTime, circleStartTime + beatLength/4, 0, 0.2);
+            circle.Color(circleStartTime, black);
+            circle.Fade(circleStartTime + beatLength*4, 0);
+
+            OsbSprite arc1 = layer.CreateSprite("sb/Pool 2/Arc-B-R2.png", OsbOrigin.Centre);
+            OsbSprite arc2 = layer.CreateSprite("sb/Pool 2/Arc-B-R1.png", OsbOrigin.Centre);
+
+            arc1.Fade(circleStartTime + beatLength, 1);
+            arc1.Color(circleStartTime + beatLength, black);
+            arc1.Scale(circleStartTime + beatLength, 0.5);
+            arc1.Rotate(OsbEasing.OutCirc, circleStartTime + beatLength, circleStartTime + beatLength * 6/4, 0, Math.PI*3/4);
+            arc1.Fade(circleStartTime + beatLength*4, 0);
+
+            arc2.Fade(circleStartTime + beatLength, 1);
+            arc2.Color(circleStartTime + beatLength, black);
+            arc2.Scale(circleStartTime + beatLength, 0.6);
+            arc2.Rotate(OsbEasing.OutCirc, circleStartTime + beatLength, circleStartTime + beatLength * 6/4, -Math.PI/2, -Math.PI*12/8);
+            arc2.Fade(circleStartTime + beatLength*4, 0);
         }
 
         private void boxBreak(double start, double end, double distance, double width) {
