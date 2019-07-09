@@ -14,10 +14,11 @@ namespace StorybrewScripts
 {
     public class Animations : StoryboardObjectGenerator
     {
-        public Color4 white = new Color4(1, 1, 1, 1f);
+        public Color4 white = new Color4((float) (242f/255), (float) (242f/255), (float) (242f/255), 1f);
         public Color4 grey = new Color4(0.5f, 0.5f, 0.5f, 1f);
         public Color4 black = new Color4((float)26/255, (float)26/255, (float)26/255, 1f);
         public Color4 red = new Color4((float)225/255, (float)9/255, (float)11/255, 1f);
+
 
         private double beatLength = 706;
 
@@ -32,10 +33,14 @@ namespace StorybrewScripts
             OsbSprite square;
             int i, rng = -1, prevRng = -1, numSquares = 21;
             double squareStart = 45821, squareEnd = 47939;
+            
+            OsbSprite[] squares = new OsbSprite[numSquares];
 
             for (i = 0; i < numSquares; i++) {
-                square = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre, squareOrigin);
+                squares[i] = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre, squareOrigin);
+                square = squares[i];
                 square.Fade(squareStart, 1); 
+                square.Color(squareStart, white);
                 square.Scale(OsbEasing.OutBack, squareStart, squareEnd, 0.02, 0.2);
                 square.Move(OsbEasing.InExpo, squareStart, squareEnd, square.PositionAt(squareStart), squareOrigin.X + i*29.4, squareOrigin.Y - i*3);
                 square.Move(OsbEasing.OutQuint, 47939, 48292, square.PositionAt(47939), square.PositionAt(47939).X + 5, square.PositionAt(47939).Y - 0.5);
@@ -67,7 +72,7 @@ namespace StorybrewScripts
                 if (i != 13 && i != 11 ) {
                     circle = layer.CreateSprite("sb/Pool 1/hollow cir.png", OsbOrigin.Centre);
                     circle.Fade(OsbEasing.OutExpo, 48997, 49350, 0, 1);
-                    circle.Color(48997, 1,1,1);
+                    circle.Color(48997, white);
                     circle.Scale(OsbEasing.OutQuart, 48997, 49350, 0.2, 0.05 + 0.017 * Math.Pow(i, 4)/1050 );
                     circle.Scale(OsbEasing.In, 49350, 50409, circle.ScaleAt(49350).X, circle.ScaleAt(49350).X - 0.02 );
                     circle.Scale(OsbEasing.InExpo, 50409, 50762, circle.ScaleAt(50409).X, 4 );
@@ -77,7 +82,7 @@ namespace StorybrewScripts
 
             circle = layer.CreateSprite("sb/Pool 3/Animation_1/Ellipse21.png", OsbOrigin.Centre);
             circle.Fade(OsbEasing.OutExpo, 48997, 49350, 0, 1);
-            circle.Color(48997, 1,1,1);
+            circle.Color(48997, white);
             circle.Scale(OsbEasing.InOutQuart, 48997, 49350, 0.2, 1.2 );
             circle.Scale(OsbEasing.In, 49350, 50409, circle.ScaleAt(49350).X, circle.ScaleAt(49350).X - 0.02 );
             circle.Scale(OsbEasing.InExpo, 50409, 50762, circle.ScaleAt(50409).X, 4 );
@@ -102,6 +107,7 @@ namespace StorybrewScripts
 
             foreach( OsbSprite line in Triangle ) {
                 line.Fade(OsbEasing.InExpo, 48468, 48644, 0, 1);
+                line.Color(48468, white);
                 line.ScaleVec(48468, 50762, 350, 3, 226, 3);
                 line.ScaleVec(OsbEasing.InOutExpo, 50762, 51468, line.ScaleAt(50762), 0, 2);
                 line.Fade(OsbEasing.InOutQuart, 50762, 51468, 1, 0);
@@ -217,6 +223,40 @@ namespace StorybrewScripts
             arc2.Fade(circleStartTime + beatLength*4, 0);
 
             circleRoundedLines(circleStartTime);
+
+            ///////////////////////////////////////////////
+            // square diamond effect
+            ///////////////////////////////////////////////
+
+            squareStart = 59939;
+            squareEnd = squareStart + beatLength*4;
+
+            square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
+            square.Fade(squareStart, 1);
+            square.Color(squareStart, black);
+            square.Scale(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, 0, 150);
+            square.Scale(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 150, 110);
+            square.Rotate(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, -Math.PI/4, -Math.PI*3/4);
+            square.Rotate(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, -Math.PI*3/4, -Math.PI/2);
+            square.Fade(squareStart + beatLength*4, 0);
+            
+            double timestep = (beatLength/2)/(squares.Length), fadeInTime;
+
+            for (i = 0; i < squares.Length - 1; i++) {
+                square = squares[i];
+                fadeInTime = squareStart + timestep*i;
+                square.Move(fadeInTime, 320, 240);
+                square.Color(fadeInTime, grey);
+
+                square.Fade(OsbEasing.OutCirc, fadeInTime, squareStart + beatLength/2, 0, 0.6);
+                square.Fade(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 0.6, 0);
+
+                square.Rotate(OsbEasing.OutCirc, fadeInTime, squareStart + beatLength/2, -Math.PI/4, -Math.PI*3/4);
+                square.Rotate(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, -Math.PI*3/4, -Math.PI/2);
+
+                square.Scale(OsbEasing.OutCirc, fadeInTime, squareStart + beatLength/2, 0, 0.4);
+                square.Scale(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 0.4, 0);
+            }
         }
 
         private void boxBreak(double start, double end, double distance, double width) {
@@ -271,7 +311,7 @@ namespace StorybrewScripts
             showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8.5, 367f, 64);
             showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8.5, 397, 78);
             
-            showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 154, 272);
+            showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 172, 254);
             showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 13, 320 - 200, 240 + 200);
             showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 312, 382);
 
