@@ -274,6 +274,35 @@ namespace StorybrewScripts
             showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 154, 272);
             showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 13, 320 - 200, 240 + 200);
             showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 312, 382);
+
+            OsbSprite t1 = GetLayer("Animations").CreateSprite("sb/t.png", OsbOrigin.BottomRight, new Vector2(320 + 76, 240 - 76));
+            OsbSprite t2 = GetLayer("Animations").CreateSprite("sb/t.png", OsbOrigin.BottomRight, new Vector2(320 - 20, 240 + 20));
+            OsbSprite rekt = GetLayer("Animations").CreateSprite("sb/1x1.jpg", OsbOrigin.TopCentre, new Vector2(320 + 10, 240 - 10));
+            
+            t1.Fade(circleStartTime + beatLength*7/2, 1);
+            t1.Rotate(circleStartTime + beatLength*7/2, -Math.PI/2);
+            t1.Color(circleStartTime + beatLength*7/2, black);
+            t1.ScaleVec(circleStartTime + beatLength*7/2, circleStartTime + beatLength*7/2 + beatLength/6, 0, 0, 1.33, 1.33);
+            t1.Fade(circleStartTime + beatLength*4, 0);
+
+            rekt.Fade(circleStartTime + beatLength*7/2 + beatLength/6, 1);
+            rekt.Rotate(circleStartTime + beatLength*7/2 + beatLength/6, Math.PI/4);
+            rekt.Color(circleStartTime + beatLength*7/2 + beatLength/6, black);
+            rekt.ScaleVec(circleStartTime + beatLength*7/2 + beatLength/6, circleStartTime + beatLength*7/2 + beatLength*11/48, 188, 0, 188, 43);
+            rekt.Fade(circleStartTime + beatLength*4, 0);
+
+            t2.Fade(circleStartTime + beatLength*7/2 + beatLength*11/48, 1);
+            t2.Rotate(circleStartTime + beatLength*7/2 + beatLength*11/48, Math.PI/2);
+            t2.Color(circleStartTime + beatLength*7/2 + beatLength*11/48, black);
+            t2.ScaleVec(OsbEasing.OutExpo, circleStartTime + beatLength*7/2 + beatLength*11/48, 59894, 0, 0, 1.33, 1.33);
+            t2.Move(OsbEasing.OutExpo, circleStartTime + beatLength*7/2 + beatLength*11/48, 
+                59894, 
+                t2.PositionAt(circleStartTime + beatLength*7/2 + beatLength*11/48).X, 
+                t2.PositionAt(circleStartTime + beatLength*7/2 + beatLength*11/48).Y, 
+                320 - 86 , 
+                240 + 86 
+            );
+            t2.Fade(circleStartTime + beatLength*4, 0);
         }
 
         private void showRoundLine(double startTime, double endTime, double angle, double length, float xPos, float yPos) {
