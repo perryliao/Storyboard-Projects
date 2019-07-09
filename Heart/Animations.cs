@@ -204,17 +204,19 @@ namespace StorybrewScripts
             OsbSprite arc1 = layer.CreateSprite("sb/Pool 2/Arc-B-R2.png", OsbOrigin.Centre);
             OsbSprite arc2 = layer.CreateSprite("sb/Pool 2/Arc-B-R1.png", OsbOrigin.Centre);
 
-            arc1.Fade(circleStartTime + beatLength, 1);
-            arc1.Color(circleStartTime + beatLength, black);
-            arc1.Scale(circleStartTime + beatLength, 0.5);
-            arc1.Rotate(OsbEasing.OutCirc, circleStartTime + beatLength, circleStartTime + beatLength * 6/4, 0, Math.PI*3/4);
+            arc1.Fade(circleStartTime + beatLength * 3/4, 1);
+            arc1.Color(circleStartTime + beatLength * 3/4, black);
+            arc1.Scale(circleStartTime + beatLength * 3/4, 0.5);
+            arc1.Rotate(OsbEasing.OutExpo, circleStartTime + beatLength * 3/4, circleStartTime + 4*beatLength, 0, Math.PI*3/4);
             arc1.Fade(circleStartTime + beatLength*4, 0);
 
-            arc2.Fade(circleStartTime + beatLength, 1);
-            arc2.Color(circleStartTime + beatLength, black);
-            arc2.Scale(circleStartTime + beatLength, 0.6);
-            arc2.Rotate(OsbEasing.OutCirc, circleStartTime + beatLength, circleStartTime + beatLength * 6/4, -Math.PI/2, -Math.PI*12/8);
+            arc2.Fade(circleStartTime + beatLength * 3/4, 1);
+            arc2.Color(circleStartTime + beatLength * 3/4, black);
+            arc2.Scale(circleStartTime + beatLength * 3/4, 0.6);
+            arc2.Rotate(OsbEasing.OutExpo, circleStartTime + beatLength * 3/4, circleStartTime + 4*beatLength, -Math.PI/2, -Math.PI*23.5/16);
             arc2.Fade(circleStartTime + beatLength*4, 0);
+
+            circleRoundedLines(circleStartTime);
         }
 
         private void boxBreak(double start, double end, double distance, double width) {
@@ -256,6 +258,31 @@ namespace StorybrewScripts
                 l.Fade(end, 0);
                 accumulatedLength += currentLength;
             }
+        }
+
+        private void circleRoundedLines(double circleStartTime) {
+            showRoundLine(circleStartTime + 2*beatLength, circleStartTime + 4*beatLength, 0, 10, 185, 163);
+            showRoundLine(circleStartTime + 2*beatLength, circleStartTime + 4*beatLength, 0, 9, 125, 192f);
+            showRoundLine(circleStartTime + 2*beatLength, circleStartTime + 4*beatLength, 0, 9.5, 185, 298f);
+            showRoundLine(circleStartTime + 2*beatLength, circleStartTime + 4*beatLength, 0, 9, 125, 327f);
+
+            showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8.5, 234, 115);
+            showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8, 262f, 64);
+            showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8.5, 367f, 64);
+            showRoundLine(circleStartTime + beatLength*2.5, circleStartTime + 4*beatLength, Math.PI/2, 8.5, 397, 78);
+            
+            showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 154, 272);
+            showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 13, 320 - 200, 240 + 200);
+            showRoundLine(circleStartTime + beatLength*3, circleStartTime + 4*beatLength, -Math.PI/4, 5, 312, 382);
+        }
+
+        private void showRoundLine(double startTime, double endTime, double angle, double length, float xPos, float yPos) {
+            OsbSprite line = GetLayer("Animations").CreateSprite("sb/roundedLine.png", OsbOrigin.CentreLeft, new Vector2(xPos, yPos));
+            line.Fade(startTime, 1);
+            line.Color(startTime, black);
+            line.Rotate(startTime, angle);
+            line.ScaleVec(OsbEasing.OutExpo, startTime, endTime, 0, 0.85, 0.1*length, 0.85);
+            line.Fade(endTime, 0);
         }
     }
 }
