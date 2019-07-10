@@ -55,7 +55,7 @@ namespace StorybrewScripts
             // smoke.MoveX(Constants.beatLength*4, Constants.beatLength*8, smoke.PositionAt(Constants.beatLength*4).X, smoke.PositionAt(0).X);
             // smoke.EndGroup();
 
-            double i, curX, curY;
+            double i, curX, curY, variation = 20;
             int j, numIterations = 3;
             OsbSprite smoke;
             string currentSmoke;
@@ -71,12 +71,12 @@ namespace StorybrewScripts
                 for (j = 0; j < numIterations; j++) {
                     currentSmoke = smokeMap[Random(smokeMap.Length)];
                     
-                    curX = prevX[j] + Random(-10, 10);
-                    curY = prevY[j] + Random(-10, 10);
+                    curX = prevX[j] + Random(-variation, variation);
+                    curY = prevY[j] + Random(-variation, variation);
                     while(curX < Constants.xFloor || curX > Constants.xCeil)
-                        curX = prevX[j] + Random(-10, 10);
+                        curX = prevX[j] + Random(-variation, variation);
                     while(curY < 0 || curY > Constants.height)
-                        curY = prevY[j] + Random(-10, 10);
+                        curY = prevY[j] + Random(-variation, variation);
                     
                     smoke = layer.CreateSprite($"sb/Pool 5/Smoke{currentSmoke}.png", OsbOrigin.Centre);
                     
@@ -87,8 +87,8 @@ namespace StorybrewScripts
                     smoke.Move(i, i + Constants.beatLength*4, 
                         prevX[j],
                         prevY[j],
-                        smoke.PositionAt(i).X + Random(-10, 10),
-                        smoke.PositionAt(i).Y + Random(-10, 10)
+                        curX,
+                        curY
                     );
 
                     smoke.Color(i, i + Constants.beatLength*4, 
