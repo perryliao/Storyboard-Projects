@@ -14,6 +14,11 @@ namespace StorybrewScripts
 {
     public class Constants {
         public static double beatLength = 706;
+        public static double xFloor = -107;
+        public static double xCeil = 747;
+        public static double width = 854;
+        public static double height = 480;
+        
         
         public static Color4 red = new Color4((float)225/255, (float)9/255, (float)11/255, 1f);
         public static Color4 blue = new Color4(0, 0.8f, 0.9f, 1f);
