@@ -28,9 +28,9 @@ namespace StorybrewScripts
             if (BackgroundPath == "") BackgroundPath = Beatmap.BackgroundPath ?? string.Empty;
             if (StartTime == EndTime) EndTime = (int)(Beatmap.HitObjects.LastOrDefault()?.EndTime ?? AudioDuration);
 
-            var layer = GetLayer("Background");
+            StoryboardLayer layer = GetLayer("Background");
             var bitmap = GetMapsetBitmap(BackgroundPath);
-            var bg = layer.CreateSprite(BackgroundPath, OsbOrigin.Centre);
+            OsbSprite bg = layer.CreateSprite(BackgroundPath, OsbOrigin.Centre);
             bg.Scale(StartTime, 480.0f / bitmap.Height);
             bg.Fade(StartTime, 0);
 

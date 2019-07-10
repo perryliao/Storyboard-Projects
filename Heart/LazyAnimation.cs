@@ -15,11 +15,11 @@ namespace StorybrewScripts
 
     public class LazyAnimation : StoryboardObjectGenerator
     {
-        private double beatLength = 706;
+        private double beatLength = Constants.beatLength;
         private double glitchStartTime = 38056;
         public override void Generate()
         {
-		    var layer = GetLayer("Lazy");
+		    StoryboardLayer layer = GetLayer("Lazy");
             OsbSprite circle = layer.CreateSprite("sb/cir.png", OsbOrigin.BottomCentre, new Vector2(320, 0));
 
             circle.Color(34527, 1, 1, 1);

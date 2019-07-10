@@ -23,11 +23,11 @@ namespace StorybrewScripts
         [Configurable]
         public double particleAmount = 100;
 
-        private double beatLength = 40174 - 39468;
+        private double beatLength = Constants.beatLength;
         public override void Generate()
         {
             Func<double, double> degToRad = (deg) => Math.PI * deg / 180.0;
-		    var layer = GetLayer("Rain");
+		    StoryboardLayer layer = GetLayer("Rain");
             
             double i;
             for (i = 0; i < particleAmount; i++) {
