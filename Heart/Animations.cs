@@ -258,8 +258,10 @@ namespace StorybrewScripts
             // kkr sketch 
             ///////////////////////////////////////////////
 
-            OsbSprite kkr2 = layer.CreateSprite("sb/sketchKkr.png", OsbOrigin.Centre);
+            OsbSprite kkr2 = layer.CreateAnimation("sb/sketchKkr.png", 2, 150, OsbLoopType.LoopForever, OsbOrigin.Centre);
+            // OsbSprite kkr2 = layer.CreateSprite("sb/sketchKkr1.png",  OsbOrigin.Centre);
             kkr2.Fade(62762, 1);
+            kkr2.Color(62762, Constants.white);
             kkr2.Scale(62762, 0.8);
             kkr2.Fade(68409, 0);
 
