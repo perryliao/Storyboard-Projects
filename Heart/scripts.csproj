@@ -66,6 +66,7 @@
     <Compile Include="Tiles.cs" />
     <Compile Include="Title.cs" />
     <Compile Include="Window.cs" />
+    <Compile Include="scriptslibrary/Constants.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>

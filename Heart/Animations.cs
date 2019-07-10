@@ -14,13 +14,7 @@ namespace StorybrewScripts
 {
     public class Animations : StoryboardObjectGenerator
     {
-        public Color4 white = new Color4((float) (242f/255), (float) (242f/255), (float) (242f/255), 1f);
-        public Color4 grey = new Color4(0.5f, 0.5f, 0.5f, 1f);
-        public Color4 black = new Color4((float)26/255, (float)26/255, (float)26/255, 1f);
-        public Color4 red = new Color4((float)225/255, (float)9/255, (float)11/255, 1f);
-
-
-        private double beatLength = 706;
+        private double beatLength = Constants.beatLength;
 
         public override void Generate()
         {
@@ -40,7 +34,7 @@ namespace StorybrewScripts
                 squares[i] = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre, squareOrigin);
                 square = squares[i];
                 square.Fade(squareStart, 1); 
-                square.Color(squareStart, white);
+                square.Color(squareStart, Constants.white);
                 square.Scale(OsbEasing.OutBack, squareStart, squareEnd, 0.02, 0.2);
                 square.Move(OsbEasing.InExpo, squareStart, squareEnd, square.PositionAt(squareStart), squareOrigin.X + i*29.4, squareOrigin.Y - i*3);
                 square.Move(OsbEasing.OutQuint, 47939, 48292, square.PositionAt(47939), square.PositionAt(47939).X + 5, square.PositionAt(47939).Y - 0.5);
@@ -72,7 +66,7 @@ namespace StorybrewScripts
                 if (i != 13 && i != 11 ) {
                     circle = layer.CreateSprite("sb/Pool 1/hollow cir.png", OsbOrigin.Centre);
                     circle.Fade(OsbEasing.OutExpo, 48997, 49350, 0, 1);
-                    circle.Color(48997, white);
+                    circle.Color(48997, Constants.white);
                     circle.Scale(OsbEasing.OutQuart, 48997, 49350, 0.2, 0.05 + 0.017 * Math.Pow(i, 4)/1050 );
                     circle.Scale(OsbEasing.In, 49350, 50409, circle.ScaleAt(49350).X, circle.ScaleAt(49350).X - 0.02 );
                     circle.Scale(OsbEasing.InExpo, 50409, 50762, circle.ScaleAt(50409).X, 4 );
@@ -82,7 +76,7 @@ namespace StorybrewScripts
 
             circle = layer.CreateSprite("sb/Pool 3/Animation_1/Ellipse21.png", OsbOrigin.Centre);
             circle.Fade(OsbEasing.OutExpo, 48997, 49350, 0, 1);
-            circle.Color(48997, white);
+            circle.Color(48997, Constants.white);
             circle.Scale(OsbEasing.InOutQuart, 48997, 49350, 0.2, 1.2 );
             circle.Scale(OsbEasing.In, 49350, 50409, circle.ScaleAt(49350).X, circle.ScaleAt(49350).X - 0.02 );
             circle.Scale(OsbEasing.InExpo, 50409, 50762, circle.ScaleAt(50409).X, 4 );
@@ -107,7 +101,7 @@ namespace StorybrewScripts
 
             foreach( OsbSprite line in Triangle ) {
                 line.Fade(OsbEasing.InExpo, 48468, 48644, 0, 1);
-                line.Color(48468, white);
+                line.Color(48468, Constants.white);
                 line.ScaleVec(48468, 50762, 350, 3, 226, 3);
                 line.ScaleVec(OsbEasing.InOutExpo, 50762, 51468, line.ScaleAt(50762), 0, 2);
                 line.Fade(OsbEasing.InOutQuart, 50762, 51468, 1, 0);
@@ -133,32 +127,32 @@ namespace StorybrewScripts
             boxOut.Fade(OsbEasing.InCirc, 53409, 53762, 0, 1);
             boxOut.Scale(OsbEasing.InExpo, 53409, 53762, 1, 0.53);
             boxOut.Rotate(OsbEasing.InExpo, 53409, 53762, Math.PI*3/4, Math.PI/2);
-            boxOut.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxOut.Color(OsbEasing.InExpo, 53409, 53762, Constants.white, Constants.black);
             boxOut.Fade(55350, 0);
 
             boxMid.Fade(OsbEasing.InCirc, 52174, 52527, 0, 1);
             boxMid.Scale(OsbEasing.InExpo, 52174, 52527, 0.75, 0.345);
             boxMid.Rotate(OsbEasing.InExpo, 52174, 52527, 0, Math.PI/4);
-            boxMid.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxMid.Color(OsbEasing.InExpo, 53409, 53762, Constants.white, Constants.black);
             boxMid.Fade(54821, 0);
 
             boxIn.Fade(OsbEasing.InCirc, 51644, 51997, 0, 1);
             boxIn.Scale(OsbEasing.InExpo, 51644, 51997, 0.5, 0.225);
             boxIn.Rotate(OsbEasing.InExpo, 51644, 51997, Math.PI*3/4, Math.PI/2);
-            boxIn.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxIn.Color(OsbEasing.InExpo, 53409, 53762, Constants.white, Constants.black);
             boxIn.Fade(54292, 0); 
 
             boxInIn.Fade(OsbEasing.InCirc, 51115, 51468, 0, 1);
             boxInIn.Scale(OsbEasing.InExpo, 51115, 51468, 0.25, 0.149);
             boxInIn.Rotate(OsbEasing.InExpo, 51115, 51468, 0, Math.PI/4);
-            boxInIn.Color(OsbEasing.InExpo, 53409, 53762, white, black);
+            boxInIn.Color(OsbEasing.InExpo, 53409, 53762, Constants.white, Constants.black);
             boxInIn.Fade(57115, 0);
             boxInIn.Fade(OsbEasing.InExpo, 53409, 53674, 1, 0);
 
             boxyCirc.Fade(53409, 1);
-            boxyCirc.Color(53409, white);
+            boxyCirc.Color(53409, Constants.white);
             boxyCirc.Scale(OsbEasing.InExpo, 53409, 53762, 0, 0.8);
-            boxyCirc.Color(OsbEasing.InExpo, 54115, 54292, white, red);
+            boxyCirc.Color(OsbEasing.InExpo, 54115, 54292, Constants.white, Constants.red);
             boxyCirc.Fade(57115, 0);
 
             boxBreak(54292, 54821, 66.4, 3);
@@ -184,7 +178,7 @@ namespace StorybrewScripts
             //         squareStart = 57115 + (x + y) * timeBetween;
             //         field[y][x] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
             //         field[y][x].Fade(squareStart, 1);
-            //         field[y][x].Color(squareStart, grey);
+            //         field[y][x].Color(squareStart, Constants.grey);
             //         field[y][x].Scale(OsbEasing.OutBack, squareStart, squareStart + timeBetween, 0, squareScale);
             //         field[y][x].Fade(59939, 0);
                     
@@ -204,20 +198,20 @@ namespace StorybrewScripts
             
             circle.Fade(OsbEasing.OutExpo, circleStartTime, circleStartTime + beatLength/4, 0, 1);
             circle.Scale(OsbEasing.OutBack, circleStartTime, circleStartTime + beatLength/4, 0, 0.2);
-            circle.Color(circleStartTime, black);
+            circle.Color(circleStartTime, Constants.black);
             circle.Fade(circleStartTime + beatLength*4, 0);
 
             OsbSprite arc1 = layer.CreateSprite("sb/Pool 2/Arc-B-R2.png", OsbOrigin.Centre);
             OsbSprite arc2 = layer.CreateSprite("sb/Pool 2/Arc-B-R1.png", OsbOrigin.Centre);
 
             arc1.Fade(circleStartTime + beatLength * 3/4, 1);
-            arc1.Color(circleStartTime + beatLength * 3/4, black);
+            arc1.Color(circleStartTime + beatLength * 3/4, Constants.black);
             arc1.Scale(circleStartTime + beatLength * 3/4, 0.5);
             arc1.Rotate(OsbEasing.OutExpo, circleStartTime + beatLength * 3/4, circleStartTime + 4*beatLength, 0, Math.PI*3/4);
             arc1.Fade(circleStartTime + beatLength*4, 0);
 
             arc2.Fade(circleStartTime + beatLength * 3/4, 1);
-            arc2.Color(circleStartTime + beatLength * 3/4, black);
+            arc2.Color(circleStartTime + beatLength * 3/4, Constants.black);
             arc2.Scale(circleStartTime + beatLength * 3/4, 0.6);
             arc2.Rotate(OsbEasing.OutExpo, circleStartTime + beatLength * 3/4, circleStartTime + 4*beatLength, -Math.PI/2, -Math.PI*23.5/16);
             arc2.Fade(circleStartTime + beatLength*4, 0);
@@ -236,7 +230,7 @@ namespace StorybrewScripts
                 square = squares[i];
                 fadeInTime = squareStart + timestep*i;
                 square.Move(fadeInTime, 320, 240);
-                square.Color(fadeInTime, grey);
+                square.Color(fadeInTime, Constants.grey);
 
                 square.Fade(OsbEasing.OutCirc, fadeInTime, squareStart + beatLength/2, 0, 0.6);
                 square.Fade(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 0.6, 0);
@@ -252,8 +246,8 @@ namespace StorybrewScripts
 
             square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
             square.Fade(squareStart, 1);
-            square.Color(squareStart, black);
-            square.Color(OsbEasing.InOutExpo, squareStart + beatLength*3, squareStart + beatLength*4, black, grey);
+            square.Color(squareStart, Constants.black);
+            square.Color(OsbEasing.InOutExpo, squareStart + beatLength*3, squareStart + beatLength*4, Constants.black, Constants.grey);
             square.Scale(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, 0, 150);
             square.Scale(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 150, 110);
             square.Rotate(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, -Math.PI/4, -Math.PI*3/4);
@@ -304,7 +298,7 @@ namespace StorybrewScripts
             while (!stopFlag) {
                 l = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2((float)(320 + xDisplacement + (vert ? accumulatedLength * angleLength : accumulatedLength * angleLengthInv)), (float)(240 + yDisplacement + (!vert ? accumulatedLength * angleLength : accumulatedLength * angleLengthInv))));
                 l.Fade(start, 1);
-                l.Color(start, black);
+                l.Color(start, Constants.black);
 
                 currentLength = Random(8, 25);
                 if (currentLength + accumulatedLength > length * 2 + 2) {
@@ -340,19 +334,19 @@ namespace StorybrewScripts
             
             t1.Fade(circleStartTime + beatLength*7/2, 1);
             t1.Rotate(circleStartTime + beatLength*7/2, -Math.PI/2);
-            t1.Color(circleStartTime + beatLength*7/2, black);
+            t1.Color(circleStartTime + beatLength*7/2, Constants.black);
             t1.ScaleVec(circleStartTime + beatLength*7/2, circleStartTime + beatLength*7/2 + beatLength/6, 0, 0, 1.33, 1.33);
             t1.Fade(circleStartTime + beatLength*4, 0);
 
             rekt.Fade(circleStartTime + beatLength*7/2 + beatLength/6, 1);
             rekt.Rotate(circleStartTime + beatLength*7/2 + beatLength/6, Math.PI/4);
-            rekt.Color(circleStartTime + beatLength*7/2 + beatLength/6, black);
+            rekt.Color(circleStartTime + beatLength*7/2 + beatLength/6, Constants.black);
             rekt.ScaleVec(circleStartTime + beatLength*7/2 + beatLength/6, circleStartTime + beatLength*7/2 + beatLength*11/48, 188, 0, 188, 43);
             rekt.Fade(circleStartTime + beatLength*4, 0);
 
             t2.Fade(circleStartTime + beatLength*7/2 + beatLength*11/48, 1);
             t2.Rotate(circleStartTime + beatLength*7/2 + beatLength*11/48, Math.PI/2);
-            t2.Color(circleStartTime + beatLength*7/2 + beatLength*11/48, black);
+            t2.Color(circleStartTime + beatLength*7/2 + beatLength*11/48, Constants.black);
             t2.ScaleVec(OsbEasing.OutExpo, circleStartTime + beatLength*7/2 + beatLength*11/48, 59894, 0, 0, 1.33, 1.33);
             t2.Move(OsbEasing.OutExpo, circleStartTime + beatLength*7/2 + beatLength*11/48, 
                 59894, 
@@ -390,7 +384,7 @@ namespace StorybrewScripts
             // foreach(OsbSprite t in tt) {
             //     t.Fade(squareStartTime + beatLength*7/2, 1);
             //     t.Rotate(squareStartTime + beatLength*7/2, flag ? -Math.PI/4 : -Math.PI*5/4);
-            //     t.Color(squareStartTime + beatLength*7/2, black);
+            //     t.Color(squareStartTime + beatLength*7/2, Constants.black);
             //     t.ScaleVec(
             //         squareStartTime + beatLength*7/2, 
             //         squareStartTime + beatLength*7/2 + beatLength/4, 
@@ -407,7 +401,7 @@ namespace StorybrewScripts
         private void showRoundLine(double startTime, double endTime, double angle, double length, float xPos, float yPos) {
             OsbSprite line = GetLayer("Animations").CreateSprite("sb/roundedLine.png", OsbOrigin.CentreLeft, new Vector2(xPos, yPos));
             line.Fade(startTime, 1);
-            line.Color(startTime, black);
+            line.Color(startTime, Constants.black);
             line.Rotate(startTime, angle);
             line.ScaleVec(OsbEasing.OutExpo, startTime, endTime, 0, 0.85, 0.1*length, 0.85);
             line.Fade(endTime, 0);
