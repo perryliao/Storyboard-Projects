@@ -19,7 +19,7 @@ namespace StorybrewScripts
         
         public override void Generate()
         {
-		    var layer = GetLayer("Title");
+		    StoryboardLayer layer = GetLayer("Title");
             OsbSprite[] words = new OsbSprite[2] {
                 layer.CreateSprite("sb/grim.png", OsbOrigin.CentreRight, new Vector2(310, 240)), 
                 layer.CreateSprite("sb/heart.png", OsbOrigin.CentreLeft, new Vector2(330, 240))

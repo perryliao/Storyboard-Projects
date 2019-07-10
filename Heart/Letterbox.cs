@@ -19,12 +19,12 @@ namespace StorybrewScripts
         [Configurable]
         public double endTime = 34527;
 
-        private double beatLength = 34527 - 33821;
+        private double beatLength = Constants.beatLength;
 
         /// <summary>Creates 2 black bar sprites, on the top and bottom.</summary>
         public override void Generate()
         {
-		    var layer = GetLayer("Letterbox");
+		    StoryboardLayer layer = GetLayer("Letterbox");
             OsbSprite[] bars = new OsbSprite[2] {
                 layer.CreateSprite("sb/1x1.jpg", OsbOrigin.TopCentre, new Vector2(320, 0)), 
                 layer.CreateSprite("sb/1x1.jpg", OsbOrigin.BottomCentre, new Vector2(320, 480))

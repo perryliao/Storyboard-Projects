@@ -16,7 +16,7 @@ namespace StorybrewScripts
     {
         public override void Generate()
         {
-		    var layer = GetLayer("SmokeBG");
+		    StoryboardLayer layer = GetLayer("SmokeBG");
             OsbSprite smoke = layer.CreateSprite("sb/Pool 5/Smoke14.png", OsbOrigin.Centre, new Vector2(320 - 150, 240));
             OsbSprite smoke2 = layer.CreateSprite("sb/Pool 5/Smoke14.png", OsbOrigin.Centre, new Vector2(320 + 150, 240));
             
