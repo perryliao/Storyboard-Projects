@@ -72,6 +72,7 @@ namespace StorybrewScripts
                     smoke.Fade(OsbEasing.Out, mStart, mStart + Constants.beatLength, 0, opacity);
                     smoke.Fade(OsbEasing.In, mEnd - Constants.beatLength/2, mEnd, opacity, 0);
                     smoke.Scale(mStart, mEnd, 3, 3.2);
+                    smoke.Rotate(mStart, mEnd, 0, Random(-Math.PI/32, Math.PI/32));
 
                     smoke.Move(mStart, mEnd, 
                         prevX[j],
@@ -82,9 +83,8 @@ namespace StorybrewScripts
 
                     Color4 fromColour = Constants.randomColours[Random(Constants.randomColours.Length)], toColour = Constants.randomColours[Random(Constants.randomColours.Length)];
                     if (i == 54293) {
-                        Log("hello");
-                        fromColour = Constants.red;
-                        toColour = Constants.red;
+                        fromColour = Constants.darkRed;
+                        toColour = Constants.darkRed;
                     } else if ( i == 65589 ) {
                         toColour = Constants.white;
                     }

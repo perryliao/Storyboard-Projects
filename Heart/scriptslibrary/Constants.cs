@@ -21,6 +21,8 @@ namespace StorybrewScripts
         
         
         public static Color4 red = new Color4((float)225/255, (float)9/255, (float)11/255, 1f);
+        public static Color4 darkRed = new Color4((float)82/255, (float)3/255, (float)7/255, 1f);
+        
         public static Color4 blue = new Color4(0, 0.8f, 0.9f, 1f);
         public static Color4 black = new Color4((float)26/255, (float)26/255, (float)26/255, 1f);
         public static Color4 white = new Color4((float) (242f/255), (float) (242f/255), (float) (242f/255), 1f);

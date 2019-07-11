@@ -13,7 +13,7 @@ Config:
     Value: "0.6"
   numSmokes:
     Type: "System.Int32"
-    Value: "4"
+    Value: "3"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
