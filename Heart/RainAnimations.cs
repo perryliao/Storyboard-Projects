@@ -17,7 +17,7 @@ namespace StorybrewScripts
         private Vector2 origin = new Vector2(320, 240);
         public override void Generate()
         {
-		    var layer = GetLayer("RainAnimations");
+		    StoryboardLayer layer = GetLayer("RainAnimations");
             OsbSprite circle = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.Centre, new Vector2(320, -100));
             
             circle.Scale(34527, 0.15 );

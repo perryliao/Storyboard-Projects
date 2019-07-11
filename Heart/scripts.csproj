@@ -60,11 +60,13 @@
     <Compile Include="Letterbox.cs" />
     <Compile Include="Rain.cs" />
     <Compile Include="RainAnimations.cs" />
+    <Compile Include="SmokeBG.cs" />
     <Compile Include="Space.cs" />
     <Compile Include="TileBar.cs" />
     <Compile Include="Tiles.cs" />
     <Compile Include="Title.cs" />
     <Compile Include="Window.cs" />
+    <Compile Include="scriptslibrary/Constants.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>
