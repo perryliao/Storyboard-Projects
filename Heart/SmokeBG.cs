@@ -45,6 +45,7 @@ namespace StorybrewScripts
             string currentSmoke;
             double[] prevX = new double[numSmokes]; 
             double[] prevY = new double[numSmokes];
+            Color4 fromColour, toColour;
 
             for (j = 0; j < numSmokes; j++) {
                 prevX[j] = 320 + Random(-150, 150);
@@ -54,6 +55,8 @@ namespace StorybrewScripts
             for (i = startTime; i < endTime; i += Constants.beatLength*4) {
                 for (j = 0; j < numSmokes; j++) {
                     currentSmoke = smokeMap[Random(smokeMap.Length)];
+                    fromColour = Constants.randomColours[Random(Constants.randomColours.Length)];
+                    toColour = Constants.randomColours[Random(Constants.randomColours.Length)];
                     
                     curX = prevX[j] + Random(-variation, variation);
                     curY = prevY[j] + Random(-variation, variation);
@@ -64,8 +67,21 @@ namespace StorybrewScripts
 
                     mStart = i - Constants.beatLength/2;
                     mEnd = i + Constants.beatLength*8/2;
-                    if (mStart < startTime) mStart = startTime;
-                    if (mEnd > endTime) mEnd = endTime; 
+                    
+                    // Time specific actions
+                    if (mStart < startTime) {
+                        mStart = startTime;
+                    }
+                    if (mEnd > endTime) {
+                        mEnd = endTime;
+                        toColour = Constants.white;
+                        currentSmoke = j > 0 ? "4" : currentSmoke;
+                    } 
+                    if (i == 54293) {
+                        fromColour = Constants.darkRed;
+                        toColour = Constants.darkRed;
+                    } else if ( i == 65589 ) {
+                    }
 
                     smoke = layer.CreateSprite($"sb/Pool 5/Smoke{currentSmoke}.png", OsbOrigin.Centre);
                     
@@ -81,13 +97,7 @@ namespace StorybrewScripts
                         curY
                     );
 
-                    Color4 fromColour = Constants.randomColours[Random(Constants.randomColours.Length)], toColour = Constants.randomColours[Random(Constants.randomColours.Length)];
-                    if (i == 54293) {
-                        fromColour = Constants.darkRed;
-                        toColour = Constants.darkRed;
-                    } else if ( i == 65589 ) {
-                        toColour = Constants.white;
-                    }
+                    
                     smoke.Color(mStart, mEnd, fromColour, toColour);
 
                     prevX[j] = curX;
