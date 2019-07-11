@@ -2,6 +2,18 @@
 Name: "SmokeBG 1"
 Script: "SmokeBG"
 Config:
+  startTime:
+    Type: "System.Double"
+    Value: "45821"
+  endTime:
+    Type: "System.Double"
+    Value: "68409"
+  opacity:
+    Type: "System.Double"
+    Value: "0.6"
+  numSmokes:
+    Type: "System.Int32"
+    Value: "4"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"

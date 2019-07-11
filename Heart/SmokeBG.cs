@@ -18,6 +18,10 @@ namespace StorybrewScripts
         public double startTime = 45821;
         [Configurable]
         public double endTime = 68409;
+        [Configurable]
+        public double opacity = 0.6;
+        [Configurable]
+        public int numSmokes = 4;
 
         private string[] smokeMap = new string[9] {
             "2",
@@ -34,41 +38,21 @@ namespace StorybrewScripts
         public override void Generate()
         {
 		    StoryboardLayer layer = GetLayer("SmokeBG");
-            // OsbSprite smoke = layer.CreateSprite("sb/Pool 5/Smoke14.png", OsbOrigin.Centre, new Vector2(320 - 150, 240));
-            // OsbSprite smoke2 = layer.CreateSprite("sb/Pool 5/Smoke14.png", OsbOrigin.Centre, new Vector2(320 + 150, 240));
-            
-            // smoke.Fade(OsbEasing.InExpo, 45468, 45821, 0, 0.4);
-            // smoke.Scale(45468, 48644, 3, 3.2);
-            // smoke.Rotate(45468, Math.PI/2);
-            // // smoke.Fade(48644, 0);
 
-            // smoke2.Fade(OsbEasing.InExpo, 45468, 45821, 0, 0.4);
-            // smoke2.Scale(45468, 48644, 3, 3.2);
-            // smoke2.Rotate(45468, Math.PI/2);
-            // smoke2.Color(OsbEasing.InOutCirc, 45468, 48644, smoke2.ColorAt(Constants.beatLength*4), Constants.randomColours[Random(Constants.randomColours.Length)]);
-            // // smoke2.Fade(48644, 0);
-
-            // smoke.StartLoopGroup(45821, 4);
-            // smoke.Color(OsbEasing.InOutCirc, 0, Constants.beatLength*4, smoke.ColorAt(0), Constants.randomColours[Random(Constants.randomColours.Length)]);
-            // smoke.MoveX(0, Constants.beatLength*4, smoke.PositionAt(0).X, smoke.PositionAt(0).X + 30);
-            // smoke.Color(Constants.beatLength*4, Constants.beatLength*8, smoke.ColorAt(Constants.beatLength*4), Constants.randomColours[Random(Constants.randomColours.Length)]);
-            // smoke.MoveX(Constants.beatLength*4, Constants.beatLength*8, smoke.PositionAt(Constants.beatLength*4).X, smoke.PositionAt(0).X);
-            // smoke.EndGroup();
-
-            double i, curX, curY, variation = 20;
-            int j, numIterations = 3;
+            double i, curX, curY, mStart, mEnd, variation = 20;
+            int j;
             OsbSprite smoke;
             string currentSmoke;
-            double[] prevX = new double[numIterations]; 
-            double[] prevY = new double[numIterations];
+            double[] prevX = new double[numSmokes]; 
+            double[] prevY = new double[numSmokes];
 
-            for (j = 0; j < numIterations; j++) {
+            for (j = 0; j < numSmokes; j++) {
                 prevX[j] = 320 + Random(-150, 150);
                 prevY[j] = 240 + Random(-20, 20);
             }
 
             for (i = startTime; i < endTime; i += Constants.beatLength*4) {
-                for (j = 0; j < numIterations; j++) {
+                for (j = 0; j < numSmokes; j++) {
                     currentSmoke = smokeMap[Random(smokeMap.Length)];
                     
                     curX = prevX[j] + Random(-variation, variation);
@@ -77,24 +61,34 @@ namespace StorybrewScripts
                         curX = prevX[j] + Random(-variation, variation);
                     while(curY < 0 || curY > Constants.height)
                         curY = prevY[j] + Random(-variation, variation);
-                    
+
+                    mStart = i - Constants.beatLength/2;
+                    mEnd = i + Constants.beatLength*8/2;
+                    if (mStart < startTime) mStart = startTime;
+                    if (mEnd > endTime) mEnd = endTime; 
+
                     smoke = layer.CreateSprite($"sb/Pool 5/Smoke{currentSmoke}.png", OsbOrigin.Centre);
                     
-                    smoke.Fade(OsbEasing.OutCirc, i, i + Constants.beatLength/2, 0, 1);
-                    smoke.Fade(OsbEasing.OutCirc, i + Constants.beatLength*4, i + Constants.beatLength*9/2, 1, 0);
-                    smoke.Scale(i, i + Constants.beatLength*4, 3, 3.2);
+                    smoke.Fade(OsbEasing.Out, mStart, mStart + Constants.beatLength, 0, opacity);
+                    smoke.Fade(OsbEasing.In, mEnd - Constants.beatLength/2, mEnd, opacity, 0);
+                    smoke.Scale(mStart, mEnd, 3, 3.2);
 
-                    smoke.Move(i, i + Constants.beatLength*4, 
+                    smoke.Move(mStart, mEnd, 
                         prevX[j],
                         prevY[j],
                         curX,
                         curY
                     );
 
-                    smoke.Color(i, i + Constants.beatLength*4, 
-                        Constants.randomColours[Random(Constants.randomColours.Length)],
-                        Constants.randomColours[Random(Constants.randomColours.Length)]
-                    );
+                    Color4 fromColour = Constants.randomColours[Random(Constants.randomColours.Length)], toColour = Constants.randomColours[Random(Constants.randomColours.Length)];
+                    if (i == 54293) {
+                        Log("hello");
+                        fromColour = Constants.red;
+                        toColour = Constants.red;
+                    } else if ( i == 65589 ) {
+                        toColour = Constants.white;
+                    }
+                    smoke.Color(mStart, mEnd, fromColour, toColour);
 
                     prevX[j] = curX;
                     prevY[j] = curY;

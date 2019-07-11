@@ -247,7 +247,7 @@ namespace StorybrewScripts
             square = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
             square.Fade(squareStart, 1);
             square.Color(squareStart, Constants.black);
-            square.Color(OsbEasing.InOutExpo, squareStart + beatLength*3, squareStart + beatLength*4, Constants.black, Constants.grey);
+            square.Color(OsbEasing.InOutExpo, squareStart + beatLength*3, squareStart + beatLength*4, Constants.black, Constants.white);
             square.Scale(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, 0, 150);
             square.Scale(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 150, 110);
             square.Rotate(OsbEasing.OutCirc, squareStart, squareStart + beatLength/2, -Math.PI/4, -Math.PI*3/4);
