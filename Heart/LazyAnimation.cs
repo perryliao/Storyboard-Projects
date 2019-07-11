@@ -15,14 +15,14 @@ namespace StorybrewScripts
 
     public class LazyAnimation : StoryboardObjectGenerator
     {
-        private double beatLength = 706;
+        private double beatLength = Constants.beatLength;
         private double glitchStartTime = 38056;
         public override void Generate()
         {
-		    var layer = GetLayer("Lazy");
+		    StoryboardLayer layer = GetLayer("Lazy");
             OsbSprite circle = layer.CreateSprite("sb/cir.png", OsbOrigin.BottomCentre, new Vector2(320, 0));
 
-            circle.Color(34527, 1, 1, 1);
+            circle.Color(34527, Constants.white);
             circle.Scale(34527, 0.48 );
             circle.Fade(34527, 1);
             // circle.Fade(37350, 0);
@@ -31,7 +31,7 @@ namespace StorybrewScripts
             circle.Rotate(OsbEasing.InOutQuint, 34880, 36644, 0, Math.PI * 2 * 3 / 4);
             circle.Move(OsbEasing.InQuad, 36644, 37350, circle.PositionAt(36644), 800, 240);
             circle.Fade(OsbEasing.InOutElastic, 36644, 37350, 1, 0);
-            circle.Color(36821, 1, 0, 0);
+            circle.Color(36821, Constants.red);
 
             OsbSprite boxOut = layer.CreateSprite("sb/boxcircle.png", OsbOrigin.Centre);
             boxOut.Fade(OsbEasing.In, 37350 - beatLength/4, 37350, 0, 1);
@@ -91,42 +91,20 @@ namespace StorybrewScripts
             OsbSprite cir1 = createBeatCircles(320 - 200, 240, 40174, false);
             OsbSprite cir1R = createBeatCircles(320 - 200 - 20, 240 + 4, 42644, true);
             OsbSprite cir1B = createBeatCircles(320 - 200 + 20, 240 - 4, 42644, true);
-            cir1.Color(40174, 1, 1, 1);
+            cir1.Color(40174, Constants.white);
             circleRGBChannelEffect(cir1, cir1R, cir1B);
             
             OsbSprite cir2 = createBeatCircles(320, 240, 40703, false);
             OsbSprite cir2R = createBeatCircles(320 - 20, 240 + 4, 42644, true);
             OsbSprite cir2B = createBeatCircles(320 + 20, 240 - 4, 42644, true);
-            cir2.Color(40703, 1, 1, 1);
+            cir2.Color(40703, Constants.white);
             circleRGBChannelEffect(cir2, cir2R, cir2B);
 
             OsbSprite cir3 = createBeatCircles(320 + 200, 240, 41233, false);
             OsbSprite cir3R = createBeatCircles(320 + 200 - 20, 240 + 4, 42644, true);
             OsbSprite cir3B = createBeatCircles(320 + 200 + 20, 240 - 4, 42644, true);
-            cir3.Color(41233, 1, 1, 1);
+            cir3.Color(41233, Constants.white);
             circleRGBChannelEffect(cir3, cir3R, cir3B);
-
-            // double progressStartTime = 40174;
-            // OsbSprite line = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107, 240));
-            // OsbSprite lineEnd = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.CentreLeft, new Vector2(-39 - 70, 240));
-            // line.ScaleVec(progressStartTime - beatLength/4, 30, 100);
-            // line.Fade(progressStartTime - beatLength/4, 0);
-            // line.Fade(progressStartTime, 1);
-            // line.Fade(42997, 0);
-            // lineEnd.ScaleVec(progressStartTime - beatLength/4, 0.1, 0.16666);
-            // lineEnd.Fade(progressStartTime - beatLength/4, 0);
-            // lineEnd.Fade(progressStartTime, 1);
-            // lineEnd.Fade(42997, 0);
-
-            // double relativeTime = progressStartTime;
-            // line.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, line.ScaleAt(relativeTime), line.ScaleAt(relativeTime).X + 150, line.ScaleAt(relativeTime).Y + 210);
-            // lineEnd.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, lineEnd.ScaleAt(relativeTime), lineEnd.ScaleAt(relativeTime).X + 0.351, lineEnd.ScaleAt(relativeTime).Y + 0.351 );
-            // lineEnd.MoveX(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, lineEnd.PositionAt(relativeTime).X, lineEnd.PositionAt(relativeTime).X + 31 );
-            
-            // relativeTime += beatLength;
-            // line.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, line.ScaleAt(relativeTime), line.ScaleAt(relativeTime).X + 350, line.ScaleAt(relativeTime).Y - 110);
-            // lineEnd.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, lineEnd.ScaleAt(relativeTime), lineEnd.ScaleAt(relativeTime).X - 0.184, lineEnd.ScaleAt(relativeTime).Y - 0.184 );
-            // lineEnd.MoveX(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, lineEnd.PositionAt(relativeTime).X, lineEnd.PositionAt(relativeTime).X + 410 );
         }
 
         private OsbSprite glitchFadeIn(double scale, double fade, string path) {
@@ -156,12 +134,12 @@ namespace StorybrewScripts
 
             original.Fade(42644, 0);
 
-            red.Color(OsbEasing.InQuad, 42644, 42997, 1, 0, 0, 1,1,1);
+            red.Color(OsbEasing.InQuad, 42644, 42997, Constants.red, Constants.white);
             red.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 0.6);
             red.Move(OsbEasing.InExpo, 42644, splitPoint, original.PositionAt(42644), red.PositionAt(42644));
             red.Move(OsbEasing.OutElastic, splitPoint, 42997, red.PositionAt(splitPoint), original.PositionAt(42644));
             
-            blue.Color(OsbEasing.InQuad, 42644, 42997, 0, 0.8, 0.9, 1,1,1);
+            blue.Color(OsbEasing.InQuad, 42644, 42997, Constants.blue, Constants.white);
             blue.Fade(OsbEasing.OutSine, 42644, 42997, (double) 1/3, 0.6);
             blue.Move(OsbEasing.InExpo, 42644, splitPoint, original.PositionAt(42644), blue.PositionAt(42644));
             blue.Move(OsbEasing.OutElastic, splitPoint, 42997, blue.PositionAt(splitPoint), original.PositionAt(42644));

@@ -53,7 +53,7 @@ namespace StorybrewScripts
         public override void Generate()
         {
             // Initialize
-		    var layer = GetLayer("Window");
+		    StoryboardLayer layer = GetLayer("Window");
             OsbSprite leftWindow = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107 , 480/2));
             leftWindow.Fade(windowStartTime, 1);
             leftWindow.ScaleVec(windowStartTime - 100, 0, 480);

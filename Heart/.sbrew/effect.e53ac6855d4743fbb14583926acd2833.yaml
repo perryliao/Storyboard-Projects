@@ -1,0 +1,26 @@
+﻿FormatVersion: 6
+Name: "SmokeBG 1"
+Script: "SmokeBG"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "45821"
+  endTime:
+    Type: "System.Double"
+    Value: "68409"
+  opacity:
+    Type: "System.Double"
+    Value: "0.6"
+  numSmokes:
+    Type: "System.Int32"
+    Value: "3"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  32a0838b21ad407297716162cccc9b41:
+    Name: "SmokeBG"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

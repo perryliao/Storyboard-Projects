@@ -20,12 +20,11 @@ namespace StorybrewScripts
         [Configurable]
         public double endTime = 23233;
 
-        private double beatLength = 706;
         private double particleDuration = 1000;
         private double particleAmount = 100;
         public override void Generate()
         {
-		    var layer = GetLayer("Space");
+		    StoryboardLayer layer = GetLayer("Space");
             double i, j;
 
             for (i = 50; i < 640; i++) {
@@ -37,8 +36,8 @@ namespace StorybrewScripts
                     Vector2 pos = findStartingPosition( i );
                     OsbSprite circ = layer.CreateSprite("sb/Pool 2/dot.png", OsbOrigin.Centre, pos);
                     circ.Scale(startTime, (double) Random(0,100)/800);
-                    circ.Fade(OsbEasing.InQuad, startTime, startTime + beatLength/2, 0, 1 );
-                    circ.Fade(OsbEasing.InQuad, endTime - beatLength/2, endTime, 1, 0 );
+                    circ.Fade(OsbEasing.InQuad, startTime, startTime + Constants.beatLength/2, 0, 1 );
+                    circ.Fade(OsbEasing.InQuad, endTime - Constants.beatLength/2, endTime, 1, 0 );
                     circ.Move(startTime, endTime, circ.PositionAt(startTime), calculateEndPoint(pos.X, pos.Y, i));
                 }
             }
