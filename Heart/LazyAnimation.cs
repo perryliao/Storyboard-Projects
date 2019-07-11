@@ -105,28 +105,6 @@ namespace StorybrewScripts
             OsbSprite cir3B = createBeatCircles(320 + 200 + 20, 240 - 4, 42644, true);
             cir3.Color(41233, Constants.white);
             circleRGBChannelEffect(cir3, cir3R, cir3B);
-
-            // double progressStartTime = 40174;
-            // OsbSprite line = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107, 240));
-            // OsbSprite lineEnd = layer.CreateSprite("sb/Pool 1/cir.png", OsbOrigin.CentreLeft, new Vector2(-39 - 70, 240));
-            // line.ScaleVec(progressStartTime - beatLength/4, 30, 100);
-            // line.Fade(progressStartTime - beatLength/4, 0);
-            // line.Fade(progressStartTime, 1);
-            // line.Fade(42997, 0);
-            // lineEnd.ScaleVec(progressStartTime - beatLength/4, 0.1, 0.16666);
-            // lineEnd.Fade(progressStartTime - beatLength/4, 0);
-            // lineEnd.Fade(progressStartTime, 1);
-            // lineEnd.Fade(42997, 0);
-
-            // double relativeTime = progressStartTime;
-            // line.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, line.ScaleAt(relativeTime), line.ScaleAt(relativeTime).X + 150, line.ScaleAt(relativeTime).Y + 210);
-            // lineEnd.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, lineEnd.ScaleAt(relativeTime), lineEnd.ScaleAt(relativeTime).X + 0.351, lineEnd.ScaleAt(relativeTime).Y + 0.351 );
-            // lineEnd.MoveX(OsbEasing.OutBack, relativeTime, relativeTime + beatLength, lineEnd.PositionAt(relativeTime).X, lineEnd.PositionAt(relativeTime).X + 31 );
-            
-            // relativeTime += beatLength;
-            // line.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, line.ScaleAt(relativeTime), line.ScaleAt(relativeTime).X + 350, line.ScaleAt(relativeTime).Y - 110);
-            // lineEnd.ScaleVec(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, lineEnd.ScaleAt(relativeTime), lineEnd.ScaleAt(relativeTime).X - 0.184, lineEnd.ScaleAt(relativeTime).Y - 0.184 );
-            // lineEnd.MoveX(OsbEasing.OutBack, relativeTime, relativeTime + beatLength*3/2, lineEnd.PositionAt(relativeTime).X, lineEnd.PositionAt(relativeTime).X + 410 );
         }
 
         private OsbSprite glitchFadeIn(double scale, double fade, string path) {

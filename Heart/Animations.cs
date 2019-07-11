@@ -160,36 +160,6 @@ namespace StorybrewScripts
             boxBreak(55350, 57115, 156.5, 5.2); 
 
             ///////////////////////////////////////////////
-            // 3x3 squares
-            ///////////////////////////////////////////////
-            
-            // float spacing = 150;
-            // double timeBetween = beatLength/4, squareScale = 100;
-            // Vector2 squareStartPos = new Vector2(320 - spacing, 240 - spacing);
-            // int x, y;
-            // OsbSprite[][] field = new OsbSprite[3][], fieldRings = new OsbSprite[field.Length][];
-            // for (i = 0; i < 3; i++) {
-            //     field[i] = new OsbSprite[field.Length];
-            //     fieldRings[i] = new OsbSprite[field[i].Length];
-            // }
-
-            // for (y = 0; y < field.Length; y++) {
-            //     for (x = 0; x < field[y].Length; x++) {
-            //         squareStart = 57115 + (x + y) * timeBetween;
-            //         field[y][x] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
-            //         field[y][x].Fade(squareStart, 1);
-            //         field[y][x].Color(squareStart, Constants.grey);
-            //         field[y][x].Scale(OsbEasing.OutBack, squareStart, squareStart + timeBetween, 0, squareScale);
-            //         field[y][x].Fade(59939, 0);
-                    
-            //         fieldRings[y][x] = layer.CreateSprite("sb/boxy.png", OsbOrigin.Centre, new Vector2(squareStartPos.X + x*spacing, squareStartPos.Y + y*spacing));
-            //         fieldRings[y][x].Fade(squareStart, 1);
-            //         fieldRings[y][x].Scale(OsbEasing.OutBack, squareStart, squareStart + timeBetween, 0, 0.18);
-            //         fieldRings[y][x].Fade(59939, 0);
-            //     }
-            //   }
-            
-            ///////////////////////////////////////////////
             // circle matrix effect
             ///////////////////////////////////////////////
 
@@ -377,27 +347,6 @@ namespace StorybrewScripts
             showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, -Math.PI*2.9/9, 2.55, 320, 379); 
             showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, 0, 6, 320 - 240, 240); 
             showRoundLine(lineStart + beatLength*3/2, squareStartTime + 4*beatLength, Math.PI, 6, 320 + 240, 240); 
-
-            // OsbSprite[] tt = new OsbSprite[2] {
-            //     GetLayer("Animations").CreateSprite("sb/t.png", OsbOrigin.BottomRight, new Vector2(320 - 240, 240)),
-            //     GetLayer("Animations").CreateSprite("sb/t.png", OsbOrigin.BottomRight, new Vector2(320 + 240, 240))
-            // }; 
-            // bool flag = false;
-            // foreach(OsbSprite t in tt) {
-            //     t.Fade(squareStartTime + beatLength*7/2, 1);
-            //     t.Rotate(squareStartTime + beatLength*7/2, flag ? -Math.PI/4 : -Math.PI*5/4);
-            //     t.Color(squareStartTime + beatLength*7/2, Constants.black);
-            //     t.ScaleVec(
-            //         squareStartTime + beatLength*7/2, 
-            //         squareStartTime + beatLength*7/2 + beatLength/4, 
-            //         0, 
-            //         0, 
-            //         0.8, 
-            //         1
-            //     );
-            //     t.Fade(squareStartTime + beatLength*4, 0);
-            //     flag = true;
-            // }
         }
 
         private void showRoundLine(double startTime, double endTime, double angle, double length, float xPos, float yPos) {
