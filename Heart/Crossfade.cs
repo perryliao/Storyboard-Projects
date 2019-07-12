@@ -27,6 +27,13 @@ namespace StorybrewScripts
             CrossBlock(StartTime + Constants.beatLength*3, new Vector2((float)Constants.xCeil, 380), 100, false);
 
             ExpoTransition(StartTime + Constants.beatLength*2, StartTime + Constants.beatLength*3);
+
+            OsbSprite screen = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
+            screen.ScaleVec(65233, Constants.width, Constants.height);
+            screen.Fade(OsbEasing.InExpo, 65233, StartTime, 0, 0.6);
+            screen.Fade(OsbEasing.InQuad, StartTime, StartTime + Constants.beatLength, screen.OpacityAt(StartTime), 0);
+            screen.Color(OsbEasing.InExpo, 65233, StartTime, Constants.white, Constants.red);
+            screen.Color(OsbEasing.InQuad, StartTime, StartTime + Constants.beatLength, Constants.darkRed, Constants.black);
         }
 
         private void CrossBlock(double startTime, Vector2 startPos, double height, bool right) {
@@ -63,7 +70,7 @@ namespace StorybrewScripts
                 bar.Fade(end, 0);
                 for(j = start; j < end; j += Constants.beatLength/8) {
                     amount = Random(60, 350);
-                    toScale = Math.Min(bar.ScaleAt(j - Constants.beatLength/2).X + amount, Constants.width);
+                    toScale = Math.Min(bar.ScaleAt(j - Constants.beatLength/8 ).X + amount, Constants.width);
                     if (j + Constants.beatLength/4 > end) toScale = Constants.width;
                     bar.ScaleVec(j, toScale, scale);
                 }

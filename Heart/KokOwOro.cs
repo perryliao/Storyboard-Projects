@@ -21,7 +21,7 @@ namespace StorybrewScripts
             kkr2.Color(62762, Constants.white);
             kkr2.Scale(62762, 0.8);
             kkr2.Fade(OsbEasing.InExpo, 65409, 65586, 1, 0);
-            kkr2.Color(OsbEasing.InExpo, 65409, 65586, Constants.white, Constants.randomColours[6]);
+            kkr2.Color(OsbEasing.InExpo, 65409, 65586, Constants.white, Constants.randomColours[0]);
 
             OsbSprite cut = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreRight, new Vector2(320 - 100, 240 + 100));
             cut.Fade(65233, 1);
@@ -48,7 +48,7 @@ namespace StorybrewScripts
             kkr.Fade(OsbEasing.InExpo, start, 65586, 0, 1);
             kkr.Fade(OsbEasing.OutExpo, 68056, 68409, 1, 0);
             kkr.Scale(start, 0.8);
-            kkr.Color(start, 65586, Constants.white, Constants.randomColours[6]);
+            kkr.Color(start, 65586, Constants.white, Constants.randomColours[0]);
             kkr.Rotate(start, 68409, 0, rotation);
             kkr.Move(OsbEasing.OutQuad, start, 68409, kkr.PositionAt(start), kkr.PositionAt(start).X + xVariation, kkr.PositionAt(start).Y + Random(50, 60));
 
