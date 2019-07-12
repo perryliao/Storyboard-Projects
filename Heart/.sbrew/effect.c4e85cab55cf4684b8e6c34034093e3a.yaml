@@ -5,6 +5,9 @@ Config:
   StartTime:
     Type: "System.Double"
     Value: "65586"
+  numBars:
+    Type: "System.Int32"
+    Value: "80"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"

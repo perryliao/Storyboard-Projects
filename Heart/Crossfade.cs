@@ -16,6 +16,8 @@ namespace StorybrewScripts
     {
         [Configurable]
         public double StartTime = 65586;
+        [Configurable]
+        public int numBars = 80;
 
         private StoryboardLayer layer; 
         public override void Generate()
@@ -59,7 +61,7 @@ namespace StorybrewScripts
         }
 
         private void ExpoTransition(double start, double end) {
-            int i, numBars = 42;
+            int i;
             double j, amount, toScale, scale = Constants.height / numBars;
             OsbSprite bar;
             for(i = 0; i < numBars; i++) {
