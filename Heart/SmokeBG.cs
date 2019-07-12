@@ -73,7 +73,7 @@ namespace StorybrewScripts
                         mStart = startTime;
                     }
                     if (mEnd > endTime) {
-                        mEnd = endTime;
+                        mEnd = endTime - Constants.beatLength/4;
                         toColour = Constants.white;
                         currentSmoke = j > 0 ? "4" : currentSmoke;
                     } 

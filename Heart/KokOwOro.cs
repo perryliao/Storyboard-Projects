@@ -46,6 +46,7 @@ namespace StorybrewScripts
             if (rotation == 0) rotation = Random(-Math.PI/8, Math.PI/8);
             if (xVariation == 0) xVariation = Random(-15, 15);
             kkr.Fade(OsbEasing.InExpo, start, 65586, 0, 1);
+            kkr.Fade(OsbEasing.OutExpo, 68056, 68409, 1, 0);
             kkr.Scale(start, 0.8);
             kkr.Color(start, 65586, Constants.white, Constants.randomColours[6]);
             kkr.Rotate(start, 68409, 0, rotation);
