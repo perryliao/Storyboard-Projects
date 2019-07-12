@@ -23,18 +23,18 @@ namespace StorybrewScripts
 
         public override void Generate()
         {
-		    var layer = GetLayer("tiles");
+		    StoryboardLayer layer = GetLayer("tiles");
             
             OsbSprite[][] field = new OsbSprite[height/scale][];  // field[y][x]
             for (int i = 0; i < height/scale; i++) {
-                field[i] = new OsbSprite[width/scale];
+                field[i] = new OsbSprite[width/scale + 1];
             }
             
             Random rnd = new Random();
             for (int y = 0; y < height/scale; y++) {
-                for (int x = 0; x < width/scale; x++) {
+                for (int x = 0; x < width/scale + 1; x++) {
                     // initial set up
-                    field[y][x] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
+                    field[y][x] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.TopLeft);
                     OsbSprite sprite = field[y][x];
                     sprite.Scale(startTime, scale);
                     sprite.ColorHsb(startTime, 0, 0, 0.1);

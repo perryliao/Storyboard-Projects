@@ -1,0 +1,20 @@
+﻿FormatVersion: 6
+Name: "Space 1"
+Script: "Space"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "11586"
+  endTime:
+    Type: "System.Double"
+    Value: "23233"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  cda6882e64984ad29d655dbb4382e3e8:
+    Name: "Space"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
