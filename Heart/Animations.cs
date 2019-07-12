@@ -200,7 +200,7 @@ namespace StorybrewScripts
                 square = squares[i];
                 fadeInTime = squareStart + timestep*i;
                 square.Move(fadeInTime, 320, 240);
-                square.Color(fadeInTime, Constants.grey);
+                square.Color(fadeInTime, Constants.white);
 
                 square.Fade(OsbEasing.OutCirc, fadeInTime, squareStart + beatLength/2, 0, 0.6);
                 square.Fade(OsbEasing.InCirc, squareStart + beatLength/2, squareStart + beatLength, 0.6, 0);
