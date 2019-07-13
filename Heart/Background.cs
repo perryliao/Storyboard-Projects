@@ -21,21 +21,8 @@ namespace StorybrewScripts
         [Configurable]
         public double Opacity = 0.2;
 
-        public double[] poisonArr = new double[13] {
-            69468,
-            69644,
-            69821, 
-            70350,
-            71233,
-            72292, 
-            72468,
-            72644,
-            73174, 
-            73703, 
-            74056,
-            74586,
-            75115,
-        };
+        private double[] poisonArr = new double[34] { 69468, 69644, 69821,  70350, 72292,  72468, 72644, 73174,  73703,  74056, 74586, 75115, 76527, 76880, 77409, 77939, 80762, 80939, 81115, 81644, 83586, 83762, 83939, 84468, 84997, 85350, 85880, 86409, 87997, 88174, 88703, 89233, 89762, 90292 };
+        private double[] poisonFadeArr = new double[6] { 70350, 75115, 77939, 81821, 86409, 90292 };
 
         public override void Generate()
         {
@@ -61,22 +48,35 @@ namespace StorybrewScripts
             letterboxBG.ScaleVec(23233, Constants.width, Constants.height * 0.7);
             letterboxBG.Fade(OsbEasing.InCirc, 33821, 34527, 1, 0);
             
-            poisonBG(tileBG);
+            poisonBG(tileBG, 0.4);
 
             letterboxBG.Fade(209586, 1);
             letterboxBG.Fade(232174, 0);
         }
 
-        public void poisonBG(OsbSprite bg) {
+        public void poisonBG(OsbSprite bg, double opacity) {
             double start, end;
             Color4 colour;
-            bg.Fade(69468, 0.4);
+
+            // Set Opacity
+            foreach(double time in poisonFadeArr) {
+                bg.Fade(OsbEasing.InCirc, time, time + Constants.beatLength, opacity, 0);
+            }
+
+            // Set Colour
             foreach(double time in poisonArr) {
                 start = time - Constants.beatLength/4;
                 end = time;
-                colour = Constants.randomColours[Random(Constants.randomColours.Length)];
+
+                do {
+                    colour = Constants.randomColours[Random(Constants.randomColours.Length)];
+                } while (colour.R * 255 == bg.ColorAt(start).R && 
+                       colour.G * 255 == bg.ColorAt(start).G && 
+                       colour.B * 255 == bg.ColorAt(start).B );
+
+                if (bg.OpacityAt(start) == 0) 
+                    bg.Fade(OsbEasing.InExpo, start, time, bg.OpacityAt(start - Constants.beatLength/4), opacity);
                 bg.Color(OsbEasing.InExpo, start, end, bg.ColorAt(start), colour);
-                // bg.Fade(start, end, bg.OpacityAt(start), 0.6);
             }
         }
     }
