@@ -1,0 +1,23 @@
+﻿FormatVersion: 6
+Name: "Kokoro 2"
+Script: "Kokoro"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "92056"
+  endTime:
+    Type: "System.Double"
+    Value: "113586"
+  slowFadeTime:
+    Type: "System.Double"
+    Value: "113586"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  4dfab8e7d62e45b4a3d2b5b534b53617:
+    Name: ""
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

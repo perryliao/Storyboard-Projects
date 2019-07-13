@@ -29,7 +29,9 @@ namespace StorybrewScripts
         {
 		    StoryboardLayer layer = GetLayer("");
             OsbSprite kokoro = layer.CreateSprite("sb/kkr.png", OsbOrigin.Centre);
+            kokoro.Fade(startTime, 0.0);
             kokoro.Scale(startTime, 0.4);
+
 
             double timestep = beatLength * 2;
             double i;
