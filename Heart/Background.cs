@@ -22,7 +22,14 @@ namespace StorybrewScripts
         public double Opacity = 0.2;
 
         private double[] poisonArr = new double[34] { 69468, 69644, 69821,  70350, 72292,  72468, 72644, 73174,  73703,  74056, 74586, 75115, 76527, 76880, 77409, 77939, 80762, 80939, 81115, 81644, 83586, 83762, 83939, 84468, 84997, 85350, 85880, 86409, 87997, 88174, 88703, 89233, 89762, 90292 };
-        private double[] poisonFadeArr = new double[6] { 70350, 75115, 77939, 81821, 86409, 90292 };
+        private IDictionary<double, double> poisonFadeDict = new Dictionary<double, double> { 
+            {70350, Constants.beatLength*2},
+            {75115, Constants.beatLength*3/2},
+            {77939, Constants.beatLength*3},
+            {81821, Constants.beatLength*2},
+            {86409, Constants.beatLength*3/2},
+            {90292, Constants.beatLength},
+        };
 
         public override void Generate()
         {
@@ -59,10 +66,10 @@ namespace StorybrewScripts
             Color4 colour;
 
             // Set Opacity
-            foreach(double time in poisonFadeArr) {
-                bg.Fade(OsbEasing.InCirc, time, time + Constants.beatLength, opacity, 0);
+            foreach(KeyValuePair<double, double> data in poisonFadeDict) {
+                bg.Fade(OsbEasing.InCirc, data.Key, data.Key + data.Value, opacity, 0);
             }
-
+            
             // Set Colour
             foreach(double time in poisonArr) {
                 start = time - Constants.beatLength/4;
