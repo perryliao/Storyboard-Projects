@@ -21,6 +21,7 @@ namespace StorybrewScripts
         public double endTime = 90997;
 
         StoryboardLayer layer;
+        double edgeHeight = 20;
         public override void Generate()
         {
 		    layer = GetLayer("Poison");
@@ -31,39 +32,82 @@ namespace StorybrewScripts
         }
 
         private void setUpFrame(float x, float y) {
-            OsbSprite frame = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(x, y));
-            float height = 290;
+            float width = 220, height = 290;
 
-            frame.Fade(startTime, 1);
-            frame.Fade(endTime, 0);
-            frame.Color(startTime, Constants.black);
-            frame.ScaleVec(startTime, 220, height);
+            makeRekt(x == 320 ? x : (x < 320 ? (float)Constants.xFloor : (float)Constants.xCeil), y, width - 20, height, Constants.blue);
 
-            if (x != 320) 
-                skewFrame(x, y, height);
-        }
-
-        private void skewFrame(float x, float y, float height) {
-            OsbSprite top = layer.CreateSprite("sb/t.png", OsbOrigin.BottomCentre, new Vector2(x, y - height/2));
-            OsbSprite bot = layer.CreateSprite("sb/t.png", OsbOrigin.CentreRight, new Vector2(x, y + height/2));
-
-            top.Fade(startTime, 1);
-            top.Fade(endTime, 0);
-            bot.Fade(startTime, 1);
-            bot.Fade(endTime, 0);
-
-            top.Color(startTime, Constants.black);
-            bot.Color(startTime, Constants.black);    
-
-            bot.Rotate(startTime, -Math.PI/2);
-
-            if (x < 320) {
-                top.FlipH(startTime, startTime);
-                bot.FlipV(startTime, startTime);
+            if (x != 320) {
+                skewFrame(x, y, width, height);
+            } else {
+                makeRekt(x, y + height/2 - (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
+                makeRekt(x, y - height/2 + (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
+                makeRekt(x - width/2, y, edgeHeight, height, Constants.realBlack);
+                makeRekt(x + width/2, y, edgeHeight, height, Constants.realBlack);
             }
 
-            top.ScaleVec(startTime, 2.19, 0.4);
-            bot.ScaleVec(startTime, 0.4, 2.19);
+        }
+
+        private void skewFrame(float x, float y, float width, float height) {
+            bool left = x < 320;
+            
+            OsbSprite tt = layer.CreateSprite("sb/t.png", OsbOrigin.BottomCentre, new Vector2(x, y - height/2));
+            OsbSprite tb = layer.CreateSprite("sb/t.png", OsbOrigin.CentreRight, new Vector2(x, y - height/2));
+            OsbSprite bt = layer.CreateSprite("sb/t.png", OsbOrigin.BottomCentre, new Vector2(x, y + height/2));
+            OsbSprite bb = layer.CreateSprite("sb/t.png", OsbOrigin.CentreRight, new Vector2(x, y + height/2));
+
+            OsbSprite edge = layer.CreateSprite("sb/1x1.jpg", left ? OsbOrigin.CentreRight : OsbOrigin.CentreLeft, new Vector2(x + width/2 * (left ? 1 : -1), y));
+            edge.Fade(startTime, 1);
+            edge.Fade(endTime, 0);
+            edge.Color(startTime, Constants.realBlack);
+            edge.ScaleVec(startTime, edgeHeight, height);
+            
+            tt.Fade(startTime, 1);
+            tt.Fade(endTime, 0);
+            tb.Fade(startTime, 1);
+            tb.Fade(endTime, 0);
+            
+            bt.Fade(startTime, 1);
+            bt.Fade(endTime, 0);
+            bb.Fade(startTime, 1);
+            bb.Fade(endTime, 0);
+
+            tt.Color(startTime, Constants.realBlack);
+            tb.Color(startTime, Constants.realBlack);
+            bt.Color(startTime, Constants.realBlack);
+            bb.Color(startTime, Constants.realBlack);
+
+            tb.Rotate(startTime, -Math.PI/2);
+            bb.Rotate(startTime, -Math.PI/2);
+            
+            if (left) {
+                tt.FlipH(startTime, startTime);
+                bb.FlipV(startTime, startTime);
+            } else {
+                tb.FlipV(startTime, startTime);
+                bt.FlipH(startTime, startTime);
+            }
+
+            tt.ScaleVec(startTime, 2.2, 0.3);
+            tb.ScaleVec(startTime, 0.3, 2.2);
+            bt.ScaleVec(startTime, 2.2, 0.3);
+            bb.ScaleVec(startTime, 0.3, 2.2);
+        }
+
+        private void makeRekt(float x, float y, double width, double height, Color4 colour) {
+            OsbOrigin o;
+            if (x < 320) {
+                o = OsbOrigin.CentreLeft;
+            } else if (x > 320) {
+                o = OsbOrigin.CentreRight;
+            } else {
+                o = OsbOrigin.Centre;
+            }
+            OsbSprite rekt = layer.CreateSprite("sb/1x1.jpg", o, new Vector2(x, y));
+            rekt.Fade(OsbEasing.InExpo, startTime, startTime + Constants.beatLength/4, 0, 1);
+            rekt.Fade(endTime, 0);
+            rekt.Color(startTime, colour);
+
+            rekt.ScaleVec(startTime, width, height);
         }
     }
 }

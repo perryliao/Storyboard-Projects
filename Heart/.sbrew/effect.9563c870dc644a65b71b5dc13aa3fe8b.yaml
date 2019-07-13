@@ -1,0 +1,20 @@
+﻿FormatVersion: 6
+Name: "Poison 1"
+Script: "Poison"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "69292"
+  endTime:
+    Type: "System.Double"
+    Value: "90997"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  b917e2086ece484086b87105f474075f:
+    Name: "Poison"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
