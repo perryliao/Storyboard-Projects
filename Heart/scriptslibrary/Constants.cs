@@ -17,6 +17,7 @@ namespace StorybrewScripts
         public static Color4 black = new Color4((float)26/255, (float)26/255, (float)26/255, 1f);
         public static Color4 white = new Color4((float) (242f/255), (float) (242f/255), (float) (242f/255), 1f);
         public static Color4 grey = new Color4(0.5f, 0.5f, 0.5f, 1f);
+        public static Color4 transparent = new Color4(0, 0, 0, 0);
 
         public static Color4[] randomColours = new Color4[14] {
             new Color4((float) (246f/255), (float) (4f/255), (float) (88f/255), 1f),    // #f60458
