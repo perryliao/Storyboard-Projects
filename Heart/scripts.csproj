@@ -60,6 +60,7 @@
     <Compile Include="KokOwOro.cs" />
     <Compile Include="LazyAnimation.cs" />
     <Compile Include="Letterbox.cs" />
+    <Compile Include="Poison.cs" />
     <Compile Include="Rain.cs" />
     <Compile Include="SmokeBG.cs" />
     <Compile Include="Space.cs" />
