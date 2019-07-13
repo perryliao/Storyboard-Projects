@@ -55,11 +55,7 @@ namespace StorybrewScripts
             OsbSprite bt = layer.CreateSprite("sb/t.png", OsbOrigin.BottomCentre, new Vector2(x, y + height/2));
             OsbSprite bb = layer.CreateSprite("sb/t.png", OsbOrigin.CentreRight, new Vector2(x, y + height/2));
 
-            OsbSprite edge = layer.CreateSprite("sb/1x1.jpg", left ? OsbOrigin.CentreRight : OsbOrigin.CentreLeft, new Vector2(x + width/2 * (left ? 1 : -1), y));
-            edge.Fade(startTime, 1);
-            edge.Fade(endTime, 0);
-            edge.Color(startTime, Constants.realBlack);
-            edge.ScaleVec(startTime, edgeHeight, height);
+            makeRekt((float)(x + width/2 * (left ? 1 : -1) + edgeHeight * (left ? -1 : 1)), y, edgeHeight, height, Constants.realBlack);
             
             tt.Fade(startTime, 1);
             tt.Fade(endTime, 0);
@@ -103,7 +99,11 @@ namespace StorybrewScripts
                 o = OsbOrigin.Centre;
             }
             OsbSprite rekt = layer.CreateSprite("sb/1x1.jpg", o, new Vector2(x, y));
-            rekt.Fade(OsbEasing.InExpo, startTime, startTime + Constants.beatLength/4, 0, 1);
+            if (colour == Constants.realBlack) {
+                rekt.Fade(startTime, 1);
+            } else {
+                rekt.Fade(OsbEasing.InExpo, startTime, startTime + Constants.beatLength/4, 0, 1);
+            }
             rekt.Fade(endTime, 0);
             rekt.Color(startTime, colour);
 
