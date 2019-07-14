@@ -23,9 +23,9 @@ namespace StorybrewScripts
         [Configurable]
         public double scrollDuration = Constants.beatLength;
 
-        public double edgeHeight = 20;
+        public double edgeHeight = PoisonScripts.edgeHeight;
         private StoryboardLayer layer;
-        
+
         public override void Generate()
         {
 		    layer = GetLayer("Poison");
@@ -43,7 +43,7 @@ namespace StorybrewScripts
             if (x != 320) {
                 skewFrame(x, y, width, height);
             } else {
-                PoisonScripts.functions[0](layer, 87468, 1000, x, y, width, height);
+                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*4, x, y, width, height);
                 makeRekt(x, y + height/2 - (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x, y - height/2 + (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x - width/2, y, edgeHeight, height, Constants.realBlack);
