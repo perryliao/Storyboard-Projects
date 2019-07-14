@@ -55,6 +55,8 @@ namespace StorybrewScripts
         private void handleScreenAnimations(StoryboardLayer layer, double startTime, double duration, float x, float y, double width, double height) {
             PoisonScripts.functions[Random(PoisonScripts.functions.Length)](layer, 69468, Constants.beatLength*3/2, x, y, width, height);
             PoisonScripts.upArrow(layer, 70527, Constants.beatLength, x, y, width);
+            PoisonScripts.functions[Random(PoisonScripts.functions.Length)](layer, 71233, Constants.beatLength*3/2, x, y, width, height);
+
         }
 
         private void skewFrame(float x, float y, float width, float height) {

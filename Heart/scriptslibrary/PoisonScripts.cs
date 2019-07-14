@@ -18,7 +18,7 @@ namespace StorybrewScripts
         public static double edgeHeight = 20;
         public static Func<double, double> degToRad = (deg) => Math.PI * deg / 180.0;
         public static Func<StoryboardLayer, double, double, float, float, double, double, bool>[] functions = {
-            scrollBars
+            scrollBars, xStatic
         };
         private static Random rnd = new Random();
         private static double sideAngle = 7.7;
@@ -46,6 +46,29 @@ namespace StorybrewScripts
                 bar.EndGroup();
                 bar.Fade(startTime + duration, 0);
             }
+            return true;
+        }
+
+        private static bool xStatic(StoryboardLayer layer, double startTime, double duration, float x, float y, double width, double height) {
+            double numCrosses = rnd.Next(1, 5);
+            double xHeight = (height - 4*edgeHeight )/numCrosses + 5;
+            double length = Math.Min(100, xHeight / Math.Cos(Math.PI/4) - 14);
+            string path = "sb/1x1.jpg";
+
+            for (int i = 0; i < (int)numCrosses; i++) {
+                OsbSprite x1 = layer.CreateSprite(path, OsbOrigin.Centre, new Vector2(x, (float)(y - height/2 + edgeHeight + xHeight/2 + i*xHeight)));
+                OsbSprite x2 = layer.CreateSprite(path, OsbOrigin.Centre, new Vector2(x, (float)(y - height/2 + edgeHeight + xHeight/2 + i*xHeight)));
+                x1.Fade(startTime, 1);
+                x1.Fade(startTime + duration, 0);
+                x1.ScaleVec(startTime, length, 14);
+                x1.Rotate(startTime, Math.PI/4);
+
+                x2.Fade(startTime, 1);
+                x2.Fade(startTime + duration, 0);
+                x2.ScaleVec(startTime, length, 14);
+                x2.Rotate(startTime, -Math.PI/4);
+            }
+
             return true;
         }
 
