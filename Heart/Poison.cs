@@ -41,6 +41,7 @@ namespace StorybrewScripts
             makeRekt(x == 320 ? x : (x < 320 ? (float)Constants.xFloor : (float)Constants.xCeil), y, width - 20, height, Constants.blue);
 
             if (x != 320) {
+                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*4, x, y, width, height);
                 skewFrame(x, y, width, height);
             } else {
                 PoisonScripts.functions[0](layer, 69468, Constants.beatLength*4, x, y, width, height);
@@ -49,21 +50,6 @@ namespace StorybrewScripts
                 makeRekt(x - width/2, y, edgeHeight, height, Constants.realBlack);
                 makeRekt(x + width/2, y, edgeHeight, height, Constants.realBlack);
             }
-        }
-
-        private void Scroll(float x, float y, float height) {
-            OsbSprite sprite = layer.CreateSprite("sb/Pool 4/wavy2.png", OsbOrigin.BottomCentre, new Vector2(x, y - height/2 + (float)edgeHeight));
-            double i;
-            double scrollPortion = scrollDuration * 0.3;
-            for (i = startTime; i < endTime; i += scrollDuration) {
-                // sprite.Fade(i, 1);
-                // sprite.Scale(i, 1);
-                sprite.Color(i, Constants.white);
-                // sprite.Fade(i , 0); 
-                sprite.ScaleVec(i, i + scrollPortion, 1, 0, 1, 1);
-                sprite.MoveY(i, i + scrollPortion, sprite.PositionAt(i).Y, sprite.PositionAt(i).Y + 80);
-            }
-
         }
 
         private void skewFrame(float x, float y, float width, float height) {
