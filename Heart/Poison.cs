@@ -38,13 +38,13 @@ namespace StorybrewScripts
         private void setUpFrame(float x, float y) {
             float width = 220, height = 290;
 
-            makeRekt(x == 320 ? x : (x < 320 ? (float)Constants.xFloor : (float)Constants.xCeil), y, width - 20, height, Constants.blue);
+            makeRekt(x == 320 ? x : (x < 320 ? (float)Constants.xFloor : (float)Constants.xCeil), y, width - 20, height, Constants.black);
 
             if (x != 320) {
-                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*4, x, y, width, height);
+                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*3/2, x, y, width, height);
                 skewFrame(x, y, width, height);
             } else {
-                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*4, x, y, width, height);
+                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*3/2, x, y, width, height);
                 makeRekt(x, y + height/2 - (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x, y - height/2 + (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x - width/2, y, edgeHeight, height, Constants.realBlack);
