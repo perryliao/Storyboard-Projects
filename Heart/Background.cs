@@ -55,19 +55,19 @@ namespace StorybrewScripts
             letterboxBG.ScaleVec(23233, Constants.width, Constants.height * 0.7);
             letterboxBG.Fade(OsbEasing.InCirc, 33821, 34527, 1, 0);
             
-            poisonBG(tileBG, 0.4);
+            poisonBG(tileBG, 0.6);
 
             letterboxBG.Fade(209586, 1);
             letterboxBG.Fade(232174, 0);
         }
 
         public void poisonBG(OsbSprite bg, double opacity) {
-            double start, end;
+            double start, end, dimmed = Math.Max(0, opacity - 0.4);
             Color4 colour;
 
             // Set Opacity
             foreach(KeyValuePair<double, double> data in poisonFadeDict) {
-                bg.Fade(OsbEasing.InCirc, data.Key, data.Key + data.Value, opacity, 0);
+                bg.Fade(OsbEasing.InCirc, data.Key, data.Key + data.Value, opacity, dimmed);
             }
             
             // Set Colour
@@ -81,7 +81,7 @@ namespace StorybrewScripts
                        colour.G * 255 == bg.ColorAt(start).G && 
                        colour.B * 255 == bg.ColorAt(start).B );
 
-                if (bg.OpacityAt(start) == 0) 
+                if (bg.OpacityAt(start) <= dimmed) 
                     bg.Fade(OsbEasing.InExpo, start, time, bg.OpacityAt(start - Constants.beatLength/4), opacity);
                 bg.Color(OsbEasing.InExpo, start, end, bg.ColorAt(start), colour);
             }
