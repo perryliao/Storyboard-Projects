@@ -40,7 +40,7 @@ namespace StorybrewScripts
                 dot.Scale(relativeStart, scale);
 
                 dot.StartLoopGroup(relativeStart, numIterations);
-                dot.Fade(0, 1);
+                dot.Fade(0, loopEnd, 1, 1);
                 dot.Fade(loopEnd, 0);
                 dot.Color(Constants.beatLength * 4, Constants.white);
                 dot.EndGroup();
