@@ -20,8 +20,12 @@ namespace StorybrewScripts
         [Configurable]
         public double endTime = 90997;
 
-        StoryboardLayer layer;
-        double edgeHeight = 20;
+        [Configurable]
+        public double scrollDuration = Constants.beatLength;
+
+        public double edgeHeight = 20;
+        private StoryboardLayer layer;
+        
         public override void Generate()
         {
 		    layer = GetLayer("Poison");
@@ -39,10 +43,25 @@ namespace StorybrewScripts
             if (x != 320) {
                 skewFrame(x, y, width, height);
             } else {
+                PoisonScripts.functions[0](layer, 87468, 1000, x, y, width, height);
                 makeRekt(x, y + height/2 - (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x, y - height/2 + (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x - width/2, y, edgeHeight, height, Constants.realBlack);
                 makeRekt(x + width/2, y, edgeHeight, height, Constants.realBlack);
+            }
+        }
+
+        private void Scroll(float x, float y, float height) {
+            OsbSprite sprite = layer.CreateSprite("sb/Pool 4/wavy2.png", OsbOrigin.BottomCentre, new Vector2(x, y - height/2 + (float)edgeHeight));
+            double i;
+            double scrollPortion = scrollDuration * 0.3;
+            for (i = startTime; i < endTime; i += scrollDuration) {
+                // sprite.Fade(i, 1);
+                // sprite.Scale(i, 1);
+                sprite.Color(i, Constants.white);
+                // sprite.Fade(i , 0); 
+                sprite.ScaleVec(i, i + scrollPortion, 1, 0, 1, 1);
+                sprite.MoveY(i, i + scrollPortion, sprite.PositionAt(i).Y, sprite.PositionAt(i).Y + 80);
             }
 
         }

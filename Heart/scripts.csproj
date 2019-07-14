@@ -70,6 +70,7 @@
     <Compile Include="Window.cs" />
     <Compile Include="scriptslibrary/Constants.cs" />
     <Compile Include="scriptslibrary/Deprecations.cs" />
+    <Compile Include="scriptslibrary/PoisonScripts.cs" />
     <Compile Include="scriptslibrary/RainAnimations.cs" />
   </ItemGroup>
   <ItemGroup />
