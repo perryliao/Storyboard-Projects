@@ -21,7 +21,7 @@ namespace StorybrewScripts
             scrollBars
         };
         private static Random rnd = new Random();
-        private static double sideAngle = 7.3;
+        private static double sideAngle = 7.7;
 
         private static bool scrollBars(StoryboardLayer layer, double startTime, double duration, float x, float y, double width, double height) {
             int numIterations = 2;
@@ -46,6 +46,37 @@ namespace StorybrewScripts
                 bar.EndGroup();
                 bar.Fade(startTime + duration, 0);
             }
+            return true;
+        }
+
+        public static bool upArrow(StoryboardLayer layer, double startTime, double duration, float x, float y, double width) {
+            string path;
+            float displacement = 20;
+
+            if (x == 320) { 
+                path = "sb/arrow.png"; 
+            } else {
+                path = "sb/arrow_s.png";
+            }
+
+
+            OsbSprite[] arrows = new OsbSprite[2] {
+                layer.CreateSprite(path, OsbOrigin.Centre, new Vector2(x, y - (float)(width/4) + displacement)), 
+                layer.CreateSprite(path, OsbOrigin.Centre, new Vector2(x, y + (float)(width/4) + displacement)) 
+            };
+
+            foreach (OsbSprite arrow in arrows) {
+                arrow.Fade(startTime, 1);
+                arrow.Fade(startTime + duration, 0);
+
+                if (x > 320) {
+                    arrow.FlipH(startTime, startTime);
+                }
+
+                arrow.Scale(startTime, 0.65);
+                arrow.MoveY(startTime, startTime + duration, arrow.PositionAt(startTime).Y, arrow.PositionAt(startTime).Y - displacement);
+            }
+            
             return true;
         }
     }

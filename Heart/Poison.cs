@@ -41,15 +41,20 @@ namespace StorybrewScripts
             makeRekt(x == 320 ? x : (x < 320 ? (float)Constants.xFloor : (float)Constants.xCeil), y, width - 20, height, Constants.black);
 
             if (x != 320) {
-                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*3/2, x, y, width, height);
+                handleScreenAnimations(layer, 69468, Constants.beatLength*3/2, x, y, width, height);
                 skewFrame(x, y, width, height);
             } else {
-                PoisonScripts.functions[0](layer, 69468, Constants.beatLength*3/2, x, y, width, height);
+                handleScreenAnimations(layer, 69468, Constants.beatLength*3/2, x, y, width, height);
                 makeRekt(x, y + height/2 - (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x, y - height/2 + (float)edgeHeight/2, width, edgeHeight, Constants.realBlack);
                 makeRekt(x - width/2, y, edgeHeight, height, Constants.realBlack);
                 makeRekt(x + width/2, y, edgeHeight, height, Constants.realBlack);
             }
+        }
+
+        private void handleScreenAnimations(StoryboardLayer layer, double startTime, double duration, float x, float y, double width, double height) {
+            PoisonScripts.functions[Random(PoisonScripts.functions.Length)](layer, 69468, Constants.beatLength*3/2, x, y, width, height);
+            PoisonScripts.upArrow(layer, 70527, Constants.beatLength, x, y, width);
         }
 
         private void skewFrame(float x, float y, float width, float height) {
