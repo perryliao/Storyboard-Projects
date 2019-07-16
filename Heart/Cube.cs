@@ -15,13 +15,17 @@ namespace StorybrewScripts
         [Configurable]
         public double startTime = 164409;
         [Configurable]
+        public double endTime = 209586;
+        [Configurable]
         public double timeStep = 100; // 1ms
+        [Configurable]
+        public float width = 100;
 
         StoryboardLayer layer;
         public override void Generate()
         {
 		    layer = GetLayer("Cube");
-            createCube(320, 240, 100);
+            createCube(320, 240, width);
         }
 
         private void createCube(float x, float y, float width) {
@@ -42,9 +46,9 @@ namespace StorybrewScripts
                 Log(points[i].ToString());
             }
 
-            OsbSprite[] triangles = makeEdges(startTime, points);
-            for ( i = 0; i < triangles.Length; i++) {
-                moveEdge(startTime, startTime + 100000, triangles[i], points[i]);
+            OsbSprite[] edges = makeEdges(startTime, points);
+            for ( i = 0; i < edges.Length; i++) {
+                moveEdge(startTime, endTime, edges[i], points[i]);
             }
         }
 
@@ -55,7 +59,7 @@ namespace StorybrewScripts
                 x = v.X;
                 y = v.Y;
                 z = v.Z;
-                r = (i - start);
+                r = i - start;
 
 
                 x1 = x;
@@ -92,7 +96,7 @@ namespace StorybrewScripts
                 
                 edges[i].Fade(start, 1);
                 edges[i].Scale(start, 2);
-                edges[i].Fade(start + 100000, 0);
+                edges[i].Fade(endTime, 0);
 
             }
             return edges;

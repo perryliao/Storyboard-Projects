@@ -1,0 +1,26 @@
+﻿FormatVersion: 6
+Name: "Cube 1"
+Script: "Cube"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "164409"
+  endTime:
+    Type: "System.Double"
+    Value: "209586"
+  timeStep:
+    Type: "System.Double"
+    Value: "2000"
+  width:
+    Type: "System.Single"
+    Value: "100"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  38ad76eee21e45889b8e39a13c5b886b:
+    Name: "Cube"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
