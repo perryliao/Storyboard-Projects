@@ -20,6 +20,8 @@ namespace StorybrewScripts
         public double timeStep = 100; // 1ms
         [Configurable]
         public float width = 100;
+        [Configurable]
+        public double speed = 1;
 
         StoryboardLayer layer;
         public override void Generate()
@@ -54,13 +56,9 @@ namespace StorybrewScripts
 
         private void moveEdge(double start, double end, OsbSprite s, Vector3 v) {
             double i, r;
-            double x, y, z, x1, y1, z1;
+            double x = v.X, y = v.Y, z = v.Z, x1, y1, z1;
             for (i = start; i < end - timeStep; i += timeStep) {
-                x = v.X;
-                y = v.Y;
-                z = v.Z;
-                r = i - start;
-
+                r = (i - start)/(1000*timeStep/speed);
 
                 x1 = x;
                 y1 = y * Math.Cos(r) - z * Math.Sin(r);
@@ -90,7 +88,7 @@ namespace StorybrewScripts
         private OsbSprite[] makeEdges(double start, Vector3[] points) {
             Assert(points.Length == 8);
             OsbSprite[] edges = new OsbSprite[8];
-            
+             
             for (int i = 0; i < edges.Length; i++) {
                 edges[i] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(points[i].X, points[i].Y));
                 

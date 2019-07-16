@@ -71,18 +71,6 @@
     <Compile Include="scriptslibrary/Constants.cs" />
     <Compile Include="scriptslibrary/Deprecations.cs" />
     <Compile Include="scriptslibrary/RainAnimations.cs" />
-    <Compile Include="Storyboarding3d/Camera.cs" />
-    <Compile Include="Storyboarding3d/CameraState.cs" />
-    <Compile Include="Storyboarding3d/HasOsbSprite.cs" />
-    <Compile Include="Storyboarding3d/Line3d.cs" />
-    <Compile Include="Storyboarding3d/Line3dEx.cs" />
-    <Compile Include="Storyboarding3d/Node3d.cs" />
-    <Compile Include="Storyboarding3d/Object3d.cs" />
-    <Compile Include="Storyboarding3d/Object3dState.cs" />
-    <Compile Include="Storyboarding3d/PerspectiveCamera.cs" />
-    <Compile Include="Storyboarding3d/Scene3d.cs" />
-    <Compile Include="Storyboarding3d/Sprite3d.cs" />
-    <Compile Include="Storyboarding3d/Triangle3d.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>
