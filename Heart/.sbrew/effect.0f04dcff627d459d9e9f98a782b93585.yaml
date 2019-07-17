@@ -10,10 +10,13 @@ Config:
     Value: "209586"
   timeStep:
     Type: "System.Double"
-    Value: "2000"
+    Value: "50"
   width:
     Type: "System.Single"
-    Value: "100"
+    Value: "50"
+  speed:
+    Type: "System.Double"
+    Value: "0.5"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"

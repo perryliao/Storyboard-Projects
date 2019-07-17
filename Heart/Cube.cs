@@ -44,19 +44,21 @@ namespace StorybrewScripts
 
             int i;
             for ( i = 0; i < points.Length; i++) {
-                points[i] = Vector3.Add(Vector3.Multiply(points[i], width/2), new Vector3(x, y, 0));
-                Log(points[i].ToString());
+                points[i] = Vector3.Multiply(points[i], width/2);
             }
 
             OsbSprite[] edges = makeEdges(startTime, points);
             for ( i = 0; i < edges.Length; i++) {
-                moveEdge(startTime, endTime, edges[i], points[i]);
+                moveEdge(startTime, endTime, x, y, edges[i], points[i]);
             }
         }
 
-        private void moveEdge(double start, double end, OsbSprite s, Vector3 v) {
+        private void moveEdge(double start, double end, float xOffset, float yOffset, OsbSprite s, Vector3 v) {
             double i, r;
             double x = v.X, y = v.Y, z = v.Z, x1, y1, z1;
+
+            s.Move(start, x + xOffset, y + yOffset);
+
             for (i = start; i < end - timeStep; i += timeStep) {
                 r = (i - start)/(1000*timeStep/speed);
 
@@ -67,7 +69,7 @@ namespace StorybrewScripts
                 y = y1;
                 z = z1;
 
-                x1 = x * Math.Cos(r) - z * Math.Sin(r);
+                x1 = x * Math.Cos(r) + z * Math.Sin(r);
                 y1 = y;
                 z1 = -x * Math.Sin(r) + z * Math.Cos(r);
                 x = x1;
@@ -81,7 +83,7 @@ namespace StorybrewScripts
                 y = y1;
                 z = z1;
 
-                s.Move(i, i + timeStep, s.PositionAt(i), x, y);
+                s.Move(i, i + timeStep, s.PositionAt(i), x + xOffset, y + yOffset);
             }
         }
 
@@ -90,7 +92,7 @@ namespace StorybrewScripts
             OsbSprite[] edges = new OsbSprite[8];
              
             for (int i = 0; i < edges.Length; i++) {
-                edges[i] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre, new Vector2(points[i].X, points[i].Y));
+                edges[i] = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
                 
                 edges[i].Fade(start, 1);
                 edges[i].Scale(start, 2);
