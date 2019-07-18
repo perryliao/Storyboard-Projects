@@ -22,6 +22,12 @@ namespace StorybrewScripts
         public float width = 100;
         [Configurable]
         public double speed = 1;
+        [Configurable]
+        public double rotX = 0;
+        [Configurable]
+        public double rotY = 0;
+        [Configurable]
+        public double rotZ = 0;
 
         StoryboardLayer layer;
         public override void Generate()
@@ -43,12 +49,9 @@ namespace StorybrewScripts
             };
 
             int i;
-            for ( i = 0; i < points.Length; i++) {
-                points[i] = Vector3.Multiply(points[i], width/2);
-            }
-
             OsbSprite[] edges = makeEdges(startTime, points);
             for ( i = 0; i < edges.Length; i++) {
+                points[i] = Vector3.Multiply(points[i], width/2);
                 moveEdge(startTime, endTime, x, y, edges[i], points[i]);
             }
         }
@@ -63,21 +66,21 @@ namespace StorybrewScripts
                 r = (i - start)/(1000*timeStep/speed);
 
                 x1 = x;
-                y1 = y * Math.Cos(r) - z * Math.Sin(r);
-                z1 = y * Math.Sin(r) + z * Math.Cos(r);
+                y1 = y * Math.Cos(rotX + r) - z * Math.Sin(rotX + r);
+                z1 = y * Math.Sin(rotX + r) + z * Math.Cos(rotX + r);
                 x = x1;
                 y = y1;
                 z = z1;
 
-                x1 = x * Math.Cos(r) + z * Math.Sin(r);
+                x1 = x * Math.Cos( rotY + r) + z * Math.Sin( rotY + r);
                 y1 = y;
-                z1 = -x * Math.Sin(r) + z * Math.Cos(r);
+                z1 = -x * Math.Sin( rotY + r) + z * Math.Cos( rotY + r);
                 x = x1;
                 y = y1;
                 z = z1;
 
-                x1 = x * Math.Cos(r) - y * Math.Sin(r);
-                y1 = x * Math.Sin(r) + y * Math.Cos(r);
+                x1 = x * Math.Cos( rotZ + r) - y * Math.Sin( rotZ + r);
+                y1 = x * Math.Sin( rotZ + r) + y * Math.Cos( rotZ + r);
                 z1 = z;
                 x = x1;
                 y = y1;

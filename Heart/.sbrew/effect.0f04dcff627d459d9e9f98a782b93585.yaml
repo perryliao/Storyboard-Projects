@@ -13,10 +13,19 @@ Config:
     Value: "50"
   width:
     Type: "System.Single"
-    Value: "50"
+    Value: "100"
   speed:
     Type: "System.Double"
-    Value: "0.5"
+    Value: "1"
+  rotX:
+    Type: "System.Double"
+    Value: "0"
+  rotY:
+    Type: "System.Double"
+    Value: "0"
+  rotZ:
+    Type: "System.Double"
+    Value: "0"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
