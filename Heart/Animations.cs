@@ -288,7 +288,7 @@ namespace StorybrewScripts
             t1.Fade(circleStartTime + beatLength*7/2, 1);
             t1.Rotate(circleStartTime + beatLength*7/2, -Math.PI/2);
             t1.Color(circleStartTime + beatLength*7/2, Constants.black);
-            t1.ScaleVec(circleStartTime + beatLength*7/2, circleStartTime + beatLength*7/2 + beatLength/6, 0, 0, 1.33, 1.33);
+            t1.ScaleVec(OsbEasing.OutCirc, circleStartTime + beatLength*7/2, circleStartTime + beatLength*7/2 + beatLength/6, 0, 0, 1.33, 1.33);
             t1.Fade(circleStartTime + beatLength*4, 0);
 
             rekt.Fade(circleStartTime + beatLength*7/2 + beatLength/6, 1);

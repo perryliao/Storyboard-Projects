@@ -1,7 +1,7 @@
 ﻿FormatVersion: 6
 MapsetPath: "C:/Users/cRyo/AppData/Local/osu!/Songs/Puru - Grimheart Remixes - 03 Grimheart (Mysteka Remix)"
 BeatmapId: 0
-BeatmapName: "zzz"
+BeatmapName: "zzz2"
 Assemblies:
 Layers:
   - "b4ae456138b5408d832ac6e9ec52bab9"
@@ -12,11 +12,13 @@ Layers:
   - "65eab2307bc34b65b1535b05401efb3c"
   - "1390a2f0285b4ac2b79cc85e2fa00f6c"
   - "612fac42690341a886508f3b4b59cf73"
-  - "0a07ff7e277e49469c99dea4fce6c8e9"
   - "86b76b0901dd4a78a38f9e3564c7f1d5"
   - "cda6882e64984ad29d655dbb4382e3e8"
   - "5cde3c14831648769d514ccbf91613dc"
   - "6c9e3a4efa5540b6befef67e0eece120"
   - "d3e2e71250e5488f9f471dde793a1154"
+  - "2c859747bf294d7f96ea2f052f473106"
+  - "66124f14214944dfa356a6febd34c990"
+  - "0a07ff7e277e49469c99dea4fce6c8e9"
   - "7d0baf90eb3046f3a8b238f8d3f520fd"
   - "1ed2ee55d75f489b9f644aacf71a1ce7"
