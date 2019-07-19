@@ -1,0 +1,14 @@
+﻿FormatVersion: 6
+Name: "Gears 1"
+Script: "Gears"
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  2e5b359b27274138b68239db27257dba:
+    Name: "gears"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
