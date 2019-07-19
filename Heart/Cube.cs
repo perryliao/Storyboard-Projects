@@ -63,7 +63,7 @@ namespace StorybrewScripts
             s.Move(start, x + xOffset, y + yOffset);
 
             for (i = start; i < end - timeStep; i += timeStep) {
-                r = (i - start)/(1000*timeStep/speed);
+                r = Math.Min(Math.PI/32, (i - start)/(1000*timeStep/speed));
 
                 x1 = x;
                 y1 = y * Math.Cos(rotX + r) - z * Math.Sin(rotX + r);
