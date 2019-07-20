@@ -21,7 +21,7 @@ namespace StorybrewScripts
         public double endTime = 23233;
 
         private double particleDuration = 1000;
-        private double particleAmount = 100;
+        private double particleAmount = 20;
         public override void Generate()
         {
 		    StoryboardLayer layer = GetLayer("Space");
@@ -42,33 +42,35 @@ namespace StorybrewScripts
                 }
             }
 
-            using (OsbSpritePool pool = new OsbSpritePool(layer, "sb/Pool 2/cir2.png", OsbOrigin.Centre, (sprite, startTime, endTime) =>
-            {
-                // This action runs for every sprite created from the pool, after all of them are created (AFTER the for loop below).
-                // It is intended to set states common to every sprite:
+            // using (OsbSpritePool pool = new OsbSpritePool(layer, "sb/Pool 2/cir2.png", OsbOrigin.Centre, (sprite, startTime, endTime) =>
+            // {
+            //     // This action runs for every sprite created from the pool, after all of them are created (AFTER the for loop below).
+            //     // It is intended to set states common to every sprite:
                 
-            }))
-            {
+            // }))
+            // {
                 double timeStep = particleDuration / particleAmount;
                 double start;
                 for (start = startTime; start <= endTime - particleDuration; start += timeStep) {
                     // This is where sprites are created from the pool.
                     // Commands here are specific to each sprite.
                     double finish = start + particleDuration;
-                    OsbSprite sprite = pool.Get(startTime, endTime);
+                    OsbSprite sprite = layer.CreateSprite("sb/Pool 2/cir2.png", OsbOrigin.Centre);
 
+                    sprite.StartLoopGroup(start, (int)((endTime - start)/particleDuration));
                     int startX = Random(-107, 747);
                     int startY = Random(0, 480);
-                    sprite.Move(OsbEasing.InCirc, start, finish, new Vector2(startX, startY), calculateEndPoint(startX, startY, 25));
+                    sprite.Move(OsbEasing.InCirc, 0, particleDuration, new Vector2(startX, startY), calculateEndPoint(startX, startY, 25));
 
-                    double fadeInTime = start + (particleDuration * 0.2);
-                    sprite.Fade(OsbEasing.InSine, start, fadeInTime, 0, 0.9);
-                    sprite.Fade(OsbEasing.InOutCirc, fadeInTime, finish, 0.9, 0);
+                    double fadeInTime = 0 + (particleDuration * 0.2);
+                    sprite.Fade(OsbEasing.InSine, 0, fadeInTime, 0, 0.9);
+                    sprite.Fade(OsbEasing.InOutCirc, fadeInTime, particleDuration, 0.9, 0);
                     
                     double scale = (double) Random(1, 30)/1000;
-                    sprite.Scale(start, finish, scale, scale/10);
+                    sprite.Scale(0, particleDuration, scale, scale/10);
+                    sprite.EndGroup();
                 }
-            }
+            // }
         }
 
         /// <summary>Creates a static star object in the scene</summary>
