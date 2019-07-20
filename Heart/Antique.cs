@@ -21,14 +21,12 @@ namespace StorybrewScripts
         [Configurable]
         public double staticTime = 0;
 
-        private double beatLength = 706;
-        private int width = 854;
-        private int height = 480;
+        private double beatLength = Constants.beatLength;
         private Random rnd = new Random();
 
         public override void Generate()
         {
-		    var layer = GetLayer("Antique");
+		    StoryboardLayer layer = GetLayer("Antique");
             OsbSprite mask = layer.CreateSprite("sb/Pool 2/Border Mask.png", OsbOrigin.Centre);
 
             // Layer mask

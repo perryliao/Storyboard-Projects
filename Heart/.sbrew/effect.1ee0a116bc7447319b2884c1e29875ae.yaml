@@ -1,26 +1,26 @@
 ﻿FormatVersion: 6
-Name: "Kokoro 1"
+Name: "Kokoro 2"
 Script: "Kokoro"
 Config:
   startTime:
     Type: "System.Double"
-    Value: "292"
+    Value: "69468"
   endTime:
     Type: "System.Double"
-    Value: "20409"
+    Value: "79703"
   slowFadeTime:
     Type: "System.Double"
-    Value: "12997"
+    Value: "79703"
   colour:
     Type: "OpenTK.Graphics.Color4"
-    Value: "0.9490196,0.9490196,0.9490196,1"
+    Value: "0.1333333,0.1333333,0.1333333,1"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  86b76b0901dd4a78a38f9e3564c7f1d5:
+  8dd1e30f1b8144c79463792cc5cb4140:
     Name: ""
-    OsbLayer: Background
+    OsbLayer: Foreground
     DiffSpecific: No
     Visible: Yes

@@ -1,0 +1,14 @@
+﻿FormatVersion: 6
+Name: "Animations 1"
+Script: "Animations"
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  7d0baf90eb3046f3a8b238f8d3f520fd:
+    Name: "Animations"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes

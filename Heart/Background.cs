@@ -28,9 +28,9 @@ namespace StorybrewScripts
             if (BackgroundPath == "") BackgroundPath = Beatmap.BackgroundPath ?? string.Empty;
             if (StartTime == EndTime) EndTime = (int)(Beatmap.HitObjects.LastOrDefault()?.EndTime ?? AudioDuration);
 
-            var layer = GetLayer("Background");
+            StoryboardLayer layer = GetLayer("Background");
             var bitmap = GetMapsetBitmap(BackgroundPath);
-            var bg = layer.CreateSprite(BackgroundPath, OsbOrigin.Centre);
+            OsbSprite bg = layer.CreateSprite(BackgroundPath, OsbOrigin.Centre);
             bg.Scale(StartTime, 480.0f / bitmap.Height);
             bg.Fade(StartTime, 0);
 
@@ -47,8 +47,8 @@ namespace StorybrewScripts
             letterboxBG.Fade(OsbEasing.InCirc, 33821, 34527, 1, 0);
 
             
-            letterboxBG.Fade(209586, 1);
-            letterboxBG.Fade(232174, 0);
+            letterboxBG.Fade(68409, 1);
+            letterboxBG.Fade(79703, 0);
         }
     }
 }

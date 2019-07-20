@@ -24,7 +24,7 @@ namespace StorybrewScripts
 
         public override void Generate()
         {
-		    var layer = GetLayer("tileBar");
+		    StoryboardLayer layer = GetLayer("tileBar");
 		    OsbSprite blackBar = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft);
             OsbSprite whiteBar = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(-107 , 240));
             OsbSprite smallWhiteBar = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft, new Vector2(width * 0.85f - 100 , 240));

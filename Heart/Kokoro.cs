@@ -23,13 +23,18 @@ namespace StorybrewScripts
         [Configurable]
         public double slowFadeTime = 12997;
 
-        private double beatLength = 706;
+        [Configurable]
+        public Color4 colour = Constants.white;
+
+        private double beatLength = Constants.beatLength;
 
         public override void Generate()
         {
-		    var layer = GetLayer("");
-            OsbSprite kokoro = layer.CreateSprite("sb/Pool 1/heart.png", OsbOrigin.Centre);
-            kokoro.Scale(startTime, 0.2);
+		    StoryboardLayer layer = GetLayer("");
+            OsbSprite kokoro = layer.CreateSprite("sb/kkr.png", OsbOrigin.Centre);
+            kokoro.Scale(startTime, 0.4);
+            kokoro.Fade(startTime, 0); 
+            kokoro.Color(startTime, colour);
 
             double timestep = beatLength * 2;
             double i;

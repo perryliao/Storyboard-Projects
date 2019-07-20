@@ -19,10 +19,12 @@ namespace StorybrewScripts
         [Configurable]
         public double endTime = 34527;
 
+        private double beatLength = Constants.beatLength;
+
         /// <summary>Creates 2 black bar sprites, on the top and bottom.</summary>
         public override void Generate()
         {
-		    var layer = GetLayer("Letterbox");
+		    StoryboardLayer layer = GetLayer("Letterbox");
             OsbSprite[] bars = new OsbSprite[2] {
                 layer.CreateSprite("sb/1x1.jpg", OsbOrigin.TopCentre, new Vector2(320, 0)), 
                 layer.CreateSprite("sb/1x1.jpg", OsbOrigin.BottomCentre, new Vector2(320, 480))
@@ -32,7 +34,7 @@ namespace StorybrewScripts
                 bar.Fade(startTime, 1);
                 bar.Color(startTime, 0, 0, 0);
                 bar.ScaleVec(startTime, 854, 480 * 0.15);
-                bar.Fade(endTime, 0);
+                bar.Fade(OsbEasing.InExpo, endTime - beatLength / 2, endTime, 1, 0);
             }
         }
     }

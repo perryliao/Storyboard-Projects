@@ -1,14 +1,14 @@
 ﻿FormatVersion: 6
-Name: "Window 1"
-Script: "Window"
+Name: "KokOwOro 1"
+Script: "KokOwOro"
 Config:
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  b23f4e47e93a4783946b06e8caa549f8:
-    Name: "Window"
+  6c9e3a4efa5540b6befef67e0eece120:
+    Name: "KokOwOro"
     OsbLayer: Background
     DiffSpecific: No
-    Visible: No
+    Visible: Yes

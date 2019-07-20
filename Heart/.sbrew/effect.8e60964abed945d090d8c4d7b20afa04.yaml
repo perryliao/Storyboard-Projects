@@ -1,13 +1,13 @@
 ﻿FormatVersion: 6
-Name: "Antique 2"
+Name: "Antique 3"
 Script: "Antique"
 Config:
   startTime:
     Type: "System.Double"
-    Value: "209586"
+    Value: "68409"
   endTime:
     Type: "System.Double"
-    Value: "232174"
+    Value: "79703"
   staticTime:
     Type: "System.Double"
     Value: "0"
@@ -16,8 +16,8 @@ Config:
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  612fac42690341a886508f3b4b59cf73:
+  2c859747bf294d7f96ea2f052f473106:
     Name: "Antique"
     OsbLayer: Background
     DiffSpecific: No
-    Visible: No
+    Visible: Yes

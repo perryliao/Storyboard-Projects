@@ -21,7 +21,7 @@ namespace StorybrewScripts
         
         public override void Generate()
         {
-		    var layer = GetLayer("Title");
+		    StoryboardLayer layer = GetLayer("Title");
             Vector2 pos1 = new Vector2(310, 240);
             Vector2 pos2 = new Vector2(330, 240);
 

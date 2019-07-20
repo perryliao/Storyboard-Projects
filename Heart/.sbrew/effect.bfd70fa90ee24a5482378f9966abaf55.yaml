@@ -1,23 +1,26 @@
 ﻿FormatVersion: 6
-Name: "Antique 2"
-Script: "Antique"
+Name: "Rain 1"
+Script: "Rain"
 Config:
   startTime:
     Type: "System.Double"
-    Value: "209586"
+    Value: "34527"
   endTime:
     Type: "System.Double"
-    Value: "232174"
-  staticTime:
+    Value: "42997"
+  particleDuration:
     Type: "System.Double"
-    Value: "0"
+    Value: "1500"
+  particleAmount:
+    Type: "System.Double"
+    Value: "60"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  612fac42690341a886508f3b4b59cf73:
-    Name: "Antique"
+  5cde3c14831648769d514ccbf91613dc:
+    Name: "Rain"
     OsbLayer: Background
     DiffSpecific: No
-    Visible: No
+    Visible: Yes
