@@ -52,7 +52,7 @@ namespace StorybrewScripts
                     configureLineEffect(rnd.Next((int)staticTime, (int)endTime - 1), endTime, i - 107);
                 }
             }
-
+            /* 
             // Configure film scratch/dust effect
             int numTextures = 8;
             int j;
@@ -78,6 +78,7 @@ namespace StorybrewScripts
                 currentFilm.Fade(i + timeStep, 0);
                 prevFilmNum = currentFilmNum;
             }
+            */
         }
 
         /// <summary>This is where line effect sprites are created, It is intended to set states common to every sprite.</summary>
