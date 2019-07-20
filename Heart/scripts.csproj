@@ -57,6 +57,7 @@
     <Compile Include="Background.cs" />
     <Compile Include="Crossfade.cs" />
     <Compile Include="Gears.cs" />
+    <Compile Include="Gitch.cs" />
     <Compile Include="Kokoro.cs" />
     <Compile Include="KokOwOro.cs" />
     <Compile Include="LazyAnimation.cs" />
