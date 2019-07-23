@@ -26,6 +26,8 @@ namespace StorybrewScripts
         public double endTime = 23259;
         [Configurable]
         public double timeStep = Constants.beatLength/2; // Lower = faster speed
+        [Configurable]
+        public double yCenter = 240;
 
         StoryboardLayer layer;
         Color4[] colours = { Colours.blue,  Colours.cyan };
@@ -35,13 +37,13 @@ namespace StorybrewScripts
             layer = GetLayer("SineWave");
 
 		    for (int i = 0; i < numSprites; i++) {
-                // y = waveHeight * (sin( (x + varyingX) / waveLength)) + varyingY + 240;
+                // y = waveHeight * (sin( (x + varyingX) / waveLength)) + varyingY + yCenter;
                 double varyingX = Random(waveLength) - waveLength/2;
                 double varyingY = Random(waveHeight) - waveHeight/2;
                 double scale = Random(2, 6);
 
                 float x = (float) Random(Constants.xFloor - 150, Constants.xCeil - 10);
-                float y = (float) (waveHeight * (Math.Sin( (x + varyingX) / waveHeight)) + varyingY + 240);
+                float y = (float) (waveHeight * (Math.Sin( (x + varyingX) / waveHeight)) + varyingY + yCenter);
                 OsbSprite circ = layer.CreateSprite("sb/float.png", OsbOrigin.Centre, new Vector2(x, y)); 
                 circ.Scale(startTime, scale/10);
                 circ.Color(startTime, colours[Random(colours.Length)]);
@@ -49,7 +51,7 @@ namespace StorybrewScripts
 
                 for (double j = startTime; j < endTime - timeStep; j += timeStep) {
                     x += (float)waveLength/20;
-                    y = (float) (waveHeight * (Math.Sin( (x + varyingX) / waveHeight)) + varyingY + 240);
+                    y = (float) (waveHeight * (Math.Sin( (x + varyingX) / waveHeight)) + varyingY + yCenter);
                     circ.Move(j, j + timeStep, circ.PositionAt(j), x, y);
                     if (x > Constants.xCeil + 5) {
                         circ.Fade(j, j + timeStep, circ.OpacityAt(j), 0);
