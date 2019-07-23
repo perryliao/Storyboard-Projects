@@ -20,8 +20,13 @@ namespace StorybrewScripts
             bg.ScaleVec(0, Constants.width, Constants.height);
             bg.Color(0, Colours.white);
             bg.Fade(0, 1);
-            bg.Fade(287445, 0);
 
+            bg.Color(OsbEasing.OutCirc, 194330, 194687, bg.ColorAt(194330), Colours.blue);
+            bg.Fade(206116, 0);
+            bg.Fade(208973, 211830, 0, 1);
+            bg.Color(208973, Colours.white);
+
+            bg.Fade(287445, 0);
             var maskBitmap = GetMapsetBitmap("sb/bgshadow.png");
             OsbSprite bgMask = foreground.CreateSprite("sb/bgshadow.png", OsbOrigin.Centre);
             bgMask.Fade(0, 1);
