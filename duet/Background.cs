@@ -15,7 +15,7 @@ namespace StorybrewScripts
             violet.Fade(0, 0);
 
             OsbSprite bg = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.Centre);
-            bg.ScaleVec(0, 854, 480);
+            bg.ScaleVec(0, Constants.width, Constants.height);
             bg.Color(0, Colours.white);
             bg.Fade(0, 1);
             bg.Fade(287445, 0);
