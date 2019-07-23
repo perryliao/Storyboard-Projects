@@ -37,7 +37,7 @@ namespace StorybrewScripts
 		    for (int i = 0; i < numLines + 1; i++) {
                 Vector2 p = findPos(i);
                 OsbSprite bar = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.BottomCentre, p);
-                double length = h; //(p.X / Math.Cos(Math.PI)) + ((p.Y > 240 ? Constants.height - p.Y : p.Y) / Math.Cos(Math.PI));
+                double length = h;
 
                 bar.Rotate(startTime, Math.PI/4);
                 bar.ScaleVec(OsbEasing.None, startTime, startTime + Constants.beatLength/4, length, 0, length, w + 3);
