@@ -1,0 +1,20 @@
+﻿FormatVersion: 6
+Name: "FoldTransition 1"
+Script: "FoldTransition"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "131294"
+  numLines:
+    Type: "System.Int32"
+    Value: "40"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  1753f61a22ab4d979557bd95a99438f9:
+    Name: "FoldTransition"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

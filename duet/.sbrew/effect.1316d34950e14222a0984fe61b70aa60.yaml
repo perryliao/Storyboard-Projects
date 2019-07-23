@@ -1,0 +1,20 @@
+﻿FormatVersion: 6
+Name: "ScrollingLyricBG 1"
+Script: "ScrollingLyricBG"
+Config:
+  startTime:
+    Type: "System.Double"
+    Value: "68616"
+  barHeight:
+    Type: "System.Double"
+    Value: "170"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  78f19fd658c445d0ab6bfbdc22c37433:
+    Name: "ScrollingLyricBG"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
