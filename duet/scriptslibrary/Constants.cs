@@ -8,7 +8,7 @@ namespace StorybrewScripts
         public static double xCeil = 747;
         public static double width = 854;
         public static double height = 480;
-        public static int glowRadius = 10;
+        public static int glowRadius = 5;
         public static string jpFont = "Yu Mincho";
         public static string enFont = "Adobe Garamond Pro";
         public static int fontSize = 34;

@@ -16,12 +16,15 @@ namespace StorybrewScripts
 
         StoryboardLayer textLayer;
         StoryboardLayer glowLayer;
+
+        OsbSprite bar;
         public override void Generate()
         {
             textLayer = GetLayer("Lyrics");
             glowLayer = GetLayer("Glow");
+            bar = glowLayer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft);
 
-		    FontGenerator font = LoadFont("sb/lyrics/true", new FontDescription() {
+		    FontGenerator font = LoadFont("sb/lyrics", new FontDescription() {
                 FontPath = Constants.jpFont,
                 FontSize = Constants.fontSize,
                 Color = Colours.white,
@@ -30,7 +33,7 @@ namespace StorybrewScripts
                 Debug = false,
             });
 
-            FontGenerator fontGlow = LoadFont("sb/lyrics/true/glow", new FontDescription() {
+            FontGenerator fontGlow = LoadFont("sb/lyrics/glow_true", new FontDescription() {
                 FontPath = Constants.jpFont,
                 FontSize = Constants.fontSize,
                 Color = Colours.black,
@@ -77,7 +80,7 @@ namespace StorybrewScripts
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     if (!texture.IsEmpty) {
-                        Vector2 pos = new Vector2(x, y + (lyric.ToString() == "明るいから" ? Constants.fontSize : 0)) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
+                        Vector2 pos = new Vector2(x, y + (lyric.ToString() == "明るいから" ? height : 0)) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
                         OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
 
                         sprite.Color(relativeStart, character.ToString() == "青" && !additive ? Colours.blue : Colours.black);                        
@@ -96,6 +99,7 @@ namespace StorybrewScripts
         private void preChorus(FontGenerator font, SubtitleLine line, bool additive) {
             StoryboardLayer layer = additive ? glowLayer : textLayer;
             float y = (float)Constants.height - padding - 40f;
+            float x = (float)Constants.xFloor + padding + 30f;
             foreach (string lyric in line.Text.Split('\n')) {
                 float width = 0f;
                 float height = 0f;
@@ -105,7 +109,20 @@ namespace StorybrewScripts
                     height = Math.Max(height, texture.BaseHeight * Constants.fontScale);
                 }
 
-                float x = (float)Constants.xFloor + padding + 30f;
+                // bg bar 
+                if (additive) {
+                    double barStart = line.StartTime - Constants.beatLength;
+                    bar.Color(barStart, Colours.blue);
+                    bar.Fade(barStart, line.StartTime, 0, 0.8);
+                    bar.Fade(line.EndTime - Constants.beatLength, line.EndTime, bar.OpacityAt(line.EndTime - Constants.beatLength), 0);
+
+                    bar.ScaleVec(OsbEasing.OutCirc, barStart, line.StartTime, 0, height*0.5, width, height*0.5);
+                    bar.ScaleVec(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, bar.ScaleAt(line.EndTime - Constants.beatLength).X, bar.ScaleAt(line.EndTime - Constants.beatLength).Y, 0, bar.ScaleAt(line.EndTime - Constants.beatLength).Y);
+                    bar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x - 10, y + height/2 , x, y + height/2 );
+                    bar.Move(OsbEasing.None, line.StartTime, line.EndTime - Constants.beatLength, bar.PositionAt(line.StartTime), bar.PositionAt(line.StartTime).X + 5, bar.PositionAt(line.StartTime).Y);
+                    bar.Move(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, bar.PositionAt(line.EndTime - Constants.beatLength), bar.PositionAt(line.EndTime - Constants.beatLength).X + width, bar.PositionAt(line.EndTime - Constants.beatLength).Y);
+                }
+
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     if (!texture.IsEmpty) {
