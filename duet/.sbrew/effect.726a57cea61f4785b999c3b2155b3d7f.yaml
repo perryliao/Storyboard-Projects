@@ -1,0 +1,35 @@
+﻿FormatVersion: 6
+Name: "SineWave 1"
+Script: "SineWave"
+Config:
+  numSprites:
+    Type: "System.Int32"
+    Value: "120"
+  waveHeight:
+    Type: "System.Double"
+    Value: "70"
+  waveLength:
+    Type: "System.Double"
+    Value: "90"
+  startTime:
+    Type: "System.Double"
+    Value: "11830"
+  endTime:
+    Type: "System.Double"
+    Value: "23259"
+  timeStep:
+    Type: "System.Double"
+    Value: "357"
+  yCenter:
+    Type: "System.Double"
+    Value: "240"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  8626a85f2d354603b934de4fa2bca334:
+    Name: "SineWave"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
