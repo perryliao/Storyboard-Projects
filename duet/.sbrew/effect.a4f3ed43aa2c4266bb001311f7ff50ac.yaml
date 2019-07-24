@@ -1,0 +1,22 @@
+﻿FormatVersion: 6
+Name: "TrueLyrics 1"
+Script: "TrueLyrics"
+Config:
+  padding:
+    Type: "System.Single"
+    Value: "60"
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random seed"
+Layers:
+  56643af9bde444efb129c029d6e0b296:
+    Name: "Glow"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  9b8f49642cfe4e4b8e3c9add9dac5594:
+    Name: "Lyrics"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

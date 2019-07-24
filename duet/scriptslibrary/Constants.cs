@@ -11,7 +11,7 @@ namespace StorybrewScripts
         public static int glowRadius = 10;
         public static string jpFont = "Yu Mincho";
         public static string enFont = "Adobe Garamond Pro";
-        public static int fontSize = 24;
+        public static int fontSize = 34;
         public static float fontScale = 0.5f;
     }
 }
