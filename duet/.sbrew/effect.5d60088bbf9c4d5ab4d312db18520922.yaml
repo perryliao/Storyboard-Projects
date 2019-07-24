@@ -10,13 +10,13 @@ Config:
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  365bcffe893748b78ef821d7da524536:
-    Name: "Lyrics"
+  fd9e0d5897134c608cb27c8da5374924:
+    Name: "Glow"
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes
-  fd9e0d5897134c608cb27c8da5374924:
-    Name: "Glow"
+  365bcffe893748b78ef821d7da524536:
+    Name: "Lyrics"
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes

@@ -54,7 +54,7 @@ namespace StorybrewScripts
 
         private void generateLyrics(FontGenerator font, SubtitleSet subtitles, bool additive) {
             foreach (SubtitleLine line in subtitles.Lines) {
-                if (line.StartTime > 217544) {
+                if (line.StartTime > 217544 && line.StartTime < 260402) {
                     verticalPositioning(font, line, additive);
                 } else {
                     handlePlacement(font, line, additive);
@@ -82,11 +82,14 @@ namespace StorybrewScripts
                         Vector2 pos = new Vector2(x, y - (pushUpStrings.Any(lyric.ToString().Contains) ? height : 0)) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
                         OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
 
-                        sprite.Color(relativeStart, character.ToString() == "色" && !additive ? Colours.pink : Colours.black);                        
                         sprite.Scale(relativeStart, Constants.fontScale);
                         sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
-                        if (additive) sprite.Additive(relativeStart, line.EndTime);
+                        if (additive) {
+                            sprite.Additive(relativeStart, line.EndTime);
+                        } else { 
+                            sprite.Color(relativeStart, character.ToString() == "色" ? Colours.pink : Colours.black);                        
+                        }
                     }
                     x += texture.BaseWidth * Constants.fontScale;
                     relativeStart += Constants.beatLength/8;
@@ -114,12 +117,15 @@ namespace StorybrewScripts
                     if (!texture.IsEmpty) {
                         Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
                         OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
-
-                        sprite.Color(relativeStart, Colours.black);                        
+               
                         sprite.Scale(relativeStart, Constants.fontScale);
                         sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
-                        if (additive) sprite.Additive(relativeStart, line.EndTime);
+                        if (additive) {
+                            sprite.Additive(relativeStart, line.EndTime);
+                        } else { 
+                            sprite.Color(relativeStart, Colours.black);
+                        }
                     }
                     y += texture.BaseWidth * Constants.fontScale;
                     relativeStart += Constants.beatLength/8;
