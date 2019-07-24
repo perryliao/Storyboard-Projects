@@ -1,14 +1,12 @@
 using OpenTK;
 using OpenTK.Graphics;
-using StorybrewCommon.Mapset;
 using StorybrewCommon.Scripting;
 using StorybrewCommon.Storyboarding;
-using StorybrewCommon.Storyboarding.Util;
 using StorybrewCommon.Subtitles;
-using StorybrewCommon.Util;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
+using System.IO;
 
 namespace StorybrewScripts
 {
@@ -19,11 +17,8 @@ namespace StorybrewScripts
         public override void Generate()
         {
             layer = GetLayer("Title"); 
-            // Font is "Adobe Garamond Pro"
-            setTitle("sb/title/true.png", 402, Constants.beatLength*3);
-            setTitle("sb/title/chihara.png", 3259, Constants.beatLength*3);
-            setTitle("sb/title/futarigoto.png", 6116, Constants.beatLength*3);
-            setTitle("sb/title/credits.png", 8973, Constants.beatLength*3);
+            setTitleSubs(Constants.jpFont, "lyrics/credit_jp.ass");
+            setTitleSubs(Constants.enFont, "lyrics/credit_en.ass");
 
             OsbSprite violet = layer.CreateSprite("sb/title/violet.png", OsbOrigin.Centre, new Vector2(320, 240));
             var bitmap = GetMapsetBitmap("sb/title/violet.png");
@@ -33,15 +28,42 @@ namespace StorybrewScripts
             violet.Color(11830, Colours.black);
             violet.Scale(11830, 45.0f / bitmap.Height);
         }
+        
+        private void setTitleSubs(string fontType, string subtitlePath) {
+            FontGenerator font = LoadFont("sb/title/" + fontType, new FontDescription() {
+                FontPath = fontType,
+                FontSize = 60,
+                Color = Colours.black,
+                TrimTransparency = true,
+                EffectsOnly = false,
+                Debug = false,
+            });
 
-        private void setTitle(string path, double startTime, double duration, float x = 320, float y = 240) {
-            OsbSprite title = layer.CreateSprite(path, OsbOrigin.Centre, new Vector2(x, y));
-            var bitmap = GetMapsetBitmap(path);
+            SubtitleSet subtitles = LoadSubtitles(subtitlePath);
+            foreach (SubtitleLine line in subtitles.Lines) {
+                float width = 0f;
+                float height = 0f;
+                foreach (char character in line.Text) {
+                    FontTexture texture = font.GetTexture(character.ToString());
+                    width += texture.BaseWidth * Constants.fontScale;
+                    height = Math.Max(height, texture.BaseHeight * Constants.fontScale);
+                }
 
-            title.Fade(startTime, 1);
-            title.Fade(startTime + duration, 0);
-            title.Color(startTime, Colours.black);
-            title.Scale(startTime, 30.0f / bitmap.Height);
+                if (fontType == Constants.enFont) Log(height.ToString());
+                float x = 320 - width/2;
+                foreach (char character in line.Text) {
+                    FontTexture texture = font.GetTexture(character.ToString());
+                    if (!texture.IsEmpty) {
+                        Vector2 pos = new Vector2(x, 240 - height/2 + 8) + texture.OffsetFor(OsbOrigin.TopCentre) * Constants.fontScale;
+                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.TopCentre, pos);
+
+                        sprite.Scale(line.StartTime, Constants.fontScale);
+                        sprite.Fade(line.StartTime, 1);
+                        sprite.Fade(line.EndTime, 0);
+                    }
+                    x += texture.BaseWidth * Constants.fontScale;
+                }
+            }
         }
     }
 }

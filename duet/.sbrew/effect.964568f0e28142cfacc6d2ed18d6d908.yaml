@@ -15,6 +15,6 @@ Config:
 Layers:
   dff937b271624f9a89ba351c9d25511e:
     Name: "FoldTransition"
-    OsbLayer: Background
+    OsbLayer: Foreground
     DiffSpecific: No
     Visible: Yes
