@@ -55,6 +55,7 @@
     <Compile Include="Background.cs" />
     <Compile Include="CircleBG.cs" />
     <Compile Include="FoldTransition.cs" />
+    <Compile Include="MinoriLyrics.cs" />
     <Compile Include="ScrollingLyricBG.cs" />
     <Compile Include="SineWave.cs" />
     <Compile Include="Title.cs" />
