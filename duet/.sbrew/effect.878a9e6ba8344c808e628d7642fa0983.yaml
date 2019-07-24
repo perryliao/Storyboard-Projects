@@ -23,6 +23,6 @@ Layers:
     Visible: Yes
   c89c62a8202e419c80aab2aaa00271cf:
     Name: "Foreground"
-    OsbLayer: Background
+    OsbLayer: Foreground
     DiffSpecific: No
     Visible: Yes
