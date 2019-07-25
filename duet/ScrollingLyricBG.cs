@@ -15,16 +15,15 @@ namespace StorybrewScripts
     public class ScrollingLyricBG : StoryboardObjectGenerator
     {
         [Configurable]
-        public double startTime = 68616; // the upbeat before the vocal downbeat
-        [Configurable]
         public double barHeight = 80;
+        [Configurable]
+        public float FontScale = Constants.fontScale;
 
         StoryboardLayer layer;
         public override void Generate()
         {
             layer = GetLayer("ScrollingLyricBG");
-            OsbSprite bar1 = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.BottomCentre);
-            OsbSprite bar2 = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.BottomCentre);
+            OsbSprite barRef;
             OsbSprite bar3 = layer.CreateSprite("sb/othersbg.jpg", OsbOrigin.Centre);
             var bar3BitMap = GetMapsetBitmap("sb/othersbg.jpg");
 
@@ -41,54 +40,46 @@ namespace StorybrewScripts
             
             int count = 0;
             foreach (SubtitleLine line in subtitles.Lines) {
-                if (count > 2 && line.StartTime < 86116) break;
-                if (count < 2 && line.StartTime > 86116) {
-                    count++;
-                    continue;
-                }
-                float y = (float)(Constants.height + barHeight/2);
+                barRef = layer.CreateSprite("sb/1x1.jpg", OsbOrigin.BottomCentre);
                 bool singer1 = count % 2 == 0;
+                float y = (float)(Constants.height + barHeight/2) + (singer1 ? 0 : -23);
                 double rotation = Math.PI/Random(16, 32) * (singer1 ? -1 : 1);
                 foreach (string lyric in line.Text.Split('\n')) {
                     float width = 0f;
                     float height = 0f;
                     foreach (char character in lyric) {
                         FontTexture texture = font.GetTexture(character.ToString());
-                        width += texture.BaseWidth * Constants.fontScale;
-                        height = Math.Max(height, texture.BaseHeight * Constants.fontScale);
+                        width += texture.BaseWidth * FontScale;
+                        height = Math.Max(height, texture.BaseHeight * FontScale);
                     }
 
-                    float x = 320 - width/2;
+                    float x = (float)(320 - (width/2 * Math.Cos(rotation)));
                     float relativeY = y;
                     double relativeStart = line.StartTime;
-                    Log(height.ToString() + y.ToString());
                     foreach (char character in lyric) {
                         FontTexture texture = font.GetTexture(character.ToString());
                         if (!texture.IsEmpty) {
-                            Vector2 pos = new Vector2(x, relativeY) + texture.OffsetFor(OsbOrigin.BottomCentre) * Constants.fontScale;
+                            Vector2 pos = new Vector2(x, relativeY) + texture.OffsetFor(OsbOrigin.BottomCentre) * FontScale;
                             OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.BottomCentre, pos);
 
-                            sprite.Scale(relativeStart, Constants.fontScale);
-                            handleLyricBar(sprite, line.StartTime, rotation, Colours.white, (float)x, (float)y, true);
+                            sprite.Scale(relativeStart, FontScale);
+                            handleLyricBar(sprite, line.StartTime, rotation, Colours.white, (float)x, (float)relativeY, true);
                         }
-                        x += texture.BaseWidth * Constants.fontScale;
+                        x += (float)(texture.BaseWidth * FontScale * Math.Cos(rotation));
+                        relativeY += (float)(texture.BaseWidth * FontScale * Math.Sin(rotation));
                     }
                     y += height;
                 }
-                if (singer1) {
-                    handleLyricBar(bar1, line.StartTime, rotation, Colours.blue);
-                } else {
-                    handleLyricBar(bar2, line.StartTime, rotation, Colours.pink);
-                }
+                handleLyricBar(barRef, line.StartTime, rotation, singer1 ? Colours.blue : Colours.pink);
+                
                 count++;
             }
-
-            double finalIn = startTime + Constants.beatLength * 8;
-            double finalOut = finalIn + Constants.beatLength * 12;
             
-            bar3.Fade(finalIn, finalIn + Constants.beatLength/2, 0, 1);
-            bar3.Fade(finalOut - Constants.beatLength*4, finalOut, 1, 0);
-            bar3.Scale(finalIn, 480.0f / bar3BitMap.Height);
+            bar3.Fade(74330, 74330 + Constants.beatLength/2, 0, 1);
+            bar3.Fade(83259 - Constants.beatLength*4, 83259, 1, 0);
+            bar3.Fade(160044, 160044 + Constants.beatLength/2, 0, 1);
+            bar3.Fade(170401 - Constants.beatLength*4, 170401, 1, 0);
+            bar3.Scale(160044, 480.0f / bar3BitMap.Height);
         }
 
         private void handleLyricBar(OsbSprite bar, double start, double rotation, Color4 colour, double x = 320, double y = -1, bool skipScale = false) {
@@ -102,7 +93,7 @@ namespace StorybrewScripts
             bar.Fade(start + Constants.beatLength * 9 / 2, 0);
             bar.Move(OsbEasing.OutCirc, start, start + Constants.beatLength/2, x, y, x, y - barHeight*2);
             bar.Move(OsbEasing.OutCirc, start + Constants.beatLength/2, start + Constants.beatLength * 4, bar.PositionAt(start + Constants.beatLength/2), bar.PositionAt(start + Constants.beatLength/2).X, bar.PositionAt(start + Constants.beatLength/2).Y - 10);
-            bar.Move(OsbEasing.InCirc, start + Constants.beatLength * 4, start + Constants.beatLength * 9 / 2, bar.PositionAt(start + Constants.beatLength * 4), bar.PositionAt(start + Constants.beatLength * 4).X, -barHeight);
+            bar.Move(OsbEasing.InCirc, start + Constants.beatLength * 4, start + Constants.beatLength * 9 / 2, bar.PositionAt(start + Constants.beatLength * 4), bar.PositionAt(start + Constants.beatLength * 4).X, bar.PositionAt(start + Constants.beatLength/2).Y - 240 - barHeight );
         }
     } 
 }
