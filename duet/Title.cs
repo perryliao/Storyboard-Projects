@@ -28,7 +28,7 @@ namespace StorybrewScripts
             violet.Color(11830, Colours.black);
             violet.Scale(11830, 45.0f / bitmap.Height);
         }
-        
+
         private void setTitleSubs(string fontType, string subtitlePath) {
             FontGenerator font = LoadFont("sb/title/" + fontType, new FontDescription() {
                 FontPath = fontType,
@@ -49,7 +49,6 @@ namespace StorybrewScripts
                     height = Math.Max(height, texture.BaseHeight * Constants.fontScale);
                 }
 
-                if (fontType == Constants.enFont) Log(height.ToString());
                 float x = 320 - width/2;
                 foreach (char character in line.Text) {
                     FontTexture texture = font.GetTexture(character.ToString());
