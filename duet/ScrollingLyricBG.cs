@@ -38,9 +38,17 @@ namespace StorybrewScripts
             });
             
             SubtitleSet subtitles = LoadSubtitles("lyrics/scrolltext.ass");
+            
+            int count = 0;
             foreach (SubtitleLine line in subtitles.Lines) {
-                float y = (float)(Constants.height + barHeight);
-                int count = 0;
+                if (count > 2 && line.StartTime < 86116) break;
+                if (count < 2 && line.StartTime > 86116) {
+                    count++;
+                    continue;
+                }
+                float y = (float)(Constants.height + barHeight/2);
+                bool singer1 = count % 2 == 0;
+                double rotation = Math.PI/Random(16, 32) * (singer1 ? -1 : 1);
                 foreach (string lyric in line.Text.Split('\n')) {
                     float width = 0f;
                     float height = 0f;
@@ -53,6 +61,7 @@ namespace StorybrewScripts
                     float x = 320 - width/2;
                     float relativeY = y;
                     double relativeStart = line.StartTime;
+                    Log(height.ToString() + y.ToString());
                     foreach (char character in lyric) {
                         FontTexture texture = font.GetTexture(character.ToString());
                         if (!texture.IsEmpty) {
@@ -60,18 +69,19 @@ namespace StorybrewScripts
                             OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.BottomCentre, pos);
 
                             sprite.Scale(relativeStart, Constants.fontScale);
-                            sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
-                            sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
-                            handleLyricBar(sprite, line.StartTime, 0, Colours.white, (float)x, (float)y, true);
+                            handleLyricBar(sprite, line.StartTime, rotation, Colours.white, (float)x, (float)y, true);
                         }
                         x += texture.BaseWidth * Constants.fontScale;
                     }
                     y += height;
                 }
+                if (singer1) {
+                    handleLyricBar(bar1, line.StartTime, rotation, Colours.blue);
+                } else {
+                    handleLyricBar(bar2, line.StartTime, rotation, Colours.pink);
+                }
+                count++;
             }
-
-            handleLyricBar(bar1, startTime, -Math.PI/Random(16, 32), Colours.blue);
-            handleLyricBar(bar2, startTime + Constants.beatLength*4, Math.PI/Random(16, 32), Colours.pink);
 
             double finalIn = startTime + Constants.beatLength * 8;
             double finalOut = finalIn + Constants.beatLength * 12;
@@ -81,15 +91,18 @@ namespace StorybrewScripts
             bar3.Scale(finalIn, 480.0f / bar3BitMap.Height);
         }
 
-        private void handleLyricBar(OsbSprite bar, double start, double rotation, Color4 colour, double x = 320, double y = 480, bool skipScale = false) {
+        private void handleLyricBar(OsbSprite bar, double start, double rotation, Color4 colour, double x = 320, double y = -1, bool skipScale = false) {
+            if (y == -1) y = Constants.height + barHeight;
             if (!skipScale) bar.ScaleVec(start, Constants.width/Math.Cos(rotation) + 40, barHeight);
             
             bar.Rotate(start, rotation);
             bar.Color(start, colour);
 
-            bar.Move(OsbEasing.OutCirc, start, start + Constants.beatLength/2, 320, Constants.height + barHeight, 320, 240 + barHeight);
-            bar.Move(OsbEasing.OutCirc, start + Constants.beatLength/2, start + Constants.beatLength * 4, bar.PositionAt(start + Constants.beatLength/2), bar.PositionAt(start + Constants.beatLength/2).X, 240 + barHeight/2);
-            bar.Move(OsbEasing.InCirc, start + Constants.beatLength * 4, start + Constants.beatLength * 9 / 2, bar.PositionAt(start + Constants.beatLength * 4), bar.PositionAt(start + Constants.beatLength * 4).X, 0);
+            bar.Fade(start,  1);
+            bar.Fade(start + Constants.beatLength * 9 / 2, 0);
+            bar.Move(OsbEasing.OutCirc, start, start + Constants.beatLength/2, x, y, x, y - barHeight*2);
+            bar.Move(OsbEasing.OutCirc, start + Constants.beatLength/2, start + Constants.beatLength * 4, bar.PositionAt(start + Constants.beatLength/2), bar.PositionAt(start + Constants.beatLength/2).X, bar.PositionAt(start + Constants.beatLength/2).Y - 10);
+            bar.Move(OsbEasing.InCirc, start + Constants.beatLength * 4, start + Constants.beatLength * 9 / 2, bar.PositionAt(start + Constants.beatLength * 4), bar.PositionAt(start + Constants.beatLength * 4).X, -barHeight);
         }
     } 
 }
