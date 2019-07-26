@@ -60,6 +60,7 @@
     <Compile Include="SineWave.cs" />
     <Compile Include="Title.cs" />
     <Compile Include="TrueLyrics.cs" />
+    <Compile Include="UnisonLyrics.cs" />
     <Compile Include="scriptslibrary/Colours.cs" />
     <Compile Include="scriptslibrary/Constants.cs" />
   </ItemGroup>
