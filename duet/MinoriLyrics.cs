@@ -14,6 +14,8 @@ namespace StorybrewScripts
     {
         [Configurable]
         public float padding = 60f;
+        [Configurable]
+        public int fineness = 2;
 
         private string[] pushUpStrings = { "何色だろう", "言えないけど", "与えられていく", "茶化したけど" };
 
@@ -62,6 +64,29 @@ namespace StorybrewScripts
             }
         }
 
+        private void pixelize(string path, double start, double end, Vector2 pos) {
+            Bitmap textBitmap = GetMapsetBitmap(path);
+            for (int x = 0; x < textBitmap.Width ; x += fineness)
+            {
+                for (int y = 0; y < textBitmap.Height ; y += fineness)
+                {
+                    Vector2 spritePos = new Vector2((float)x, (float)y - textBitmap.Height/2);
+                    spritePos = Vector2.Multiply(spritePos, Constants.fontScale);
+                    Color pixelColor = textBitmap.GetPixel(x, y);
+
+                    if (pixelColor.A > 0)
+                    {
+                        var sprite = GetLayer("").CreateSprite("sb/circle2.png", OsbOrigin.Centre, spritePos + pos);
+                        sprite.Scale(start, 0.05);
+                        sprite.Fade(start, 1);
+                        sprite.Fade(end, 0);
+                        sprite.Color(start, Colours.green);
+                        
+                    }
+                }
+            }
+        }
+
         private void handlePlacement(FontGenerator font, SubtitleLine line, bool additive) {
             StoryboardLayer layer = additive ? glowLayer : textLayer;
             float y = (float)Constants.height - padding;
@@ -81,7 +106,6 @@ namespace StorybrewScripts
                     if (!texture.IsEmpty) {
                         Vector2 pos = new Vector2(x, y - (pushUpStrings.Any(lyric.ToString().Contains) ? height : 0)) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
                         OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
-
                         sprite.Scale(relativeStart, Constants.fontScale);
                         sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
@@ -124,6 +148,7 @@ namespace StorybrewScripts
                         if (additive) {
                             sprite.Additive(relativeStart, line.EndTime);
                         } else { 
+                            pixelize(texture.Path, line.EndTime - Constants.beatLength/2, line.EndTime, pos);
                             sprite.Color(relativeStart, Colours.black);
                         }
                     }
