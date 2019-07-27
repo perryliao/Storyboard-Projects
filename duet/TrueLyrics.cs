@@ -33,7 +33,7 @@ namespace StorybrewScripts
                 Debug = false,
             });
 
-            FontGenerator fontGlow = LoadFont("sb/lyrics/glow_true", new FontDescription() {
+            FontGenerator fontGlow = LoadFont("sb/lyrics/glow", new FontDescription() {
                 FontPath = Constants.jpFont,
                 FontSize = Constants.fontSize,
                 Color = Colours.black,
@@ -42,7 +42,7 @@ namespace StorybrewScripts
                 Debug = false,
             }, new FontGlow() {
                 Radius = Constants.glowRadius,
-                Color = Colours.cyan,
+                Color = Colours.white,
             });
 
             SubtitleSet subtitles = LoadSubtitles("lyrics/true.ass");
@@ -88,7 +88,8 @@ namespace StorybrewScripts
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
                         if (additive) {
                             sprite.Additive(relativeStart, line.EndTime);
-                        } else { 
+                            sprite.Color(relativeStart, Colours.cyan); 
+                        } else {
                             sprite.Color(relativeStart, character.ToString() == "青" ? Colours.blue : Colours.black);                        
                         }
                     }
@@ -135,7 +136,10 @@ namespace StorybrewScripts
                         sprite.Scale(line.StartTime - Constants.beatLength/2, Constants.fontScale);
                         sprite.Fade(line.StartTime - Constants.beatLength/2, line.StartTime, 0, 1);
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
-                        if (additive) sprite.Additive(line.StartTime - Constants.beatLength/2, line.EndTime);
+                        if (additive) {
+                            sprite.Additive(line.StartTime - Constants.beatLength/2, line.EndTime);
+                            sprite.Color(line.StartTime - Constants.beatLength/2, Colours.cyan); 
+                        }
                     }
                     x += texture.BaseWidth * Constants.fontScale;
                 }
@@ -168,6 +172,7 @@ namespace StorybrewScripts
                         sprite.Fade(line.EndTime - Constants.beatLength, line.EndTime - Constants.beatLength/2, 1, 0);
                         if (additive) {
                             sprite.Additive(relativeStart, line.EndTime);
+                            sprite.Color(relativeStart, Colours.cyan); 
                         } else { 
                             sprite.Color(relativeStart, Colours.black);
                         }

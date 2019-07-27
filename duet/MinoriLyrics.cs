@@ -36,7 +36,7 @@ namespace StorybrewScripts
                 Debug = false,
             });
 
-            FontGenerator fontGlow = LoadFont("sb/lyrics/glow_minori", new FontDescription() {
+            FontGenerator fontGlow = LoadFont("sb/lyrics/glow", new FontDescription() {
                 FontPath = Constants.jpFont,
                 FontSize = Constants.fontSize,
                 Color = Colours.black,
@@ -45,7 +45,7 @@ namespace StorybrewScripts
                 Debug = false,
             }, new FontGlow() {
                 Radius = Constants.glowRadius,
-                Color = Colours.pink,
+                Color = Colours.white,
             });
 
             SubtitleSet subtitles = LoadSubtitles("lyrics/minori.ass");
@@ -66,17 +66,14 @@ namespace StorybrewScripts
 
         private void pixelize(string path, double start, double end, Vector2 pos) {
             Bitmap textBitmap = GetMapsetBitmap(path);
-            for (int x = 0; x < textBitmap.Width ; x += fineness)
-            {
-                for (int y = 0; y < textBitmap.Height ; y += fineness)
-                {
+            for (int x = 0; x < textBitmap.Width ; x += fineness) {
+                for (int y = 0; y < textBitmap.Height ; y += fineness) {
                     Vector2 spritePos = new Vector2((float)x, (float)y - textBitmap.Height/2);
                     spritePos = Vector2.Multiply(spritePos, Constants.fontScale);
                     Color pixelColor = textBitmap.GetPixel(x, y);
 
-                    if (pixelColor.A > 0)
-                    {
-                        var sprite = GetLayer("").CreateSprite("sb/circle2.png", OsbOrigin.Centre, spritePos + pos);
+                    if (pixelColor.A > 0) {
+                        var sprite = textLayer.CreateSprite("sb/circle2.png", OsbOrigin.Centre, spritePos + pos);
                         sprite.Scale(start, 0.05);
                         sprite.Fade(start, 1);
                         sprite.Fade(end, 0);
@@ -111,7 +108,8 @@ namespace StorybrewScripts
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
                         if (additive) {
                             sprite.Additive(relativeStart, line.EndTime);
-                        } else { 
+                            sprite.Color(relativeStart, Colours.pink);
+                        } else {
                             sprite.Color(relativeStart, character.ToString() == "色" ? Colours.pink : Colours.black);                        
                         }
                     }
@@ -147,6 +145,7 @@ namespace StorybrewScripts
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
                         if (additive) {
                             sprite.Additive(relativeStart, line.EndTime);
+                            sprite.Color(relativeStart, Colours.pink); 
                         } else { 
                             pixelize(texture.Path, line.EndTime - Constants.beatLength/2, line.EndTime, pos);
                             sprite.Color(relativeStart, Colours.black);

@@ -30,7 +30,7 @@ namespace StorybrewScripts
                 Debug = false,
             });
 
-            FontGenerator fontGlow = LoadFont("sb/lyrics/glow_unison", new FontDescription() {
+            FontGenerator fontGlow = LoadFont("sb/lyrics/glow", new FontDescription() {
                 FontPath = Constants.jpFont,
                 FontSize = Constants.fontSize,
                 Color = Colours.black,
@@ -39,7 +39,7 @@ namespace StorybrewScripts
                 Debug = false,
             }, new FontGlow() {
                 Radius = Constants.glowRadius,
-                Color = Colours.purple,
+                Color = Colours.white,
             });
 
             SubtitleSet subtitles = LoadSubtitles("lyrics/unison.ass");
@@ -84,6 +84,7 @@ namespace StorybrewScripts
             //             sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
             //             if (additive) {
             //                 sprite.Additive(relativeStart, line.EndTime);
+            //                 sprite.Color(relativeStart, Colours.purple);
             //             } else { 
             //                 sprite.Color(relativeStart, character.ToString() == "色" ? Colours.pink : Colours.black);                        
             //             }
@@ -120,7 +121,8 @@ namespace StorybrewScripts
                         sprite.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
                         if (additive) {
                             sprite.Additive(relativeStart, line.EndTime);
-                        } else { 
+                            sprite.Color(relativeStart, Colours.purple);
+                        } else {
                             sprite.Color(relativeStart, Colours.black);
                         }
                     }
