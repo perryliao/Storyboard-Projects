@@ -16,11 +16,12 @@ namespace StorybrewScripts
         private string[] pushLeftStrings = { "輝いている", "つなぎ合わせば" };
         StoryboardLayer textLayer;
         StoryboardLayer glowLayer;
-
+        OsbSprite bar;
         public override void Generate()
         {
             textLayer = GetLayer("Lyrics");
             glowLayer = GetLayer("Glow");
+            bar = glowLayer.CreateSprite("sb/1x1.jpg", OsbOrigin.BottomCentre);
 
 		    FontGenerator font = LoadFont("sb/lyrics", new FontDescription() {
                 FontPath = Constants.jpFont,
@@ -67,10 +68,10 @@ namespace StorybrewScripts
 
         private void preChorus(FontGenerator font, SubtitleLine line, bool additive) {
             StoryboardLayer layer = additive ? glowLayer : textLayer;
-            float fontScale = Constants.fontScale + 0.2f;
+            float fontScale = Constants.fontScale + 0.2f, width = 0f, height = 0f;
             foreach (string lyric in line.Text.Split('\n')) {
-                float width = 0f;
-                float height = 0f;
+                width = 0f;
+                height = 0f;
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     width += texture.BaseWidth * fontScale;
@@ -78,13 +79,14 @@ namespace StorybrewScripts
                 }
                 
                 float x = pushLeftStrings.Any(lyric.ToString().Contains) ? 320 - width/lyric.Length/2 - 5: 320 + width/lyric.Length/2 + 5;
+                Log(x.ToString());
                 float y = Math.Max(40, 240 - width/2 - 80);
                 double relativeStart = line.StartTime - Constants.beatLength/2;
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     if (!texture.IsEmpty) {
-                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.Centre) * fontScale;
-                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.Centre);
+                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.CentreRight) * fontScale;
+                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreRight);
                
                         sprite.Scale(relativeStart, fontScale);
                         sprite.Move(OsbEasing.OutExpo, relativeStart, line.EndTime, pos.X, pos.Y - 20, pos.X, pos.Y);
@@ -94,12 +96,22 @@ namespace StorybrewScripts
                             sprite.Additive(relativeStart, line.EndTime);
                             sprite.Color(relativeStart, Colours.purple);
                         } else {
-                            sprite.Color(relativeStart, Colours.black);
+                            sprite.Color(relativeStart, Colours.white);
                         }
                     }
                     y += texture.BaseWidth * fontScale;
                 }
                 x += height;
+            }
+            
+            if (!pushLeftStrings.Any(line.Text.ToString().Contains)) {
+                bar.Fade(line.StartTime, 1);
+                bar.MoveY(OsbEasing.OutExpo, line.StartTime, line.EndTime - Constants.beatLength/2, 300, width + 80);
+                bar.MoveY(line.EndTime - Constants.beatLength/2, line.EndTime, bar.PositionAt(line.EndTime - Constants.beatLength/2).Y, bar.PositionAt(line.EndTime - Constants.beatLength/2).Y - width - 50);
+                bar.ScaleVec(OsbEasing.OutExpo, line.StartTime, line.EndTime - Constants.beatLength/2, height*3, 0, height*3, width + 50);
+                bar.ScaleVec(line.EndTime - Constants.beatLength/2, line.EndTime, height*3, width + 50, height*3, 0);
+                bar.Fade(line.EndTime - Constants.beatLength/2, line.EndTime, 1, 0);
+                bar.Color(line.StartTime, Colours.purple);
             }
         }
 
