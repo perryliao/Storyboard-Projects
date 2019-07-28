@@ -1,24 +1,18 @@
 ﻿FormatVersion: 6
-Name: "MinoriLyrics 1"
-Script: "MinoriLyrics"
+Name: "UnisonLyrics 1"
+Script: "UnisonLyrics"
 Config:
-  padding:
-    Type: "System.Single"
-    Value: "60"
-  fineness:
-    Type: "System.Int32"
-    Value: "1"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  fd9e0d5897134c608cb27c8da5374924:
+  223f3269b2ca4cf4a28e7f9b30da810f:
     Name: "Glow"
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes
-  365bcffe893748b78ef821d7da524536:
+  6b3fafa708304cb1a8e635698f736bfa:
     Name: "Lyrics"
     OsbLayer: Background
     DiffSpecific: No

@@ -13,8 +13,13 @@ Config:
     Value: "0"
     DisplayName: "Random seed"
 Layers:
-  78f19fd658c445d0ab6bfbdc22c37433:
-    Name: "ScrollingLyricBG"
+  ee3b0202cf0445898d2ec7096231e8a0:
+    Name: "ScrollingLyricsBG"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  9cabac1691b841baba99fbc8896b0fec:
+    Name: "ScrollingLyrics"
     OsbLayer: Background
     DiffSpecific: No
     Visible: Yes

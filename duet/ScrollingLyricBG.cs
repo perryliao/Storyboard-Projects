@@ -20,11 +20,13 @@ namespace StorybrewScripts
         public float FontScale = Constants.fontScale;
 
         StoryboardLayer layer;
+        StoryboardLayer bgLayer;
         public override void Generate()
         {
-            layer = GetLayer("ScrollingLyricBG");
+            layer = GetLayer("ScrollingLyrics");
+            bgLayer = GetLayer("ScrollingLyricsBG");
             OsbSprite barRef;
-            OsbSprite bar3 = layer.CreateSprite("sb/othersbg.jpg", OsbOrigin.Centre);
+            OsbSprite bar3 = bgLayer.CreateSprite("sb/othersbg.jpg", OsbOrigin.Centre);
             var bar3BitMap = GetMapsetBitmap("sb/othersbg.jpg");
 
             FontGenerator font = LoadFont("sb/lyrics/", new FontDescription() {
