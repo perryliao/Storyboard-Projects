@@ -79,14 +79,13 @@ namespace StorybrewScripts
                 }
                 
                 float x = pushLeftStrings.Any(lyric.ToString().Contains) ? 320 - width/lyric.Length/2 - 5: 320 + width/lyric.Length/2 + 5;
-                Log(x.ToString());
                 float y = Math.Max(40, 240 - width/2 - 80);
                 double relativeStart = line.StartTime - Constants.beatLength/2;
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     if (!texture.IsEmpty) {
-                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.CentreRight) * fontScale;
-                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreRight);
+                        Vector2 pos = new Vector2(x, y + texture.OffsetFor(OsbOrigin.Centre).Y * fontScale); 
+                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.Centre);
                
                         sprite.Scale(relativeStart, fontScale);
                         sprite.Move(OsbEasing.OutExpo, relativeStart, line.EndTime, pos.X, pos.Y - 20, pos.X, pos.Y);

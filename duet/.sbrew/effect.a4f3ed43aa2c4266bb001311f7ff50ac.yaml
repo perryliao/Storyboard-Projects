@@ -10,6 +10,11 @@ Config:
     Value: "0"
     DisplayName: "Random seed"
 Layers:
+  5efb687e73484226a1c9eab0ec2585a6:
+    Name: "LyricBar"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
   56643af9bde444efb129c029d6e0b296:
     Name: "Glow"
     OsbLayer: Background

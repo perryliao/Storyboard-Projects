@@ -16,13 +16,17 @@ namespace StorybrewScripts
 
         StoryboardLayer textLayer;
         StoryboardLayer glowLayer;
+        StoryboardLayer lyricBarLayer;
 
         OsbSprite bar;
+        OsbSprite skinnyBar;
         public override void Generate()
         {
             textLayer = GetLayer("Lyrics");
             glowLayer = GetLayer("Glow");
-            bar = glowLayer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft);
+            lyricBarLayer = GetLayer("LyricBar");
+            skinnyBar = lyricBarLayer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreRight);
+            bar = lyricBarLayer.CreateSprite("sb/1x1.jpg", OsbOrigin.CentreLeft);
 
 		    FontGenerator font = LoadFont("sb/lyrics", new FontDescription() {
                 FontPath = Constants.jpFont,
@@ -117,14 +121,23 @@ namespace StorybrewScripts
                 if (additive) {
                     double barStart = line.StartTime - Constants.beatLength;
                     bar.Color(barStart, Colours.blue);
-                    bar.Fade(barStart, line.StartTime, 0, 0.8);
+                    bar.Fade(barStart, line.StartTime, 0, 0.9);
                     bar.Fade(line.EndTime - Constants.beatLength, line.EndTime, bar.OpacityAt(line.EndTime - Constants.beatLength), 0);
 
-                    bar.ScaleVec(OsbEasing.OutCirc, barStart, line.StartTime, 0, height*0.5, width, height*0.5);
+                    bar.ScaleVec(OsbEasing.OutCirc, barStart, line.StartTime, 0, height*0.66, width + 20, height*0.66);
                     bar.ScaleVec(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, bar.ScaleAt(line.EndTime - Constants.beatLength).X, bar.ScaleAt(line.EndTime - Constants.beatLength).Y, 0, bar.ScaleAt(line.EndTime - Constants.beatLength).Y);
-                    bar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x - 10, y + height/2 , x, y + height/2 );
+                    bar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x - 20, y + height/2 - 9 , x - 10, y + height/2 - 9 );
                     bar.Move(OsbEasing.None, line.StartTime, line.EndTime - Constants.beatLength, bar.PositionAt(line.StartTime), bar.PositionAt(line.StartTime).X + 5, bar.PositionAt(line.StartTime).Y);
-                    bar.Move(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, bar.PositionAt(line.EndTime - Constants.beatLength), bar.PositionAt(line.EndTime - Constants.beatLength).X + width, bar.PositionAt(line.EndTime - Constants.beatLength).Y);
+                    bar.Move(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, bar.PositionAt(line.EndTime - Constants.beatLength), bar.PositionAt(line.EndTime - Constants.beatLength).X + width + 20, bar.PositionAt(line.EndTime - Constants.beatLength).Y);
+                
+                    skinnyBar.Color(barStart, Colours.cyan);
+                    skinnyBar.Fade(barStart, line.StartTime, 0, 0.3);
+                    skinnyBar.Fade(line.EndTime - Constants.beatLength, line.EndTime, skinnyBar.OpacityAt(line.EndTime - Constants.beatLength), 0);
+
+                    skinnyBar.ScaleVec(OsbEasing.OutCirc, barStart, line.StartTime, 0, 13, width + 20, 13);
+                    skinnyBar.ScaleVec(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, skinnyBar.ScaleAt(line.EndTime - Constants.beatLength).X, skinnyBar.ScaleAt(line.EndTime - Constants.beatLength).Y, 0, skinnyBar.ScaleAt(line.EndTime - Constants.beatLength).Y);
+                    skinnyBar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x + width + 40, y + height * 0.6 , x + width + 30, y + height * 0.6 );
+                    skinnyBar.Move(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, skinnyBar.PositionAt(line.EndTime - Constants.beatLength), skinnyBar.PositionAt(line.EndTime - Constants.beatLength).X - width - 20, skinnyBar.PositionAt(line.EndTime - Constants.beatLength).Y);
                 }
 
                 foreach (char character in lyric) {
