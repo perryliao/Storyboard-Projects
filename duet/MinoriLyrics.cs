@@ -68,7 +68,7 @@ namespace StorybrewScripts
             Bitmap textBitmap = GetMapsetBitmap(path);
             for (int x = 0; x < textBitmap.Width ; x += fineness) {
                 for (int y = 0; y < textBitmap.Height ; y += fineness) {
-                    Vector2 spritePos = new Vector2((float)x, (float)y - textBitmap.Height/2);
+                    Vector2 spritePos = new Vector2((float)x - textBitmap.Width/2, (float)y - textBitmap.Height/2);
                     spritePos = Vector2.Multiply(spritePos, Constants.fontScale);
                     Color pixelColor = textBitmap.GetPixel(x, y);
 
@@ -137,8 +137,8 @@ namespace StorybrewScripts
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     if (!texture.IsEmpty) {
-                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
-                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
+                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.Centre) * Constants.fontScale;
+                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.Centre, pos);
                
                         sprite.Scale(relativeStart, Constants.fontScale);
                         sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
