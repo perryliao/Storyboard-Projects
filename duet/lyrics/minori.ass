@@ -8,8 +8,9 @@ ScaledBorderAndShadow: yes
 YCbCr Matrix: None
 
 [Aegisub Project Garbage]
-Audio File: C:/Users/cRyo/AppData/Local/osu!/Songs/03 ふたりごと/audio.mp3
-Active Line: 5
+Audio File: ../../../../../AppData/Local/osu!/Songs/03 ふたりごと/audio.mp3
+Scroll Position: 15
+Active Line: 25
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
@@ -28,10 +29,24 @@ Dialogue: 0,0:00:48.79,0:00:51.83,Default,,0,0,0,,言えないけど
 Dialogue: 0,0:00:52.36,0:00:56.83,Default,,0,0,0,,与えることで
 Dialogue: 0,0:00:54.50,0:00:56.83,Default,,0,0,0,,与えられていく
 Dialogue: 0,0:01:04.33,0:01:05.76,Default,,0,0,0,,君と
+Dialogue: 0,0:01:25.04,0:01:27.19,Default,,0,0,0,,なんとなく
+Dialogue: 0,0:01:27.90,0:01:30.05,Default,,0,0,0,,なんとなく
+Dialogue: 0,0:01:30.76,0:01:32.91,Default,,0,0,0,,伝えて
+Dialogue: 0,0:01:33.62,0:01:35.77,Default,,0,0,0,,欠けたとこ
+Dialogue: 0,0:01:36.47,0:01:38.62,Default,,0,0,0,,触れ合えば
+Dialogue: 0,0:01:39.33,0:01:41.48,Default,,0,0,0,,これからも
 Dialogue: 0,0:02:22.72,0:02:27.54,Default,,0,0,0,,偶然を運命と呼んだりして
 Dialogue: 0,0:02:25.94,0:02:27.54,Default,,0,0,0,,茶化したけど
 Dialogue: 0,0:02:27.90,0:02:31.47,Default,,0,0,0,,この言葉の続き
+Dialogue: 0,0:02:50.76,0:02:52.90,Default,,0,0,0,,さりげなく
+Dialogue: 0,0:02:53.62,0:02:55.76,Default,,0,0,0,,さりげなく
+Dialogue: 0,0:02:56.47,0:02:58.61,Default,,0,0,0,,答えて
+Dialogue: 0,0:02:59.33,0:03:01.47,Default,,0,0,0,,ためらいを
+Dialogue: 0,0:03:02.19,0:03:04.33,Default,,0,0,0,,立ち止まり
+Dialogue: 0,0:03:05.04,0:03:07.18,Default,,0,0,0,,陰ひとつ
 Dialogue: 0,0:03:39.33,0:03:41.47,Default,,0,0,0,,なんとなく
 Dialogue: 0,0:03:42.19,0:03:44.33,Default,,0,0,0,,なんとなく
 Dialogue: 0,0:03:45.04,0:03:47.19,Default,,0,0,0,,伝えて
 Dialogue: 0,0:03:47.90,0:03:50.04,Default,,0,0,0,,欠けたとこ
+Dialogue: 0,0:03:50.76,0:03:51.83,Default,,0,0,0,,触れ合えば
+Dialogue: 0,0:03:53.61,0:03:54.67,Default,,0,0,0,,これからも

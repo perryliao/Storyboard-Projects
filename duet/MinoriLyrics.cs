@@ -56,7 +56,9 @@ namespace StorybrewScripts
 
         private void generateLyrics(FontGenerator font, SubtitleSet subtitles, bool additive) {
             foreach (SubtitleLine line in subtitles.Lines) {
-                if (line.StartTime > 217544 && line.StartTime < 260402) {
+                if (Helpers.inChorus(line.StartTime, line.EndTime)) {
+                    chorus(font, line, additive);
+                } else if (line.StartTime > 217544 && line.StartTime < 260402) { 
                     verticalPositioning(font, line, additive);
                 } else {
                     handlePlacement(font, line, additive);
@@ -66,19 +68,28 @@ namespace StorybrewScripts
 
         private void pixelize(string path, double start, double end, Vector2 pos) {
             Bitmap textBitmap = GetMapsetBitmap(path);
+            double duration = end - start;
+            double relativeStart;
+            double timestep = Constants.beatLength/8;
             for (int x = 0; x < textBitmap.Width ; x += fineness) {
                 for (int y = 0; y < textBitmap.Height ; y += fineness) {
-                    Vector2 spritePos = new Vector2((float)x - textBitmap.Width/2, (float)y - textBitmap.Height/2);
+                    Vector2 spritePos = new Vector2((float)x, (float)y - textBitmap.Height/2);
                     spritePos = Vector2.Multiply(spritePos, Constants.fontScale);
                     Color pixelColor = textBitmap.GetPixel(x, y);
-
+                    relativeStart = start + (x+y)*3;
                     if (pixelColor.A > 0) {
                         var sprite = textLayer.CreateSprite("sb/circle2.png", OsbOrigin.Centre, spritePos + pos);
-                        sprite.Scale(start, 0.05);
-                        sprite.Fade(start, 1);
+                        sprite.Scale(OsbEasing.Out, relativeStart, relativeStart + timestep, 0, 0.05);
+                        sprite.Fade(relativeStart, 1);
                         sprite.Fade(end, 0);
-                        sprite.Color(start, Colours.green);
-                        
+                        sprite.Color(relativeStart, Colours.black);
+
+                        double tmp = 0, inc = 5;
+                        for (double i = relativeStart; i < relativeStart + duration - timestep; i += timestep) {
+                            // y = sqrt(x * Random(inc))
+                            sprite.Move(i, i + timestep, sprite.PositionAt(i), sprite.PositionAt(i).X + tmp, sprite.PositionAt(i).Y - Math.Sqrt(tmp * Random(10) / Random(5)));
+                            tmp += inc;
+                        }
                     }
                 }
             }
@@ -147,7 +158,6 @@ namespace StorybrewScripts
                             sprite.Additive(relativeStart, line.EndTime);
                             sprite.Color(relativeStart, Colours.pink); 
                         } else { 
-                            pixelize(texture.Path, line.EndTime - Constants.beatLength/2, line.EndTime, pos);
                             sprite.Color(relativeStart, Colours.black);
                         }
                     }
@@ -155,6 +165,43 @@ namespace StorybrewScripts
                     relativeStart += Constants.beatLength/8;
                 }
                 x += height;
+            }
+        }
+
+        private void chorus(FontGenerator font, SubtitleLine line, bool additive) {
+            StoryboardLayer layer = additive ? glowLayer : textLayer;
+            float y = (float)Constants.height - padding;
+            foreach (string lyric in line.Text.Split('\n')) {
+                float width = 0f;
+                float height = 0f;
+                foreach (char character in lyric) {
+                    FontTexture texture = font.GetTexture(character.ToString());
+                    width += texture.BaseWidth * Constants.fontScale;
+                    height = Math.Max(height, texture.BaseHeight * Constants.fontScale);
+                }
+
+                float x = (float)Constants.xCeil - padding - width;
+                double relativeStart = line.StartTime - Constants.beatLength/2;
+                foreach (char character in lyric) {
+                    FontTexture texture = font.GetTexture(character.ToString());
+                    if (!texture.IsEmpty) {
+                        Vector2 pos = new Vector2(x, y - (pushUpStrings.Any(lyric.ToString().Contains) ? height : 0)) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
+                        OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
+                        sprite.Scale(relativeStart, Constants.fontScale);
+                        sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
+                        sprite.Fade(line.EndTime, line.EndTime + Constants.beatLength/2, 1, 0);
+                        if (additive) {
+                            sprite.Additive(relativeStart, line.EndTime);
+                            sprite.Color(relativeStart, Colours.pink);
+                        } else {
+                            if (line.StartTime > 230401) pixelize(texture.Path, line.EndTime, line.EndTime + Constants.beatLength*2, pos);
+                            sprite.Color(relativeStart, character.ToString() == "色" ? Colours.pink : Colours.black);                        
+                        }
+                    }
+                    x += texture.BaseWidth * Constants.fontScale;
+                    relativeStart += Constants.beatLength/8;
+                }
+                y += height;
             }
         }
     }
