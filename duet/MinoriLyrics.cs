@@ -70,21 +70,21 @@ namespace StorybrewScripts
             Bitmap textBitmap = GetMapsetBitmap(path);
             double duration = end - start;
             double relativeStart;
-            double timestep = Constants.beatLength/8;
+            double timestep = Constants.beatLength/4;
             for (int x = 0; x < textBitmap.Width ; x += fineness) {
                 for (int y = 0; y < textBitmap.Height ; y += fineness) {
                     Vector2 spritePos = new Vector2((float)x, (float)y - textBitmap.Height/2);
                     spritePos = Vector2.Multiply(spritePos, Constants.fontScale);
                     Color pixelColor = textBitmap.GetPixel(x, y);
-                    relativeStart = start + (x+y)*3;
+                    relativeStart = start + (x+y)*5;
                     if (pixelColor.A > 0) {
                         var sprite = textLayer.CreateSprite("sb/circle2.png", OsbOrigin.Centre, spritePos + pos);
-                        sprite.Scale(OsbEasing.Out, relativeStart, relativeStart + timestep, 0, 0.05);
+                        sprite.Scale(OsbEasing.None, relativeStart, relativeStart + timestep, 0, 0.075);
                         sprite.Fade(relativeStart, 1);
                         sprite.Fade(end, 0);
                         sprite.Color(relativeStart, Colours.black);
 
-                        double tmp = 0, inc = 5;
+                        double tmp = 0, inc = 9;
                         for (double i = relativeStart; i < relativeStart + duration - timestep; i += timestep) {
                             // y = sqrt(x * Random(inc))
                             sprite.Move(i, i + timestep, sprite.PositionAt(i), sprite.PositionAt(i).X + tmp, sprite.PositionAt(i).Y - Math.Sqrt(tmp * Random(10) / Random(5)));
@@ -189,13 +189,13 @@ namespace StorybrewScripts
                         OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
                         sprite.Scale(relativeStart, Constants.fontScale);
                         sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
-                        sprite.Fade(line.EndTime, line.EndTime + Constants.beatLength/2, 1, 0);
+                        sprite.Fade(OsbEasing.InQuart, line.EndTime, line.EndTime + Constants.beatLength/2, 1, 0);
                         if (additive) {
                             sprite.Additive(relativeStart, line.EndTime);
                             sprite.Color(relativeStart, Colours.pink);
                         } else {
                             if (line.StartTime > 230401) pixelize(texture.Path, line.EndTime, line.EndTime + Constants.beatLength*2, pos);
-                            sprite.Color(relativeStart, character.ToString() == "色" ? Colours.pink : Colours.black);                        
+                            sprite.Color(relativeStart, Colours.black);                        
                         }
                     }
                     x += texture.BaseWidth * Constants.fontScale;
