@@ -16,6 +16,8 @@ namespace StorybrewScripts
         public float padding = 60f;
         [Configurable]
         public int fineness = 2;
+        [Configurable]
+        public float chrousScale = Constants.fontScale;
 
         private string[] pushUpStrings = { "何色だろう", "言えないけど", "与えられていく", "茶化したけど" };
 
@@ -74,14 +76,14 @@ namespace StorybrewScripts
             for (int x = 0; x < textBitmap.Width ; x += fineness) {
                 for (int y = 0; y < textBitmap.Height ; y += fineness) {
                     Vector2 spritePos = new Vector2((float)x, (float)y - textBitmap.Height/2);
-                    spritePos = Vector2.Multiply(spritePos, Constants.fontScale);
+                    spritePos = Vector2.Multiply(spritePos, chrousScale);
                     Color pixelColor = textBitmap.GetPixel(x, y);
                     relativeStart = start + (x+y)*5;
                     if (pixelColor.A > 0) {
                         var sprite = textLayer.CreateSprite("sb/circle2.png", OsbOrigin.Centre, spritePos + pos);
                         sprite.Scale(OsbEasing.None, relativeStart, relativeStart + timestep, 0, 0.075);
                         sprite.Fade(relativeStart, 0.4);
-                        sprite.Fade(end, 0);
+                        sprite.Fade(end - Constants.beatLength, end, 1, 0);
                         sprite.Color(relativeStart, Colours.black);
 
                         double tmp = 0, inc = 9;
@@ -177,8 +179,8 @@ namespace StorybrewScripts
                 float height = 0f;
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
-                    width += texture.BaseWidth * Constants.fontScale;
-                    height = Math.Max(height, texture.BaseHeight * Constants.fontScale);
+                    width += texture.BaseWidth * chrousScale;
+                    height = Math.Max(height, texture.BaseHeight * chrousScale);
                 }
 
                 float x = (float)Random(320, Constants.xCeil - padding - width);
@@ -187,21 +189,28 @@ namespace StorybrewScripts
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     if (!texture.IsEmpty) {
-                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
+                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.CentreLeft) * chrousScale;
                         OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
-                        sprite.Scale(relativeStart, Constants.fontScale);
-                        sprite.Move(OsbEasing.OutCirc, relativeStart, line.EndTime + Constants.beatLength/2, sprite.PositionAt(relativeStart), sprite.PositionAt(relativeStart).X + 3, sprite.PositionAt(relativeStart).Y + (vertFlag ? -Random(4) : Random(4)));
+                        sprite.Scale(relativeStart, chrousScale);
+                        sprite.Move(OsbEasing.Out, relativeStart, line.EndTime, sprite.PositionAt(relativeStart), sprite.PositionAt(relativeStart).X + 3, sprite.PositionAt(relativeStart).Y + (vertFlag ? -Random(4) : Random(4)));
+                        
                         sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
                         sprite.Fade(OsbEasing.InQuart, line.EndTime, line.EndTime + Constants.beatLength/2, 1, 0);
-                        if (additive) {
-                            // sprite.Additive(relativeStart, line.EndTime);
-                            // sprite.Color(relativeStart, Colours.pink);
+                        
+                        if (line.StartTime > 230401) {
+                            pixelize(texture.Path, line.EndTime, line.EndTime + Constants.beatLength*2, sprite.PositionAt(line.EndTime));
                         } else {
-                            if (line.StartTime > 230401) pixelize(texture.Path, line.EndTime, line.EndTime + Constants.beatLength*2, sprite.PositionAt(line.EndTime));
-                            sprite.Color(relativeStart, Colours.black);                        
+                            bool left = Random(-6, 5) < 0;
+                            sprite.Move(line.EndTime, line.EndTime + Constants.beatLength/2, sprite.PositionAt(line.EndTime), 
+                                sprite.PositionAt(line.EndTime).X + (left ? -Random(5) : Random(5)),
+                                sprite.PositionAt(line.EndTime).Y + Random(15, 20)
+                            );
+                            sprite.Rotate(line.EndTime, line.EndTime + Constants.beatLength/2, sprite.RotationAt(line.EndTime), sprite.RotationAt(line.EndTime) + Math.PI/Random(8, 32) * (left ? -1 : 1));
                         }
+                        sprite.Color(relativeStart, Colours.black);                        
+                        
                     }
-                    x += texture.BaseWidth * Constants.fontScale;
+                    x += texture.BaseWidth * chrousScale;
                     relativeStart += Constants.beatLength/8;
                     vertFlag = !vertFlag;
                 }

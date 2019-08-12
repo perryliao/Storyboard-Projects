@@ -124,9 +124,9 @@ namespace StorybrewScripts
                     bar.Fade(barStart, line.StartTime, 0, 0.9);
                     bar.Fade(line.EndTime - Constants.beatLength, line.EndTime, bar.OpacityAt(line.EndTime - Constants.beatLength), 0);
 
-                    bar.ScaleVec(OsbEasing.OutCirc, barStart, line.StartTime, 0, height*0.66, width + 20, height*0.66);
+                    bar.ScaleVec(OsbEasing.OutCirc, barStart, line.StartTime, 0, height*0.7, width + 20, height*0.7);
                     bar.ScaleVec(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, bar.ScaleAt(line.EndTime - Constants.beatLength).X, bar.ScaleAt(line.EndTime - Constants.beatLength).Y, 0, bar.ScaleAt(line.EndTime - Constants.beatLength).Y);
-                    bar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x - 20, y + height/2 - 9 , x - 10, y + height/2 - 9 );
+                    bar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x - 20, y + height/2 - 5, x - 10, y + height/2 - 5);
                     bar.Move(OsbEasing.None, line.StartTime, line.EndTime - Constants.beatLength, bar.PositionAt(line.StartTime), bar.PositionAt(line.StartTime).X + 5, bar.PositionAt(line.StartTime).Y);
                     bar.Move(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, bar.PositionAt(line.EndTime - Constants.beatLength), bar.PositionAt(line.EndTime - Constants.beatLength).X + width + 20, bar.PositionAt(line.EndTime - Constants.beatLength).Y);
                 
@@ -136,7 +136,7 @@ namespace StorybrewScripts
 
                     skinnyBar.ScaleVec(OsbEasing.OutCirc, barStart, line.StartTime, 0, 13, width + 20, 13);
                     skinnyBar.ScaleVec(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, skinnyBar.ScaleAt(line.EndTime - Constants.beatLength).X, skinnyBar.ScaleAt(line.EndTime - Constants.beatLength).Y, 0, skinnyBar.ScaleAt(line.EndTime - Constants.beatLength).Y);
-                    skinnyBar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x + width + 40, y + height * 0.6 , x + width + 30, y + height * 0.6 );
+                    skinnyBar.Move(OsbEasing.OutCirc, barStart, line.StartTime, x + width + 40, y + height * 0.6 + 3 , x + width + 30, y + height * 0.6 + 3 );
                     skinnyBar.Move(OsbEasing.OutCirc, line.EndTime - Constants.beatLength, line.EndTime, skinnyBar.PositionAt(line.EndTime - Constants.beatLength), skinnyBar.PositionAt(line.EndTime - Constants.beatLength).X - width - 20, skinnyBar.PositionAt(line.EndTime - Constants.beatLength).Y);
                 }
 
