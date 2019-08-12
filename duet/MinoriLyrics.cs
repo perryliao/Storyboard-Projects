@@ -80,7 +80,7 @@ namespace StorybrewScripts
                     if (pixelColor.A > 0) {
                         var sprite = textLayer.CreateSprite("sb/circle2.png", OsbOrigin.Centre, spritePos + pos);
                         sprite.Scale(OsbEasing.None, relativeStart, relativeStart + timestep, 0, 0.075);
-                        sprite.Fade(relativeStart, 1);
+                        sprite.Fade(relativeStart, 0.4);
                         sprite.Fade(end, 0);
                         sprite.Color(relativeStart, Colours.black);
 
@@ -169,8 +169,9 @@ namespace StorybrewScripts
         }
 
         private void chorus(FontGenerator font, SubtitleLine line, bool additive) {
+            if (additive) return;
             StoryboardLayer layer = additive ? glowLayer : textLayer;
-            float y = (float)Constants.height - padding;
+            float y = (float) Random(240, Constants.height - padding);
             foreach (string lyric in line.Text.Split('\n')) {
                 float width = 0f;
                 float height = 0f;
@@ -180,26 +181,29 @@ namespace StorybrewScripts
                     height = Math.Max(height, texture.BaseHeight * Constants.fontScale);
                 }
 
-                float x = (float)Constants.xCeil - padding - width;
+                float x = (float)Random(320, Constants.xCeil - padding - width);
                 double relativeStart = line.StartTime - Constants.beatLength/2;
+                bool vertFlag = true;
                 foreach (char character in lyric) {
                     FontTexture texture = font.GetTexture(character.ToString());
                     if (!texture.IsEmpty) {
-                        Vector2 pos = new Vector2(x, y - (pushUpStrings.Any(lyric.ToString().Contains) ? height : 0)) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
+                        Vector2 pos = new Vector2(x, y) + texture.OffsetFor(OsbOrigin.CentreLeft) * Constants.fontScale;
                         OsbSprite sprite = layer.CreateSprite(texture.Path, OsbOrigin.CentreLeft, pos);
                         sprite.Scale(relativeStart, Constants.fontScale);
+                        sprite.Move(OsbEasing.OutCirc, relativeStart, line.EndTime + Constants.beatLength/2, sprite.PositionAt(relativeStart), sprite.PositionAt(relativeStart).X + 3, sprite.PositionAt(relativeStart).Y + (vertFlag ? -Random(4) : Random(4)));
                         sprite.Fade(relativeStart, relativeStart + Constants.beatLength/2, 0, 1);
                         sprite.Fade(OsbEasing.InQuart, line.EndTime, line.EndTime + Constants.beatLength/2, 1, 0);
                         if (additive) {
-                            sprite.Additive(relativeStart, line.EndTime);
-                            sprite.Color(relativeStart, Colours.pink);
+                            // sprite.Additive(relativeStart, line.EndTime);
+                            // sprite.Color(relativeStart, Colours.pink);
                         } else {
-                            if (line.StartTime > 230401) pixelize(texture.Path, line.EndTime, line.EndTime + Constants.beatLength*2, pos);
+                            if (line.StartTime > 230401) pixelize(texture.Path, line.EndTime, line.EndTime + Constants.beatLength*2, sprite.PositionAt(line.EndTime));
                             sprite.Color(relativeStart, Colours.black);                        
                         }
                     }
                     x += texture.BaseWidth * Constants.fontScale;
                     relativeStart += Constants.beatLength/8;
+                    vertFlag = !vertFlag;
                 }
                 y += height;
             }
