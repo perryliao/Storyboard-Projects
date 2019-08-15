@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="CircleBG.cs" />
+    <Compile Include="Envelope.cs" />
     <Compile Include="EnvelopeTransition.cs" />
     <Compile Include="FoldTransition.cs" />
     <Compile Include="MinoriLyrics.cs" />
