@@ -10,6 +10,7 @@ namespace StorybrewScripts
         public static Color4 yellow = new Color4(255, 233, 156, 255);
         public static Color4 green = new Color4(157, 239, 47, 255);
         public static Color4 purple = new Color4(217, 156, 240, 255);
+        public static Color4 beige = new Color4(240, 237, 218, 255);
         public static Color4 cyan = new Color4(0, 0.8f, 0.9f, 1f);
     }
 }

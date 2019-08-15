@@ -21,6 +21,9 @@ namespace StorybrewScripts
             bg.Color(0, Colours.white);
             bg.Fade(0, 1);
 
+            bg.Color(108794, Colours.beige);
+            bg.Color(131830, Colours.white);
+
             bg.Color(OsbEasing.OutCirc, 194330, 194687, bg.ColorAt(194330), Colours.blue);
             bg.Fade(206116, 0);
             bg.Fade(208973, 211830, 0, 1);

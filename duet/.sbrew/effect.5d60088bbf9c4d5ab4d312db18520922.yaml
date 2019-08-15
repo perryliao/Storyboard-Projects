@@ -8,6 +8,9 @@ Config:
   fineness:
     Type: "System.Int32"
     Value: "1"
+  chrousScale:
+    Type: "System.Single"
+    Value: "0.7"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
